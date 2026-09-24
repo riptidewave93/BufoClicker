@@ -1,12 +1,20 @@
 package Bufo::Game;
 use strict;
 use warnings;
-use JSON::PP      ();
-use Scalar::Util  ();
-use Bufo::Catalog ();
-use Bufo::Number  ();
+use Scalar::Util                 ();
+use Bufo::Catalog                ();
+use Bufo::Number                 ();
+use Bufo::Util::General          ();
+use Bufo::Explorer               ();
+use Bufo::ExplorerModel          ();
+use Bufo::Managers::Generators   ();
+use Bufo::Managers::Upgrades     ();
+use Bufo::Managers::Achievements ();
+use Bufo::Managers::Prestige     ();
+use Bufo::Managers::Boss         ();
+use Bufo::Managers::Golden       ();
 
-sub _clone { JSON::PP::decode_json( JSON::PP::encode_json( $_[0] ) ) }
+sub _clone { Bufo::Util::General::deepClone( $_[0] ) }
 
 sub _finite {
     defined( $_[0] )
@@ -45,6 +53,8 @@ sub new {
     my $saved = $args{state} ? _clone( $args{state} ) : {};
     my $self  = bless {
         catalog   => $args{catalog},
+        event_bus => $args{events},
+        random    => $args{random} // sub { rand() },
         now       => $now,
         paused    => 0,
         events    => [],
@@ -65,7 +75,16 @@ sub new {
             clickCount     => $r->{clickCount}     // $a->{clickCount} // 0
         },
         generators => _clone( $self->{catalog}->generators ),
-        upgrades => { purchased => _clone( $saved->{upgrades}{purchased} // [] ), available => [] },
+        explorer   => Bufo::ExplorerModel->normalize( $saved->{explorer}, now => $now ),
+        upgrades   => {
+            purchased => _clone( $saved->{upgrades}{purchased} // [] ),
+            available => [],
+            (
+                exists( $saved->{upgrades}{definitions} )
+                ? ( definitions => _clone( $saved->{upgrades}{definitions} ) )
+                : ()
+            )
+        },
         achievements => {
             unlocked     => _clone( $a->{unlocked}     // [] ),
             customEvents => _clone( $a->{customEvents} // {} ),
@@ -95,14 +114,25 @@ sub new {
         my $g   = $self->{state}{generators}{$id};
         my $old = $saved->{generators}{$id} // {};
         $g->{count}    = $old->{count} // 0;
+        $g->{enabled}  = $old->{enabled} if exists $old->{enabled};
+        $g->{boosts}   = _clone( $old->{boosts} // [] );
         $g->{unlocked} = ( $g->{unlocked} || $old->{unlocked} ) ? 1 : 0;
     }
+    my $weak = $self;
+    Scalar::Util::weaken($weak);
+    $self->{explorer} = Bufo::Explorer->new(
+        state    => $self->{state}{explorer},
+        now      => sub { $weak->{now} },
+        random   => $self->{random},
+        on_event => sub { $weak->emit(@_) if $weak; }
+    );
     $self->refresh;
     return $self;
 }
-sub state               { $_[0]{state} }
-sub catalog             { $_[0]{catalog} }
-sub production          { $_[0]{production} // 0 }
+sub state      { $_[0]{state} }
+sub catalog    { $_[0]{catalog} }
+sub production { $_[0]{production} // 0 }
+
 sub format_number {
     shift;
     return Bufo::Number::format(@_);
@@ -124,9 +154,11 @@ sub drain_events {
     $self->{events} = [];
     return $events;
 }
+
 sub set_auto_save {
-    my ($self, $enabled) = @_;
+    my ( $self, $enabled ) = @_;
     $self->{state}{gameSettings}{autoSave} = $enabled ? 1 : 0;
+    $self->notify_state_change;
     return _ok();
 }
 
@@ -134,6 +166,7 @@ sub mark_saved {
     my ( $self, $now ) = @_;
     return _fail('Invalid save time') unless _finite($now) && $now >= 0;
     $self->{state}{gameSettings}{lastSaved} = $now;
+    $self->notify_state_change;
     return _ok();
 }
 
@@ -147,49 +180,56 @@ sub _requirements_met {
         my $target = $req->{target};
         if ( $type eq 'bufos' || $type eq 'totalBufos' ) {
             return 0 if $s->{resources}{totalBufos} < $req->{value};
-        }
-        elsif ( $type eq 'generators' || $type eq 'generatorCount' ) {
+        } elsif ( $type eq 'generators' || $type eq 'generatorCount' ) {
             return 0 if !$target || ( $s->{generators}{$target}{count} // 0 ) < $req->{value};
-        }
-        elsif ( $type eq 'achievement' || $type eq 'achievements' ) {
+        } elsif ( $type eq 'achievement' || $type eq 'achievements' ) {
             return 0 unless $target && $ach->{$target};
-        }
-        elsif ( $type eq 'upgrade' ) { return 0 unless $owned->{ $req->{id} // $target // '' }; }
-        elsif ( $type eq 'special' ) {
+        } elsif ( $type eq 'upgrade' ) {
+            return 0 unless $owned->{ $req->{id} // $target // '' };
+        } elsif ( $type eq 'special' ) {
             return 0 unless $target && $s->{achievements}{customEvents}{$target};
+        } else {
+            return 0;
         }
-        else { return 0; }
     }
     return 1;
 }
 
 # Durable purchases and achievement IDs are the only sources of permanent effects.
 sub refresh {
-    my $self = shift;
-    my $s    = $self->{state};
-    my $r    = $s->{resources};
+    my $self        = shift;
+    my $s           = $self->{state};
+    my $r           = $s->{resources};
+    my $click_extra = ( $r->{clickMultiplier} // 1 ) / ( $self->{permanent_click} // 1 );
+    my $production_extra =
+      ( $r->{productionMultiplier} // 1 ) / ( $self->{permanent_production} // 1 );
     $r->{clickMultiplier}            = 1;
     $r->{productionMultiplier}       = 1;
     $r->{frenzyProductionMultiplier} = $self->{frenzies}{production} > $self->{now} ? 7 : 1;
     $r->{frenzyClickMultiplier}      = $self->{frenzies}{click} > $self->{now}      ? 7 : 1;
-    for my $g ( values %{ $s->{generators} } ) { $g->{boosts} = []; }
+    my %managed = ( map { ( "upgrade_$_" => 1 ) } @{ $s->{upgrades}{purchased} } );
+    $managed{"achievement_$_"} = 1 for @{ $s->{achievements}{unlocked} };
+    my %active;
+
+    for my $g ( values %{ $s->{generators} } ) {
+        $active{ $g->{id} } = { map { $_->{id} => $_->{active} } @{ $g->{boosts} // [] } };
+        $g->{boosts}        = [ grep { !$managed{ $_->{id} } } @{ $g->{boosts} // [] } ];
+    }
 
     for my $id ( @{ $s->{upgrades}{purchased} } ) {
-        my $u = $self->{catalog}->upgrade($id);
+        my $u = $self->upgrade_definition($id);
         die "Unknown purchased upgrade $id\n" unless $u;
         for my $effect ( @{ $u->{effects} } ) {
             if ( $effect->{type} eq 'clickMultiplier' ) {
                 $r->{clickMultiplier} *= $effect->{multiplier};
-            }
-            elsif ( $effect->{type} eq 'globalMultiplier' ) {
+            } elsif ( $effect->{type} eq 'globalMultiplier' ) {
                 $r->{productionMultiplier} *= $effect->{multiplier};
-            }
-            else {
+            } else {
                 push @{ $s->{generators}{ $effect->{target} }{boosts} },
                   {
                     id         => "upgrade_$id",
                     multiplier => $effect->{multiplier},
-                    active     => 1,
+                    active     => $active{ $effect->{target} }{"upgrade_$id"} // 1,
                     source     => $u->{name}
                   };
             }
@@ -203,42 +243,58 @@ sub refresh {
         if    ( $reward->{type} eq 'clickBoost' ) { $r->{clickMultiplier} *= $reward->{value}; }
         elsif ( $reward->{type} eq 'productionBoost' ) {
             $r->{productionMultiplier} *= $reward->{value};
-        }
-        elsif ( $reward->{type} eq 'generatorBoost' ) {
+        } elsif ( $reward->{type} eq 'generatorBoost' ) {
             push @{ $s->{generators}{ $reward->{target} }{boosts} },
               {
                 id         => "achievement_$id",
                 multiplier => $reward->{value},
-                active     => 1,
+                active     => $active{ $reward->{target} }{"achievement_$id"} // 1,
                 source     => $a->{name}
               };
         }
     }
+    $self->{permanent_click}      = $r->{clickMultiplier};
+    $self->{permanent_production} = $r->{productionMultiplier};
+    $r->{clickMultiplier}      *= $click_extra;
+    $r->{productionMultiplier} *= $production_extra;
     my $passive = $self->prestige_multiplier * $self->boss_multiplier;
     $r->{clickPower} =
       $r->{baseClickPower} * $r->{clickMultiplier} * $passive * $r->{frenzyClickMultiplier};
     my $production = 0;
+
     for my $g ( values %{ $s->{generators} } ) {
-        $g->{unlocked} = 1 if $self->_requirements_met( $g->{unlockRequirements} );
+        if ( !$g->{unlocked} && $self->_requirements_met( $g->{unlockRequirements} ) ) {
+            $g->{unlocked} = 1;
+            $self->emit( 'GENERATOR_UNLOCKED', { generator => _clone($g) } );
+        }
         my $boost = 1;
-        $boost *= $_->{multiplier} for @{ $g->{boosts} };
+        $boost *= $_->{multiplier} for grep { $_->{active} } @{ $g->{boosts} };
         $g->{currentProduction} =
           $g->{baseProduction} *
           $boost * $r->{productionMultiplier} *
           $passive *
           $r->{frenzyProductionMultiplier};
         $g->{totalProduction} = $g->{currentProduction} * $g->{count};
+        die "Generator $g->{id} production is out of range\n"
+          unless _finite( $g->{currentProduction} )
+          && $g->{currentProduction} <= 1e300
+          && _finite( $g->{totalProduction} )
+          && $g->{totalProduction} <= 1e300;
         my $cost = $g->{baseCost} * $g->{costMultiplier}**$g->{count};
         $g->{currentCost} = _finite($cost) ? _ceil($cost) : undef;
         $production += $g->{totalProduction};
     }
+    die "Effective game values are out of range\n"
+      unless _finite($production)
+      && $production <= 1e300
+      && _finite( $r->{clickPower} )
+      && $r->{clickPower} <= 1e300;
     $self->{production} = $production;
     my $purchased = _set( $s->{upgrades}{purchased} );
     $s->{upgrades}{available} = [
-        map { $_->{id} } grep {
-                !$purchased->{ $_->{id} }
-              && $self->_requirements_met( $_->{unlockConditions} )
-        } @{ $self->{catalog}->upgrades }
+        map    { $_->{id} }
+          grep { !$purchased->{ $_->{id} } && $self->_requirements_met( $_->{unlockConditions} ) }
+          @{ $self->{state}{upgrades}{definitions} // $self->{catalog}->upgrades }
     ];
     $s->{achievements}{clickCount} = $r->{clickCount};
     for my $a ( @{ $self->{catalog}->achievements } ) {
@@ -259,6 +315,7 @@ sub _achievement_value {
     return scalar @{ $s->{upgrades}{purchased} } if $type eq 'upgradeCount';
     return scalar( @{ $s->{bosses}{defeated} } ) + $s->{bosses}{lifetimeDefeats}
       if $type eq 'bossesDefeated';
+    return $s->{explorer}{explorationsCompleted} // 0     if $type eq 'explorationCount';
     return $s->{prestige}{transcendences}                 if $type eq 'transcendences';
     return $s->{prestige}{lifetimePoints}                 if $type eq 'prestigePoints';
     return $s->{generators}{ $req->{target} }{count} // 0 if $type eq 'generatorType';
@@ -288,6 +345,7 @@ sub _check_achievements {
             $unlocked->{ $a->{id} } = 1;
             push @{ $s->{achievements}{unlocked} }, $a->{id};
             push @{ $self->{events} }, { type => 'achievement', id => $a->{id} };
+            $self->emit( 'ACHIEVEMENT_UNLOCKED', { achievement => $a, timestamp => $self->{now} } );
             if ( $a->{reward} && $a->{reward}{type} eq 'bufoBonus' ) {
                 $self->_credit( $a->{reward}{value} );
             }
@@ -308,11 +366,14 @@ sub _count_click {
     $self->{state}{resources}{clickCount}++;
     $self->{state}{achievements}{clickCount} = $self->{state}{resources}{clickCount};
 }
-sub _valid_time { _finite( $_[1] ) && $_[1] >= 0 && $_[1] >= $_[0]{now} }
+
+# Date.now can move backward; gameplay deadlines use the latest accepted timestamp.
+sub _valid_time { _finite( $_[1] ) && $_[1] >= 0 }
 
 sub click {
     my ( $self, $now ) = @_;
     return _fail('Invalid click time') unless $self->_valid_time($now);
+    $now = _max( $now, $self->{now} );
     return _fail('Game is paused')                if $self->{paused};
     return _fail('Fight the boss to deal damage') if $self->{fight};
     $self->_timers($now);
@@ -324,6 +385,17 @@ sub click {
     $self->_count_click;
     $self->_credit($gain);
     $self->_check_achievements;
+    $self->emit(
+        'click',
+        {
+            state           => _clone( $self->{state} ),
+            clickPower      => $gain,
+            totalClicks     => $self->{state}{resources}{clickCount},
+            combo           => $self->{combo},
+            comboMultiplier => $multiplier,
+            isCombo         => $combo ? 1 : 0
+        }
+    ) if $self->{event_bus} || $self->{on_state_change};
     return _ok( bufosGained => $gain, isCombo => $combo ? 1 : 0, comboMultiplier => $multiplier );
 }
 
@@ -390,12 +462,15 @@ sub buy_generator {
     $g->{count} += $quantity;
     $self->refresh;
     $self->_check_achievements;
+    $self->emit( 'GENERATOR_PURCHASED',
+        { generator => _clone($g), quantity => $quantity, cost => $cost } );
+    $self->emit( 'GENERATOR_PRODUCTION_UPDATED', { totalProduction => $self->production } );
     return _ok( cost => $cost, quantity => $quantity );
 }
 
 sub buy_upgrade {
     my ( $self, $id ) = @_;
-    my $u = $self->{catalog}->upgrade($id);
+    my $u = $self->upgrade_definition($id);
     return _fail('Unknown upgrade') unless $u;
     return _fail('Upgrade already purchased') if _set( $self->{state}{upgrades}{purchased} )->{$id};
     return _fail('Upgrade is locked')
@@ -405,6 +480,9 @@ sub buy_upgrade {
     push @{ $self->{state}{upgrades}{purchased} }, $id;
     $self->refresh;
     $self->_check_achievements;
+    $self->emit( 'UPGRADE_PURCHASED',
+        { upgrade => $u, cost => $u->{cost}, effects => [ map { $_->{type} } @{ $u->{effects} } ] }
+    );
     return _ok( cost => $u->{cost} );
 }
 
@@ -422,6 +500,7 @@ sub active_boss { $_[0]{fight} }
 sub start_boss {
     my ( $self, $now ) = @_;
     return _fail('Invalid fight time') unless $self->_valid_time($now);
+    $now = _max( $now, $self->{now} );
     return _fail('Game is paused')                 if $self->{paused};
     return _fail('A boss fight is already active') if $self->{fight};
     my $boss = $self->available_boss;
@@ -436,50 +515,44 @@ sub start_boss {
         remainingMs => 30000,
         lastAt      => $now
     };
+    $self->emit( 'BOSS_FIGHT_STARTED', { boss => $boss, maxHealth => $health } );
     return _ok();
 }
 
 sub hit_boss {
     my ( $self, $now ) = @_;
     return _fail('Invalid hit time') unless $self->_valid_time($now);
+    $now = _max( $now, $self->{now} );
     return _fail('Game is paused') if $self->{paused};
     return _fail('No active boss fight') unless $self->{fight};
     $self->_timers($now);
     return _fail('The fight has ended') unless $self->{fight};
     my $damage = $self->{state}{resources}{clickPower};
     $self->_count_click;
-    $self->{fight}{health} = _max( 0, $self->{fight}{health} - $damage );
+    $self->damage_boss($damage);
 
-    if ( $self->{fight}{health} <= 0 ) {
-        my $id = $self->{fight}{boss}{id};
-        $self->{fight} = undef;
-        push @{ $self->{state}{bosses}{defeated} }, $id;
-        $self->{state}{achievements}{customEvents}{"boss_$id"} = 1;
-        push @{ $self->{events} }, { type => 'boss_won', id => $id };
-    }
-    $self->refresh;
-    $self->_check_achievements;
     return _ok( damage => $damage );
 }
 
 sub retreat_boss {
     my $self = shift;
     return _fail('No active boss fight') unless $self->{fight};
+    my $boss = $self->{fight}{boss};
     $self->{fight} = undef;
+    $self->emit( 'BOSS_FIGHT_RETREATED', { boss => $boss } );
     return _ok();
 }
 
 sub _timers {
     my ( $self, $now ) = @_;
     $self->{now} = $now;
-    if ( $self->{fight} && !$self->{paused} ) {
+    if ( $self->{fight} && !$self->{paused} && !$self->{boss_paused} ) {
         $self->{fight}{remainingMs} -= _max( 0, $now - $self->{fight}{lastAt} );
         $self->{fight}{lastAt} = $now;
-        if ( $self->{fight}{remainingMs} <= 0 ) {
-            push @{ $self->{events} }, { type => 'boss_lost', id => $self->{fight}{boss}{id} };
-            $self->{fight} = undef;
-            $self->{state}{resources}{bufos} = 0;
-        }
+        $self->emit( 'BOSS_TICK',
+            { boss => $self->{fight}{boss}, remainingMs => _max( 0, $self->{fight}{remainingMs} ) }
+        );
+        $self->lose_boss if $self->{fight}{remainingMs} <= 0;
     }
     for my $kind (qw(production click)) {
         $self->{frenzies}{$kind} = 0 if $self->{frenzies}{$kind} <= $now;
@@ -491,6 +564,7 @@ sub tick {
     my ( $self, $seconds, $now ) = @_;
     return _fail('Invalid tick')
       unless _finite($seconds) && $seconds >= 0 && $self->_valid_time($now);
+    $now = _max( $now, $self->{now} );
     return _ok( production => 0 ) if $self->{paused};
     my $production = $self->production * $seconds;
     my $ends       = $self->{frenzies}{production};
@@ -500,8 +574,23 @@ sub tick {
     }
     $self->_credit($production);
     $self->_timers($now);
+    $self->{explorer}->update($seconds);
     $self->{state}{gameSettings}{lastTick} = $now;
     $self->_check_achievements;
+    $self->notify_state_change;
+    if ( my $bus = $self->{event_bus} ) {
+
+        # Snapshot construction is expensive in WASM; idle games have no tick subscribers.
+        my $payload = $bus->hasListeners('tick')
+          ? {
+            state           => _clone( $self->{state} ),
+            generators      => $self->getGeneratorManager->getUnlockedGenerators,
+            totalProduction => $self->production,
+            explorer        => $self->{explorer}->getExplorer
+          }
+          : undef;
+        $bus->emit( 'tick', $payload );
+    }
     return _ok( production => $production );
 }
 
@@ -509,6 +598,7 @@ sub credit_elapsed {
     my ( $self, $seconds, $now ) = @_;
     return _fail('Invalid elapsed time')
       unless _finite($seconds) && $seconds >= 0 && $seconds <= 43200 && $self->_valid_time($now);
+    $now = _max( $now, $self->{now} );
     my $production =
       $self->production / ( $self->{state}{resources}{frenzyProductionMultiplier} // 1 ) * $seconds;
     $self->_credit($production);
@@ -521,6 +611,7 @@ sub credit_elapsed {
 sub pause {
     my ( $self, $now ) = @_;
     return _fail('Invalid pause time') unless $self->_valid_time($now);
+    $now = _max( $now, $self->{now} );
     $self->_timers($now);
     $self->{paused}                        = 1;
     $self->{frenzies}                      = { production => 0, click => 0 };
@@ -534,6 +625,7 @@ sub pause {
 sub resume {
     my ( $self, $now ) = @_;
     return _fail('Invalid resume time') unless $self->_valid_time($now);
+    $now                                   = _max( $now, $self->{now} );
     $self->{now}                           = $now;
     $self->{paused}                        = 0;
     $self->{fight}{lastAt}                 = $now if $self->{fight};
@@ -546,9 +638,11 @@ sub active_frenzies {
     $now = $self->{now} unless defined $now;
     return {
         map {
-            $_ => ( $self->{frenzies}{$_} > $now
+            $_ => (
+                $self->{frenzies}{$_} > $now
                 ? { multiplier => 7, endsAt => $self->{frenzies}{$_} }
-                : undef )
+                : undef
+            )
         } qw(production click)
     };
 }
@@ -562,6 +656,7 @@ sub golden_outcome {
 sub collect_golden {
     my ( $self, $outcome, $now ) = @_;
     return _fail('Invalid reward time') unless $self->_valid_time($now);
+    $now = _max( $now, $self->{now} );
     return _fail('Game is paused') if $self->{paused};
     return _fail('Unknown golden reward')
       unless defined($outcome) && $outcome =~ /\A(?:bufo_frenzy|click_frenzy|lucky)\z/;
@@ -590,9 +685,10 @@ sub collect_golden {
 
 sub trigger_custom_event {
     my ( $self, $name ) = @_;
-    return _fail('Unknown milestone') unless defined($name) && $name eq 'console_opened';
+    return _fail('Invalid milestone') unless defined($name) && !ref($name) && length($name);
     $self->{state}{achievements}{customEvents}{$name} = 1;
     $self->_check_achievements;
+    $self->notify_state_change;
     return _ok();
 }
 
@@ -606,16 +702,144 @@ sub prestige {
     $s->{prestige}{lifetimePoints} += $gained;
     $s->{prestige}{transcendences}++;
     $s->{bosses}{lifetimeDefeats} += @{ $s->{bosses}{defeated} };
-    $s->{bosses}{defeated}      = [];
-    $s->{resources}{bufos}      = 0;
-    $s->{resources}{totalBufos} = 0;
-    $s->{generators}            = _clone( $self->{catalog}->generators );
-    $s->{upgrades}              = { purchased  => [], available => [] };
-    $self->{frenzies}           = { production => 0, click => 0 };
-    $self->{combo}              = 0;
-    $self->{lastClick}          = undef;
+    $s->{bosses}{defeated}                = [];
+    $s->{resources}{bufos}                = 0;
+    $s->{resources}{totalBufos}           = 0;
+    $s->{generators}                      = _clone( $self->{catalog}->generators );
+    $s->{upgrades}                        = { purchased => [], available => [] };
+    $s->{resources}{clickMultiplier}      = $self->{permanent_click}      // 1;
+    $s->{resources}{productionMultiplier} = $self->{permanent_production} // 1;
+    $self->{frenzies}                     = { production => 0, click => 0 };
+    $self->{combo}                        = 0;
+    $self->{lastClick}                    = undef;
     $self->refresh;
     $self->_check_achievements;
+    $self->emit(
+        'PRESTIGE_TRANSCENDED',
+        {
+            gained     => $gained,
+            prestige   => _clone( $s->{prestige} ),
+            multiplier => $self->prestige_multiplier
+        }
+    );
     return _ok( gained => $gained );
+}
+
+sub damage_boss {
+    my ( $self, $damage ) = @_;
+    return unless $self->{fight} && _finite($damage) && $damage > 0;
+    $self->{fight}{health} = _max( 0, $self->{fight}{health} - $damage );
+    my $boss = $self->{fight}{boss};
+    $self->emit(
+        'BOSS_DAMAGED',
+        {
+            boss      => $boss,
+            health    => $self->{fight}{health},
+            maxHealth => $self->{fight}{maxHealth},
+            damage    => $damage
+        }
+    );
+    if ( $self->{fight}{health} <= 0 ) {
+        $self->{fight} = undef;
+        push @{ $self->{state}{bosses}{defeated} }, $boss->{id};
+        $self->{state}{achievements}{customEvents}{ 'boss_' . $boss->{id} } = 1;
+        push @{ $self->{events} }, { type => 'boss_won', id => $boss->{id} };
+        $self->emit(
+            'BOSS_DEFEATED',
+            {
+                boss          => $boss,
+                defeatedCount => scalar( @{ $self->{state}{bosses}{defeated} } ),
+                multiplier    => $self->boss_multiplier
+            }
+        );
+    }
+    $self->refresh;
+    $self->_check_achievements;
+}
+
+sub lose_boss {
+    my $self = shift;
+    return unless $self->{fight};
+    my $boss = $self->{fight}{boss};
+    push @{ $self->{events} }, { type => 'boss_lost', id => $boss->{id} };
+    $self->{fight} = undef;
+    $self->{state}{resources}{bufos} = 0;
+    $self->emit( 'BOSS_FIGHT_LOST', { boss => $boss } );
+}
+
+sub upgrade_definition {
+    my ( $self, $id, $state ) = @_;
+    $state //= $self->{state};
+    for my $definition ( @{ $state->{upgrades}{definitions} // [] } ) {
+        return $definition if $definition->{id} eq $id;
+    }
+    return $self->{catalog}->upgrade($id);
+}
+
+sub _manager {
+    my ( $self, $name, $class ) = @_;
+    return $self->{managers}{$name} if $self->{managers}{$name};
+    my $weak = $self;
+    Scalar::Util::weaken($weak);
+    return $self->{managers}{$name} = $class->new(
+        game   => sub { $weak },
+        clock  => sub { $weak->{now} },
+        random => $self->{random}
+    );
+}
+sub getGeneratorManager   { $_[0]->_manager( 'generators',   'Bufo::Managers::Generators' ) }
+sub getUpgradeManager     { $_[0]->_manager( 'upgrades',     'Bufo::Managers::Upgrades' ) }
+sub getAchievementManager { $_[0]->_manager( 'achievements', 'Bufo::Managers::Achievements' ) }
+sub getPrestigeManager    { $_[0]->_manager( 'prestige',     'Bufo::Managers::Prestige' ) }
+sub getBossManager        { $_[0]->_manager( 'boss',         'Bufo::Managers::Boss' ) }
+sub getGoldenBufoManager  { $_[0]->_manager( 'golden',       'Bufo::Managers::Golden' ) }
+sub set_event_bus         { $_[0]{event_bus}       = $_[1]; }
+sub set_state_observer    { $_[0]{on_state_change} = $_[1]; }
+sub notify_state_change   { $_[0]{on_state_change}->() if $_[0]{on_state_change}; }
+
+sub emit {
+    my ( $self, $event, $payload ) = @_;
+    $self->notify_state_change;
+    $self->{event_bus}->emit( $event, $payload ) if $self->{event_bus};
+}
+sub getExplorerManager { $_[0]{explorer} }
+
+# Separate durable boosts from custom factors when a complete state replaces this game.
+sub _permanent_multipliers {
+    my ( $self,  $state )      = @_;
+    my ( $click, $production ) = ( 1, 1 );
+    for my $id ( @{ $state->{upgrades}{purchased} } ) {
+        my $upgrade = $self->upgrade_definition( $id, $state );
+        die "Unknown purchased upgrade $id\n" unless $upgrade;
+        for my $effect ( @{ $upgrade->{effects} } ) {
+            $click      *= $effect->{multiplier} if $effect->{type} eq 'clickMultiplier';
+            $production *= $effect->{multiplier} if $effect->{type} eq 'globalMultiplier';
+        }
+    }
+    for my $id ( @{ $state->{achievements}{unlocked} } ) {
+        my $achievement = $self->{catalog}->achievement($id);
+        die "Unknown achievement $id\n" unless $achievement;
+        my $reward = $achievement->{reward};
+        next unless $reward;
+        $click      *= $reward->{value} if $reward->{type} eq 'clickBoost';
+        $production *= $reward->{value} if $reward->{type} eq 'productionBoost';
+    }
+    return ( $click, $production );
+}
+
+# StateManager writes complete snapshots without retaining an obsolete Explorer hash.
+sub replace_state {
+    my ( $self, $state ) = @_;
+    my $copy = _clone($state);
+    my ( $permanent_click, $permanent_production ) = $self->_permanent_multipliers($copy);
+    my $explorer = Bufo::ExplorerModel->normalize( $copy->{explorer}, now => $self->{now} );
+    %{ $self->{state}{explorer} } = %$explorer;
+    $copy->{explorer}             = $self->{state}{explorer};
+    $self->{state}                = $copy;
+    $self->{permanent_click}      = $permanent_click;
+    $self->{permanent_production} = $permanent_production;
+    $self->{production}           = 0;
+    $self->{production} += $_->{totalProduction} // 0 for values %{ $copy->{generators} };
+    return 1;
 }
 1;

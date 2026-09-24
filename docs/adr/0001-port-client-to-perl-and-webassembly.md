@@ -25,7 +25,11 @@ than implementing a new binding layer or maintaining a Perl compiler fork.
 - `lib/Bufo/Catalog.pm` validates game content and defines the boss ladder.
 - `lib/Bufo/Game.pm` owns progression, economy and transient game state.
 - `lib/Bufo/Save.pm` validates and migrates durable progress.
-- `web/app.pl` owns the DOM, browser events, fetch, storage and notifications.
+- `lib/Bufo/Model/` and `lib/Bufo/Managers/` retain the original reusable domain APIs.
+- `ExplorerModel`, `Explorer`, `Enemies`, and `Combat` implement the complete Explorer subsystem.
+- `lib/Bufo/Core/` and `lib/Bufo/Util/` provide events, state subscriptions, logging and utilities.
+- `lib/Bufo/Browser/` provides components, DOM helpers, animations, UI management and developer tools.
+- `web/app.pl` connects these services to browser events, fetching, storage and rendering.
 - `scripts/build.pl` packages those modules with the static assets and runtime.
 
 Game modules run under native Perl for tests and under Perl 5.28.1 in WebPerl.
@@ -79,7 +83,10 @@ Reset and import replace the active game only after their storage write succeeds
 
 Preserve the legacy export encoding, Base64 of URI-encoded JSON. Reconstruct
 costs, production and multipliers from durable purchases and achievements.
-Temporary frenzies, fights and click combos do not survive reloads. Rebuilding
+Temporary Golden frenzies, clicker-boss fights and click combos do not survive reloads.
+Explorer data, equipment and upgrades persist. Its encounter/combat context remains
+transient, matching the original save format; a restored fighting state cannot
+resume that lost encounter. Generator enable flags and custom boosts persist. Rebuilding
 an achievement effect must not award its one-time currency reward again.
 
 ## Behavior and scope
@@ -90,9 +97,39 @@ Keep the existing artwork and responsive layout. Apply the requested dark
 palette with white primary text. Keep rapid-click targets responsive and use
 bounded effects rather than continuously repainting decoration.
 
-As in PR #2, omit the retired Explorer/RPG subsystem, which has no player UI.
-Accept its legacy save field without restoring its simulation. Export/import
-and explicit save recovery become visible through the save tools.
+Convert the entire original application, including Explorer/combat, exported
+helpers, component APIs, and development tools. Explorer has no player panel,
+but the original game initializes, ticks, saves, and exposes it. Preserve those
+operations and saved progression. Do not treat lack of a visible control as
+permission to remove code.
+
+Keep original pure-model and manager algorithms separate where they differ.
+Explorer's pure helper completes at 600 seconds of simulated progress; its
+manager uses a 50-second distance counter and random encounters. Both use wall
+clock duration when calculating completion rewards. Hidden pages pause progress
+and healing, but that duration still includes the hidden interval. This is a
+preserved source behavior, not a correction.
+
+Use one browser-owned EventBus and provider-bound facade/state manager. A Game
+instance owns its Explorer manager and transient combat context. Import, reset,
+and prestige construct a candidate without live event listeners. After its save
+succeeds, attach the shared services and replace the current Game. Facade calls
+resolve that current instance, so developer tools cannot keep changing an old
+Explorer after an import.
+
+The fixed-step loop retains the original time-scale and FPS controls, one-second
+accumulation cap, and 100 ms UI event interval. Browser state notifications during
+simulation are flushed at that UI interval. Direct actions still notify immediately.
+Tick payloads are constructed only when a subscriber needs them. Resume resets accumulation and
+credits at most 12 hours of bulk production. Backward wall-clock adjustments
+clamp to the last accepted game time, so returning to the tab cannot leave the
+game paused. Negative or nonfinite timestamps remain invalid. Custom active generator boosts
+remain effective while away; temporary Golden frenzies do not. The original
+`enabled` generator flag gates purchases, not production from owned units.
+
+An explicit development build exposes `window.debugTools`. Production omits
+that binding. All callbacks and developer operations execute Perl. Export/import
+and explicit save recovery are also available through the save tools.
 
 ## Alternatives
 

@@ -6,7 +6,7 @@ services:
     user: "${BUFO_UID:-1000}:${BUFO_GID:-1000}"
     volumes:
       - .:/app
-    command: perl scripts/build.pl
+    command: perl scripts/build.pl --development
   test:
     extends: build
     command: prove -lr t
@@ -26,6 +26,8 @@ services:
   webdriver:
     image: selenium/standalone-chromium:4.34.0
     profiles: [browser]
+    ports:
+      - "127.0.0.1:14444:4444"
     shm_size: 2gb
     environment:
       SE_NODE_MAX_SESSIONS: 1
@@ -37,3 +39,10 @@ services:
       WEBDRIVER_URL: http://webdriver:4444
       BUFO_URL: http://site
     command: perl scripts/browser-test.pl
+  browser-ui:
+    extends: browser-test
+    depends_on: [dev, webdriver]
+    environment:
+      WEBDRIVER_URL: http://webdriver:4444
+      BUFO_URL: http://dev
+    command: perl scripts/browser-ui.pl

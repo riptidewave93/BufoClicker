@@ -248,7 +248,7 @@ $console->trigger_custom_event('console_opened');
 my $bonus_bank = $console->state->{resources}{bufos};
 $console->trigger_custom_event('console_opened');
 is( $console->state->{resources}{bufos}, $bonus_bank, 'console reward happens once' );
-ok( !$console->trigger_custom_event('invented')->{ok}, 'unknown event rejected' );
+ok( $console->trigger_custom_event('invented')->{ok}, 'custom event API retains developer milestones' );
 my $settings = seeded();
 $settings->set_auto_save(0);
 $settings->mark_saved(1234);
@@ -267,8 +267,8 @@ my $invalid = seeded();
 my $invalid_before = JSON::PP->new->canonical->encode($invalid->state);
 for my $call (
     sub { $invalid->collect_golden('made_up', 2000) },
-    sub { $invalid->collect_golden('lucky', 999) },
-    sub { $invalid->click(999) },
+    sub { $invalid->collect_golden('lucky', -1) },
+    sub { $invalid->click(-1) },
     sub { $invalid->tick(-1, 2000) },
     sub { $invalid->hit_boss(2000) },
 ) {

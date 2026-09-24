@@ -1,0 +1,5127 @@
+{
+  "default": {
+    "name": "Explorer Frog",
+    "level": 1,
+    "experience": 0,
+    "experienceToNextLevel": 100,
+    "state": "idle",
+    "stateStartTime": 1000,
+    "health": 100,
+    "maxHealth": 100,
+    "attack": {
+      "value": 10,
+      "level": 1,
+      "growthRate": 2,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "defense": {
+      "value": 5,
+      "level": 1,
+      "growthRate": 1.5,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "speed": {
+      "value": 8,
+      "level": 1,
+      "growthRate": 1.2,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "luck": {
+      "value": 5,
+      "level": 1,
+      "growthRate": 1,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "equipment": {
+      "weapon": null,
+      "armor": null,
+      "accessory": null
+    },
+    "explorationProgress": 0,
+    "currentArea": "Pond",
+    "explorationsCompleted": 0,
+    "lifetimeBufosFromExploring": 0
+  },
+  "stats": {
+    "dps": 5,
+    "survival": 15.037593984962408,
+    "power": 9,
+    "effect": 0.36
+  },
+  "upgrades": {
+    "attack": {
+      "success": 1,
+      "cost": 50,
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 1,
+        "experience": 0,
+        "experienceToNextLevel": 100,
+        "state": "idle",
+        "stateStartTime": 1000,
+        "health": 100,
+        "maxHealth": 110,
+        "attack": {
+          "value": 12,
+          "level": 2,
+          "growthRate": 2,
+          "upgradeCost": 57,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1.5,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 8,
+          "level": 1,
+          "growthRate": 1.2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 0,
+        "lifetimeBufosFromExploring": 0
+      }
+    },
+    "defense": {
+      "success": 1,
+      "cost": 50,
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 1,
+        "experience": 0,
+        "experienceToNextLevel": 100,
+        "state": "idle",
+        "stateStartTime": 1000,
+        "health": 100,
+        "maxHealth": 120,
+        "attack": {
+          "value": 10,
+          "level": 1,
+          "growthRate": 2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 6.5,
+          "level": 2,
+          "growthRate": 1.5,
+          "upgradeCost": 57,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 8,
+          "level": 1,
+          "growthRate": 1.2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 0,
+        "lifetimeBufosFromExploring": 0
+      }
+    },
+    "speed": {
+      "success": 1,
+      "cost": 50,
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 1,
+        "experience": 0,
+        "experienceToNextLevel": 100,
+        "state": "idle",
+        "stateStartTime": 1000,
+        "health": 100,
+        "maxHealth": 110,
+        "attack": {
+          "value": 10,
+          "level": 1,
+          "growthRate": 2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1.5,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 9.2,
+          "level": 2,
+          "growthRate": 1.2,
+          "upgradeCost": 57,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 0,
+        "lifetimeBufosFromExploring": 0
+      }
+    },
+    "luck": {
+      "success": 1,
+      "cost": 50,
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 1,
+        "experience": 0,
+        "experienceToNextLevel": 100,
+        "state": "idle",
+        "stateStartTime": 1000,
+        "health": 100,
+        "maxHealth": 110,
+        "attack": {
+          "value": 10,
+          "level": 1,
+          "growthRate": 2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1.5,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 8,
+          "level": 1,
+          "growthRate": 1.2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 6,
+          "level": 2,
+          "growthRate": 1,
+          "upgradeCost": 57,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 0,
+        "lifetimeBufosFromExploring": 0
+      }
+    },
+    "invalid": {
+      "success": 0,
+      "cost": 0,
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 1,
+        "experience": 0,
+        "experienceToNextLevel": 100,
+        "state": "idle",
+        "stateStartTime": 1000,
+        "health": 100,
+        "maxHealth": 100,
+        "attack": {
+          "value": 10,
+          "level": 1,
+          "growthRate": 2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1.5,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 8,
+          "level": 1,
+          "growthRate": 1.2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 0,
+        "lifetimeBufosFromExploring": 0
+      }
+    }
+  },
+  "poorUpgrade": {
+    "success": 0,
+    "cost": 50,
+    "explorer": {
+      "name": "Explorer Frog",
+      "level": 1,
+      "experience": 0,
+      "experienceToNextLevel": 100,
+      "state": "idle",
+      "stateStartTime": 1000,
+      "health": 100,
+      "maxHealth": 100,
+      "attack": {
+        "value": 10,
+        "level": 1,
+        "growthRate": 2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "defense": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1.5,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "speed": {
+        "value": 8,
+        "level": 1,
+        "growthRate": 1.2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "luck": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "equipment": {
+        "weapon": null,
+        "armor": null,
+        "accessory": null
+      },
+      "explorationProgress": 0,
+      "currentArea": "Pond",
+      "explorationsCompleted": 0,
+      "lifetimeBufosFromExploring": 0
+    }
+  },
+  "modelLevel": {
+    "name": "Explorer Frog",
+    "level": 2,
+    "experience": 150,
+    "experienceToNextLevel": 150,
+    "state": "idle",
+    "stateStartTime": 1000,
+    "health": 100,
+    "maxHealth": 130,
+    "attack": {
+      "value": 10,
+      "level": 1,
+      "growthRate": 2,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "defense": {
+      "value": 5,
+      "level": 1,
+      "growthRate": 1.5,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "speed": {
+      "value": 8,
+      "level": 1,
+      "growthRate": 1.2,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "luck": {
+      "value": 5,
+      "level": 1,
+      "growthRate": 1,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "equipment": {
+      "weapon": null,
+      "armor": null,
+      "accessory": null
+    },
+    "explorationProgress": 0,
+    "currentArea": "Pond",
+    "explorationsCompleted": 0,
+    "lifetimeBufosFromExploring": 0
+  },
+  "results": {
+    "success": {
+      "survived": 1,
+      "duration": 40.8,
+      "bufosGained": 12,
+      "experienceGained": 6,
+      "itemsFound": []
+    },
+    "failure": {
+      "survived": 0,
+      "duration": 40.8,
+      "bufosGained": 3,
+      "experienceGained": 3,
+      "itemsFound": []
+    }
+  },
+  "completions": {
+    "success": {
+      "name": "Explorer Frog",
+      "level": 1,
+      "experience": 6,
+      "experienceToNextLevel": 100,
+      "state": "resting",
+      "stateStartTime": 1000,
+      "health": 90,
+      "maxHealth": 100,
+      "attack": {
+        "value": 10,
+        "level": 1,
+        "growthRate": 2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "defense": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1.5,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "speed": {
+        "value": 8,
+        "level": 1,
+        "growthRate": 1.2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "luck": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "equipment": {
+        "weapon": null,
+        "armor": null,
+        "accessory": null
+      },
+      "explorationProgress": 0,
+      "currentArea": "Pond",
+      "explorationsCompleted": 1,
+      "lifetimeBufosFromExploring": 12
+    },
+    "failure": {
+      "name": "Explorer Frog",
+      "level": 1,
+      "experience": 3,
+      "experienceToNextLevel": 100,
+      "state": "resting",
+      "stateStartTime": 1000,
+      "health": 60,
+      "maxHealth": 100,
+      "attack": {
+        "value": 10,
+        "level": 1,
+        "growthRate": 2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "defense": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1.5,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "speed": {
+        "value": 8,
+        "level": 1,
+        "growthRate": 1.2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "luck": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "equipment": {
+        "weapon": null,
+        "armor": null,
+        "accessory": null
+      },
+      "explorationProgress": 0,
+      "currentArea": "Pond",
+      "explorationsCompleted": 1,
+      "lifetimeBufosFromExploring": 3
+    }
+  },
+  "rest": {
+    "injured": {
+      "name": "Explorer Frog",
+      "level": 1,
+      "experience": 0,
+      "experienceToNextLevel": 100,
+      "state": "resting",
+      "stateStartTime": 1000,
+      "health": 20,
+      "maxHealth": 100,
+      "attack": {
+        "value": 10,
+        "level": 1,
+        "growthRate": 2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "defense": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1.5,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "speed": {
+        "value": 8,
+        "level": 1,
+        "growthRate": 1.2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "luck": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "equipment": {
+        "weapon": null,
+        "armor": null,
+        "accessory": null
+      },
+      "explorationProgress": 0,
+      "currentArea": "Pond",
+      "explorationsCompleted": 0,
+      "lifetimeBufosFromExploring": 0
+    },
+    "full": {
+      "name": "Explorer Frog",
+      "level": 1,
+      "experience": 0,
+      "experienceToNextLevel": 100,
+      "state": "idle",
+      "stateStartTime": 1000,
+      "health": 100,
+      "maxHealth": 100,
+      "attack": {
+        "value": 10,
+        "level": 1,
+        "growthRate": 2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "defense": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1.5,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "speed": {
+        "value": 8,
+        "level": 1,
+        "growthRate": 1.2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "luck": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "equipment": {
+        "weapon": null,
+        "armor": null,
+        "accessory": null
+      },
+      "explorationProgress": 0,
+      "currentArea": "Pond",
+      "explorationsCompleted": 0,
+      "lifetimeBufosFromExploring": 0
+    },
+    "partial": {
+      "name": "Explorer Frog",
+      "level": 1,
+      "experience": 0,
+      "experienceToNextLevel": 100,
+      "state": "resting",
+      "stateStartTime": 1000,
+      "health": 45,
+      "maxHealth": 100,
+      "attack": {
+        "value": 10,
+        "level": 1,
+        "growthRate": 2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "defense": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1.5,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "speed": {
+        "value": 8,
+        "level": 1,
+        "growthRate": 1.2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "luck": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "equipment": {
+        "weapon": null,
+        "armor": null,
+        "accessory": null
+      },
+      "explorationProgress": 0,
+      "currentArea": "Pond",
+      "explorationsCompleted": 0,
+      "lifetimeBufosFromExploring": 0
+    }
+  },
+  "started": {
+    "name": "Explorer Frog",
+    "level": 1,
+    "experience": 0,
+    "experienceToNextLevel": 100,
+    "state": "exploring",
+    "stateStartTime": 1000,
+    "health": 100,
+    "maxHealth": 100,
+    "attack": {
+      "value": 10,
+      "level": 1,
+      "growthRate": 2,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "defense": {
+      "value": 5,
+      "level": 1,
+      "growthRate": 1.5,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "speed": {
+      "value": 8,
+      "level": 1,
+      "growthRate": 1.2,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "luck": {
+      "value": 5,
+      "level": 1,
+      "growthRate": 1,
+      "upgradeCost": 50,
+      "multiplier": 1
+    },
+    "equipment": {
+      "weapon": null,
+      "armor": null,
+      "accessory": null
+    },
+    "explorationProgress": 0,
+    "currentArea": "Pond",
+    "explorationsCompleted": 0,
+    "lifetimeBufosFromExploring": 0
+  },
+  "modelUpdate": {
+    "explorer": {
+      "name": "Explorer Frog",
+      "level": 1,
+      "experience": 67,
+      "experienceToNextLevel": 100,
+      "state": "resting",
+      "stateStartTime": 601000,
+      "health": 90,
+      "maxHealth": 100,
+      "attack": {
+        "value": 10,
+        "level": 1,
+        "growthRate": 2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "defense": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1.5,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "speed": {
+        "value": 8,
+        "level": 1,
+        "growthRate": 1.2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "luck": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "equipment": {
+        "weapon": null,
+        "armor": null,
+        "accessory": null
+      },
+      "explorationProgress": 0,
+      "currentArea": "Pond",
+      "explorationsCompleted": 1,
+      "lifetimeBufosFromExploring": 128
+    },
+    "result": {
+      "survived": 1,
+      "duration": 407.99999999999994,
+      "bufosGained": 128,
+      "experienceGained": 67,
+      "itemsFound": []
+    }
+  },
+  "enemies": {
+    "Pond": {
+      "id": "waterBug_Pond_1000",
+      "name": "Water Bug",
+      "health": 24,
+      "maxHealth": 24,
+      "attack": 3,
+      "defense": 1,
+      "speed": 6,
+      "type": "normal",
+      "colorTheme": "#6BCDFF",
+      "spriteRef": "assets/images/enemies/water_bug.png",
+      "area": "Pond",
+      "difficultyLevel": 1.2,
+      "dropTable": {
+        "possibleDrops": [
+          {
+            "id": "common_slime",
+            "name": "Common Slime",
+            "dropRate": 0.8
+          },
+          {
+            "id": "water_essence",
+            "name": "Water Essence",
+            "dropRate": 0.5
+          }
+        ],
+        "baseBufos": 6,
+        "baseExperience": 11
+      }
+    },
+    "Creek": {
+      "id": "mudCrawler_Creek_1000",
+      "name": "Mud Crawler",
+      "health": 49,
+      "maxHealth": 49,
+      "attack": 5,
+      "defense": 4,
+      "speed": 2,
+      "type": "normal",
+      "colorTheme": "#8B4513",
+      "spriteRef": "assets/images/enemies/mud_crawler.png",
+      "area": "Creek",
+      "difficultyLevel": 2.2,
+      "dropTable": {
+        "possibleDrops": [
+          {
+            "id": "common_slime",
+            "name": "Common Slime",
+            "dropRate": 0.8
+          },
+          {
+            "id": "thorn_spike",
+            "name": "Thorn Spike",
+            "dropRate": 0.4
+          }
+        ],
+        "baseBufos": 12,
+        "baseExperience": 18
+      }
+    },
+    "Swamp": {
+      "id": "mudCrawler_Swamp_1000",
+      "name": "Mud Crawler",
+      "health": 52,
+      "maxHealth": 52,
+      "attack": 5,
+      "defense": 4,
+      "speed": 2,
+      "type": "normal",
+      "colorTheme": "#8B4513",
+      "spriteRef": "assets/images/enemies/mud_crawler.png",
+      "area": "Swamp",
+      "difficultyLevel": 3.2,
+      "dropTable": {
+        "possibleDrops": [
+          {
+            "id": "common_slime",
+            "name": "Common Slime",
+            "dropRate": 0.8
+          },
+          {
+            "id": "thorn_spike",
+            "name": "Thorn Spike",
+            "dropRate": 0.4
+          }
+        ],
+        "baseBufos": 14,
+        "baseExperience": 20
+      }
+    },
+    "River": {
+      "id": "poisonDartFrog_River_1000",
+      "name": "Poison Dart Frog",
+      "health": 36,
+      "maxHealth": 36,
+      "attack": 13,
+      "defense": 2,
+      "speed": 10,
+      "type": "normal",
+      "colorTheme": "#FF4D4D",
+      "spriteRef": "assets/images/enemies/poison_frog.png",
+      "area": "River",
+      "difficultyLevel": 4.2,
+      "dropTable": {
+        "possibleDrops": [
+          {
+            "id": "frog_scale",
+            "name": "Frog Scale",
+            "dropRate": 0.6
+          },
+          {
+            "id": "water_essence",
+            "name": "Water Essence",
+            "dropRate": 0.5
+          }
+        ],
+        "baseBufos": 37,
+        "baseExperience": 45
+      }
+    },
+    "Lake": {
+      "id": "giantSnapper_Lake_1000",
+      "name": "Giant Snapper",
+      "health": 146,
+      "maxHealth": 146,
+      "attack": 18,
+      "defense": 18,
+      "speed": 2,
+      "type": "normal",
+      "colorTheme": "#006400",
+      "spriteRef": "assets/images/enemies/giant_snapper.png",
+      "area": "Lake",
+      "difficultyLevel": 5.2,
+      "dropTable": {
+        "possibleDrops": [
+          {
+            "id": "water_essence",
+            "name": "Water Essence",
+            "dropRate": 0.5
+          },
+          {
+            "id": "thorn_spike",
+            "name": "Thorn Spike",
+            "dropRate": 0.4
+          },
+          {
+            "id": "golden_egg",
+            "name": "Golden Egg",
+            "dropRate": 0.05
+          }
+        ],
+        "baseBufos": 66,
+        "baseExperience": 82
+      }
+    },
+    "Forest": {
+      "id": "forestStalker_Forest_1000",
+      "name": "Forest Stalker",
+      "health": 105,
+      "maxHealth": 105,
+      "attack": 29,
+      "defense": 8,
+      "speed": 17,
+      "type": "normal",
+      "colorTheme": "#3D7B3D",
+      "spriteRef": "assets/images/enemies/forest_stalker.png",
+      "area": "Forest",
+      "difficultyLevel": 6.2,
+      "dropTable": {
+        "possibleDrops": [
+          {
+            "id": "thorn_spike",
+            "name": "Thorn Spike",
+            "dropRate": 0.4
+          },
+          {
+            "id": "golden_egg",
+            "name": "Golden Egg",
+            "dropRate": 0.05
+          }
+        ],
+        "baseBufos": 108,
+        "baseExperience": 144
+      }
+    },
+    "Mountains": {
+      "id": "darkDweller_Mountains_1000",
+      "name": "Elite Dark Dweller",
+      "health": 590,
+      "maxHealth": 590,
+      "attack": 85,
+      "defense": 48,
+      "speed": 9,
+      "type": "elite",
+      "colorTheme": "#4B0082",
+      "spriteRef": "assets/images/enemies/dark_dweller.png",
+      "area": "Mountains",
+      "difficultyLevel": 8.2,
+      "dropTable": {
+        "possibleDrops": [
+          {
+            "id": "frog_scale",
+            "name": "Frog Scale",
+            "dropRate": 0.6
+          },
+          {
+            "id": "golden_egg",
+            "name": "Golden Egg",
+            "dropRate": 0.05
+          }
+        ],
+        "baseBufos": 546,
+        "baseExperience": 655
+      }
+    },
+    "Dungeon": {
+      "id": "darkDweller_Dungeon_1000",
+      "name": "Elite Dark Dweller",
+      "health": 652,
+      "maxHealth": 652,
+      "attack": 94,
+      "defense": 52,
+      "speed": 9,
+      "type": "elite",
+      "colorTheme": "#4B0082",
+      "spriteRef": "assets/images/enemies/dark_dweller.png",
+      "area": "Dungeon",
+      "difficultyLevel": 10.2,
+      "dropTable": {
+        "possibleDrops": [
+          {
+            "id": "frog_scale",
+            "name": "Frog Scale",
+            "dropRate": 0.6
+          },
+          {
+            "id": "golden_egg",
+            "name": "Golden Egg",
+            "dropRate": 0.05
+          }
+        ],
+        "baseBufos": 661,
+        "baseExperience": 793
+      }
+    }
+  },
+  "waterbug": {
+    "id": "waterBug_Pond_1000",
+    "name": "Water Bug",
+    "health": 24,
+    "maxHealth": 24,
+    "attack": 3,
+    "defense": 1,
+    "speed": 6,
+    "type": "normal",
+    "colorTheme": "#6BCDFF",
+    "spriteRef": "assets/images/enemies/water_bug.png",
+    "area": "Pond",
+    "difficultyLevel": 1,
+    "dropTable": {
+      "possibleDrops": [
+        {
+          "id": "common_slime",
+          "name": "Common Slime",
+          "dropRate": 0.8
+        },
+        {
+          "id": "water_essence",
+          "name": "Water Essence",
+          "dropRate": 0.5
+        }
+      ],
+      "baseBufos": 6,
+      "baseExperience": 11
+    }
+  },
+  "rewards": {
+    "bufos": 6,
+    "experience": 11,
+    "drops": [
+      "guaranteed",
+      "common_slime"
+    ]
+  },
+  "relative": 1.4870689655172413,
+  "combat": {
+    "initial": {
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 1,
+        "experience": 0,
+        "experienceToNextLevel": 100,
+        "state": "idle",
+        "stateStartTime": 1000,
+        "health": 100,
+        "maxHealth": 100,
+        "attack": {
+          "value": 10,
+          "level": 1,
+          "growthRate": 2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1.5,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 8,
+          "level": 1,
+          "growthRate": 1.2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 0,
+        "lifetimeBufosFromExploring": 0
+      },
+      "enemy": {
+        "id": "waterBug_Pond_1000",
+        "name": "Water Bug",
+        "health": 24,
+        "maxHealth": 24,
+        "attack": 3,
+        "defense": 1,
+        "speed": 6,
+        "type": "normal",
+        "colorTheme": "#6BCDFF",
+        "spriteRef": "assets/images/enemies/water_bug.png",
+        "area": "Pond",
+        "difficultyLevel": 1,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "common_slime",
+              "name": "Common Slime",
+              "dropRate": 0.8
+            },
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            }
+          ],
+          "baseBufos": 6,
+          "baseExperience": 11
+        }
+      },
+      "status": "inProgress",
+      "round": 1,
+      "combatLog": [
+        "Explorer Frog encounters Water Bug!"
+      ],
+      "startTime": 1000,
+      "lastActionTime": 1000
+    },
+    "attack": {
+      "newState": {
+        "explorer": {
+          "name": "Explorer Frog",
+          "level": 1,
+          "experience": 0,
+          "experienceToNextLevel": 100,
+          "state": "idle",
+          "stateStartTime": 1000,
+          "health": 99,
+          "maxHealth": 100,
+          "attack": {
+            "value": 10,
+            "level": 1,
+            "growthRate": 2,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "defense": {
+            "value": 5,
+            "level": 1,
+            "growthRate": 1.5,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "speed": {
+            "value": 8,
+            "level": 1,
+            "growthRate": 1.2,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "luck": {
+            "value": 5,
+            "level": 1,
+            "growthRate": 1,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+          },
+          "explorationProgress": 0,
+          "currentArea": "Pond",
+          "explorationsCompleted": 0,
+          "lifetimeBufosFromExploring": 0
+        },
+        "enemy": {
+          "id": "waterBug_Pond_1000",
+          "name": "Water Bug",
+          "health": 14,
+          "maxHealth": 24,
+          "attack": 3,
+          "defense": 1,
+          "speed": 6,
+          "type": "normal",
+          "colorTheme": "#6BCDFF",
+          "spriteRef": "assets/images/enemies/water_bug.png",
+          "area": "Pond",
+          "difficultyLevel": 1,
+          "dropTable": {
+            "possibleDrops": [
+              {
+                "id": "common_slime",
+                "name": "Common Slime",
+                "dropRate": 0.8
+              },
+              {
+                "id": "water_essence",
+                "name": "Water Essence",
+                "dropRate": 0.5
+              }
+            ],
+            "baseBufos": 6,
+            "baseExperience": 11
+          }
+        },
+        "status": "inProgress",
+        "round": 2,
+        "combatLog": [
+          "Explorer Frog encounters Water Bug!",
+          "Explorer Frog attacks Water Bug for 10 damage!",
+          "Water Bug attacks Explorer Frog for 1 damage!"
+        ],
+        "startTime": 1000,
+        "lastActionTime": 1000
+      },
+      "damageToEnemy": 10,
+      "damageToExplorer": 1,
+      "actionMessage": "Explorer Frog attacks Water Bug for 10 damage!"
+    },
+    "defend": {
+      "newState": {
+        "explorer": {
+          "name": "Explorer Frog",
+          "level": 1,
+          "experience": 0,
+          "experienceToNextLevel": 100,
+          "state": "idle",
+          "stateStartTime": 1000,
+          "health": 99,
+          "maxHealth": 100,
+          "attack": {
+            "value": 10,
+            "level": 1,
+            "growthRate": 2,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "defense": {
+            "value": 5,
+            "level": 1,
+            "growthRate": 1.5,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "speed": {
+            "value": 8,
+            "level": 1,
+            "growthRate": 1.2,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "luck": {
+            "value": 5,
+            "level": 1,
+            "growthRate": 1,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+          },
+          "explorationProgress": 0,
+          "currentArea": "Pond",
+          "explorationsCompleted": 0,
+          "lifetimeBufosFromExploring": 0
+        },
+        "enemy": {
+          "id": "waterBug_Pond_1000",
+          "name": "Water Bug",
+          "health": 24,
+          "maxHealth": 24,
+          "attack": 3,
+          "defense": 1,
+          "speed": 6,
+          "type": "normal",
+          "colorTheme": "#6BCDFF",
+          "spriteRef": "assets/images/enemies/water_bug.png",
+          "area": "Pond",
+          "difficultyLevel": 1,
+          "dropTable": {
+            "possibleDrops": [
+              {
+                "id": "common_slime",
+                "name": "Common Slime",
+                "dropRate": 0.8
+              },
+              {
+                "id": "water_essence",
+                "name": "Water Essence",
+                "dropRate": 0.5
+              }
+            ],
+            "baseBufos": 6,
+            "baseExperience": 11
+          }
+        },
+        "status": "inProgress",
+        "round": 2,
+        "combatLog": [
+          "Explorer Frog encounters Water Bug!",
+          "Water Bug attacks Explorer Frog for 1 damage!",
+          "Explorer Frog defends against Water Bug's attack!"
+        ],
+        "startTime": 1000,
+        "lastActionTime": 1000
+      },
+      "damageToEnemy": 0,
+      "damageToExplorer": 1,
+      "actionMessage": "Explorer Frog defends against Water Bug's attack!"
+    },
+    "flee": {
+      "newState": {
+        "explorer": {
+          "name": "Explorer Frog",
+          "level": 1,
+          "experience": 0,
+          "experienceToNextLevel": 100,
+          "state": "idle",
+          "stateStartTime": 1000,
+          "health": 100,
+          "maxHealth": 100,
+          "attack": {
+            "value": 10,
+            "level": 1,
+            "growthRate": 2,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "defense": {
+            "value": 5,
+            "level": 1,
+            "growthRate": 1.5,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "speed": {
+            "value": 8,
+            "level": 1,
+            "growthRate": 1.2,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "luck": {
+            "value": 5,
+            "level": 1,
+            "growthRate": 1,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+          },
+          "explorationProgress": 0,
+          "currentArea": "Pond",
+          "explorationsCompleted": 0,
+          "lifetimeBufosFromExploring": 0
+        },
+        "enemy": {
+          "id": "waterBug_Pond_1000",
+          "name": "Water Bug",
+          "health": 24,
+          "maxHealth": 24,
+          "attack": 3,
+          "defense": 1,
+          "speed": 6,
+          "type": "normal",
+          "colorTheme": "#6BCDFF",
+          "spriteRef": "assets/images/enemies/water_bug.png",
+          "area": "Pond",
+          "difficultyLevel": 1,
+          "dropTable": {
+            "possibleDrops": [
+              {
+                "id": "common_slime",
+                "name": "Common Slime",
+                "dropRate": 0.8
+              },
+              {
+                "id": "water_essence",
+                "name": "Water Essence",
+                "dropRate": 0.5
+              }
+            ],
+            "baseBufos": 6,
+            "baseExperience": 11
+          }
+        },
+        "status": "defeat",
+        "round": 2,
+        "combatLog": [
+          "Explorer Frog encounters Water Bug!",
+          "Explorer Frog successfully fled from the battle!"
+        ],
+        "startTime": 1000,
+        "lastActionTime": 1000
+      },
+      "damageToEnemy": 0,
+      "damageToExplorer": 0,
+      "actionMessage": "Explorer Frog successfully fled from the battle!"
+    },
+    "failedFlee": {
+      "newState": {
+        "explorer": {
+          "name": "Explorer Frog",
+          "level": 1,
+          "experience": 0,
+          "experienceToNextLevel": 100,
+          "state": "idle",
+          "stateStartTime": 1000,
+          "health": 99,
+          "maxHealth": 100,
+          "attack": {
+            "value": 10,
+            "level": 1,
+            "growthRate": 2,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "defense": {
+            "value": 5,
+            "level": 1,
+            "growthRate": 1.5,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "speed": {
+            "value": 8,
+            "level": 1,
+            "growthRate": 1.2,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "luck": {
+            "value": 5,
+            "level": 1,
+            "growthRate": 1,
+            "upgradeCost": 50,
+            "multiplier": 1
+          },
+          "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+          },
+          "explorationProgress": 0,
+          "currentArea": "Pond",
+          "explorationsCompleted": 0,
+          "lifetimeBufosFromExploring": 0
+        },
+        "enemy": {
+          "id": "waterBug_Pond_1000",
+          "name": "Water Bug",
+          "health": 24,
+          "maxHealth": 24,
+          "attack": 3,
+          "defense": 1,
+          "speed": 6,
+          "type": "normal",
+          "colorTheme": "#6BCDFF",
+          "spriteRef": "assets/images/enemies/water_bug.png",
+          "area": "Pond",
+          "difficultyLevel": 1,
+          "dropTable": {
+            "possibleDrops": [
+              {
+                "id": "common_slime",
+                "name": "Common Slime",
+                "dropRate": 0.8
+              },
+              {
+                "id": "water_essence",
+                "name": "Water Essence",
+                "dropRate": 0.5
+              }
+            ],
+            "baseBufos": 6,
+            "baseExperience": 11
+          }
+        },
+        "status": "inProgress",
+        "round": 2,
+        "combatLog": [
+          "Explorer Frog encounters Water Bug!",
+          "Explorer Frog failed to escape!",
+          "Water Bug attacks Explorer Frog for 1 damage!"
+        ],
+        "startTime": 1000,
+        "lastActionTime": 1000
+      },
+      "damageToEnemy": 0,
+      "damageToExplorer": 1,
+      "actionMessage": "Explorer Frog failed to escape!"
+    },
+    "actions": [
+      {
+        "newState": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "idle",
+            "stateStartTime": 1000,
+            "health": 99,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "enemy": {
+            "id": "waterBug_Pond_1000",
+            "name": "Water Bug",
+            "health": 14,
+            "maxHealth": 24,
+            "attack": 3,
+            "defense": 1,
+            "speed": 6,
+            "type": "normal",
+            "colorTheme": "#6BCDFF",
+            "spriteRef": "assets/images/enemies/water_bug.png",
+            "area": "Pond",
+            "difficultyLevel": 1,
+            "dropTable": {
+              "possibleDrops": [
+                {
+                  "id": "common_slime",
+                  "name": "Common Slime",
+                  "dropRate": 0.8
+                },
+                {
+                  "id": "water_essence",
+                  "name": "Water Essence",
+                  "dropRate": 0.5
+                }
+              ],
+              "baseBufos": 6,
+              "baseExperience": 11
+            }
+          },
+          "status": "inProgress",
+          "round": 2,
+          "combatLog": [
+            "Explorer Frog encounters Water Bug!",
+            "Explorer Frog attacks Water Bug for 10 damage!",
+            "Water Bug attacks Explorer Frog for 1 damage!"
+          ],
+          "startTime": 1000,
+          "lastActionTime": 1000
+        },
+        "damageToEnemy": 10,
+        "damageToExplorer": 1,
+        "actionMessage": "Explorer Frog attacks Water Bug for 10 damage!"
+      },
+      {
+        "newState": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "idle",
+            "stateStartTime": 1000,
+            "health": 98,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "enemy": {
+            "id": "waterBug_Pond_1000",
+            "name": "Water Bug",
+            "health": 4,
+            "maxHealth": 24,
+            "attack": 3,
+            "defense": 1,
+            "speed": 6,
+            "type": "normal",
+            "colorTheme": "#6BCDFF",
+            "spriteRef": "assets/images/enemies/water_bug.png",
+            "area": "Pond",
+            "difficultyLevel": 1,
+            "dropTable": {
+              "possibleDrops": [
+                {
+                  "id": "common_slime",
+                  "name": "Common Slime",
+                  "dropRate": 0.8
+                },
+                {
+                  "id": "water_essence",
+                  "name": "Water Essence",
+                  "dropRate": 0.5
+                }
+              ],
+              "baseBufos": 6,
+              "baseExperience": 11
+            }
+          },
+          "status": "inProgress",
+          "round": 3,
+          "combatLog": [
+            "Explorer Frog encounters Water Bug!",
+            "Explorer Frog attacks Water Bug for 10 damage!",
+            "Water Bug attacks Explorer Frog for 1 damage!",
+            "Explorer Frog attacks Water Bug for 10 damage!",
+            "Water Bug attacks Explorer Frog for 1 damage!"
+          ],
+          "startTime": 1000,
+          "lastActionTime": 1000
+        },
+        "damageToEnemy": 10,
+        "damageToExplorer": 1,
+        "actionMessage": "Explorer Frog attacks Water Bug for 10 damage!"
+      },
+      {
+        "newState": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "idle",
+            "stateStartTime": 1000,
+            "health": 98,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "enemy": {
+            "id": "waterBug_Pond_1000",
+            "name": "Water Bug",
+            "health": 0,
+            "maxHealth": 24,
+            "attack": 3,
+            "defense": 1,
+            "speed": 6,
+            "type": "normal",
+            "colorTheme": "#6BCDFF",
+            "spriteRef": "assets/images/enemies/water_bug.png",
+            "area": "Pond",
+            "difficultyLevel": 1,
+            "dropTable": {
+              "possibleDrops": [
+                {
+                  "id": "common_slime",
+                  "name": "Common Slime",
+                  "dropRate": 0.8
+                },
+                {
+                  "id": "water_essence",
+                  "name": "Water Essence",
+                  "dropRate": 0.5
+                }
+              ],
+              "baseBufos": 6,
+              "baseExperience": 11
+            }
+          },
+          "status": "victory",
+          "round": 4,
+          "combatLog": [
+            "Explorer Frog encounters Water Bug!",
+            "Explorer Frog attacks Water Bug for 10 damage!",
+            "Water Bug attacks Explorer Frog for 1 damage!",
+            "Explorer Frog attacks Water Bug for 10 damage!",
+            "Water Bug attacks Explorer Frog for 1 damage!",
+            "Explorer Frog attacks Water Bug for 10 damage!",
+            "Water Bug is defeated!",
+            "Gained 6 bufos and 11 experience!",
+            "Found items: common_slime!"
+          ],
+          "startTime": 1000,
+          "lastActionTime": 1000
+        },
+        "damageToEnemy": 10,
+        "damageToExplorer": 0,
+        "actionMessage": "Explorer Frog attacks Water Bug for 10 damage!",
+        "rewards": {
+          "bufos": 6,
+          "experience": 11,
+          "drops": [
+            "common_slime"
+          ]
+        }
+      }
+    ],
+    "sim2": {
+      "victory": 0,
+      "explorerRemainingHealth": 98,
+      "experienceGained": 0,
+      "bufosGained": 0,
+      "itemsFound": [],
+      "rounds": 2
+    },
+    "sim3": {
+      "victory": 1,
+      "explorerRemainingHealth": 98,
+      "experienceGained": 11,
+      "bufosGained": 6,
+      "itemsFound": [
+        "common_slime"
+      ],
+      "rounds": 3
+    }
+  },
+  "managerComplete": {
+    "state": {
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 1,
+        "experience": 8,
+        "experienceToNextLevel": 100,
+        "state": "resting",
+        "stateStartTime": 51000,
+        "health": 95,
+        "maxHealth": 100,
+        "attack": {
+          "value": 10,
+          "level": 1,
+          "growthRate": 2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1.5,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 8,
+          "level": 1,
+          "growthRate": 1.2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 1,
+        "lifetimeBufosFromExploring": 43
+      },
+      "resources": {
+        "bufos": 123,
+        "totalBufos": 123
+      }
+    },
+    "events": [
+      {
+        "name": "EXPLORER_STATE_CHANGED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "previousState": "idle"
+        }
+      },
+      {
+        "name": "EXPLORATION_STARTED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "area": "Pond"
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 10,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 20,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 30,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 40,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 50,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 60,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 70,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 80,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 90,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_STATE_CHANGED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 8,
+            "experienceToNextLevel": 100,
+            "state": "resting",
+            "stateStartTime": 51000,
+            "health": 95,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 1,
+            "lifetimeBufosFromExploring": 43
+          },
+          "previousState": "exploring"
+        }
+      },
+      {
+        "name": "EXPLORATION_COMPLETED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 8,
+            "experienceToNextLevel": 100,
+            "state": "resting",
+            "stateStartTime": 51000,
+            "health": 95,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 1,
+            "lifetimeBufosFromExploring": 43
+          },
+          "result": {
+            "survived": 1,
+            "duration": 50,
+            "bufosGained": 43,
+            "experienceGained": 8,
+            "itemsFound": []
+          }
+        }
+      }
+    ]
+  },
+  "encounter": {
+    "explorer": {
+      "name": "Explorer Frog",
+      "level": 1,
+      "experience": 0,
+      "experienceToNextLevel": 100,
+      "state": "fighting",
+      "stateStartTime": 1000,
+      "health": 100,
+      "maxHealth": 100,
+      "attack": {
+        "value": 10,
+        "level": 1,
+        "growthRate": 2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "defense": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1.5,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "speed": {
+        "value": 8,
+        "level": 1,
+        "growthRate": 1.2,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "luck": {
+        "value": 5,
+        "level": 1,
+        "growthRate": 1,
+        "upgradeCost": 50,
+        "multiplier": 1
+      },
+      "equipment": {
+        "weapon": null,
+        "armor": null,
+        "accessory": null
+      },
+      "explorationProgress": 0,
+      "currentArea": "Pond",
+      "explorationsCompleted": 0,
+      "lifetimeBufosFromExploring": 0
+    },
+    "enemy": {
+      "id": "waterBug_Pond_2000",
+      "name": "Water Bug",
+      "health": 24,
+      "maxHealth": 24,
+      "attack": 3,
+      "defense": 1,
+      "speed": 6,
+      "type": "normal",
+      "colorTheme": "#6BCDFF",
+      "spriteRef": "assets/images/enemies/water_bug.png",
+      "area": "Pond",
+      "difficultyLevel": 1.01,
+      "dropTable": {
+        "possibleDrops": [
+          {
+            "id": "common_slime",
+            "name": "Common Slime",
+            "dropRate": 0.8
+          },
+          {
+            "id": "water_essence",
+            "name": "Water Essence",
+            "dropRate": 0.5
+          }
+        ],
+        "baseBufos": 6,
+        "baseExperience": 11
+      }
+    },
+    "combat": {
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 1,
+        "experience": 0,
+        "experienceToNextLevel": 100,
+        "state": "fighting",
+        "stateStartTime": 1000,
+        "health": 100,
+        "maxHealth": 100,
+        "attack": {
+          "value": 10,
+          "level": 1,
+          "growthRate": 2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1.5,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 8,
+          "level": 1,
+          "growthRate": 1.2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 0,
+        "lifetimeBufosFromExploring": 0
+      },
+      "enemy": {
+        "id": "waterBug_Pond_2000",
+        "name": "Water Bug",
+        "health": 24,
+        "maxHealth": 24,
+        "attack": 3,
+        "defense": 1,
+        "speed": 6,
+        "type": "normal",
+        "colorTheme": "#6BCDFF",
+        "spriteRef": "assets/images/enemies/water_bug.png",
+        "area": "Pond",
+        "difficultyLevel": 1.01,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "common_slime",
+              "name": "Common Slime",
+              "dropRate": 0.8
+            },
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            }
+          ],
+          "baseBufos": 6,
+          "baseExperience": 11
+        }
+      },
+      "status": "inProgress",
+      "round": 1,
+      "combatLog": [
+        "Explorer Frog encounters Water Bug!"
+      ],
+      "startTime": 2000,
+      "lastActionTime": 2000
+    },
+    "events": [
+      {
+        "name": "EXPLORER_STATE_CHANGED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "previousState": "idle"
+        }
+      },
+      {
+        "name": "EXPLORATION_STARTED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "area": "Pond"
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_STATE_CHANGED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "fighting",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "previousState": "exploring"
+        }
+      },
+      {
+        "name": "ENEMY_ENCOUNTERED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "fighting",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "enemy": {
+            "id": "waterBug_Pond_2000",
+            "name": "Water Bug",
+            "health": 24,
+            "maxHealth": 24,
+            "attack": 3,
+            "defense": 1,
+            "speed": 6,
+            "type": "normal",
+            "colorTheme": "#6BCDFF",
+            "spriteRef": "assets/images/enemies/water_bug.png",
+            "area": "Pond",
+            "difficultyLevel": 1.01,
+            "dropTable": {
+              "possibleDrops": [
+                {
+                  "id": "common_slime",
+                  "name": "Common Slime",
+                  "dropRate": 0.8
+                },
+                {
+                  "id": "water_essence",
+                  "name": "Water Essence",
+                  "dropRate": 0.5
+                }
+              ],
+              "baseBufos": 6,
+              "baseExperience": 11
+            }
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 0,
+            "experienceToNextLevel": 100,
+            "state": "fighting",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      }
+    ]
+  },
+  "managerMixed": {
+    "state": {
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 1,
+        "experience": 11,
+        "experienceToNextLevel": 100,
+        "state": "exploring",
+        "stateStartTime": 2000,
+        "health": 97,
+        "maxHealth": 100,
+        "attack": {
+          "value": 10,
+          "level": 1,
+          "growthRate": 2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1.5,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 8,
+          "level": 1,
+          "growthRate": 1.2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 0,
+        "lifetimeBufosFromExploring": 6
+      },
+      "resources": {
+        "bufos": 123,
+        "totalBufos": 123
+      }
+    },
+    "events": [
+      {
+        "name": "COMBAT_ACTION",
+        "payload": {
+          "newState": {
+            "explorer": {
+              "name": "Explorer Frog",
+              "level": 1,
+              "experience": 0,
+              "experienceToNextLevel": 100,
+              "state": "fighting",
+              "stateStartTime": 1000,
+              "health": 99,
+              "maxHealth": 100,
+              "attack": {
+                "value": 10,
+                "level": 1,
+                "growthRate": 2,
+                "upgradeCost": 50,
+                "multiplier": 1
+              },
+              "defense": {
+                "value": 5,
+                "level": 1,
+                "growthRate": 1.5,
+                "upgradeCost": 50,
+                "multiplier": 1
+              },
+              "speed": {
+                "value": 8,
+                "level": 1,
+                "growthRate": 1.2,
+                "upgradeCost": 50,
+                "multiplier": 1
+              },
+              "luck": {
+                "value": 5,
+                "level": 1,
+                "growthRate": 1,
+                "upgradeCost": 50,
+                "multiplier": 1
+              },
+              "equipment": {
+                "weapon": null,
+                "armor": null,
+                "accessory": null
+              },
+              "explorationProgress": 0,
+              "currentArea": "Pond",
+              "explorationsCompleted": 0,
+              "lifetimeBufosFromExploring": 0
+            },
+            "enemy": {
+              "id": "waterBug_Pond_2000",
+              "name": "Water Bug",
+              "health": 14,
+              "maxHealth": 24,
+              "attack": 3,
+              "defense": 1,
+              "speed": 6,
+              "type": "normal",
+              "colorTheme": "#6BCDFF",
+              "spriteRef": "assets/images/enemies/water_bug.png",
+              "area": "Pond",
+              "difficultyLevel": 1.01,
+              "dropTable": {
+                "possibleDrops": [
+                  {
+                    "id": "common_slime",
+                    "name": "Common Slime",
+                    "dropRate": 0.8
+                  },
+                  {
+                    "id": "water_essence",
+                    "name": "Water Essence",
+                    "dropRate": 0.5
+                  }
+                ],
+                "baseBufos": 6,
+                "baseExperience": 11
+              }
+            },
+            "status": "inProgress",
+            "round": 2,
+            "combatLog": [
+              "Explorer Frog encounters Water Bug!",
+              "Explorer Frog attacks Water Bug for 10 damage!",
+              "Water Bug attacks Explorer Frog for 1 damage!"
+            ],
+            "startTime": 2000,
+            "lastActionTime": 2000
+          },
+          "damageToEnemy": 10,
+          "damageToExplorer": 1,
+          "actionMessage": "Explorer Frog attacks Water Bug for 10 damage!"
+        }
+      },
+      {
+        "name": "COMBAT_ENDED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 11,
+            "experienceToNextLevel": 100,
+            "state": "fighting",
+            "stateStartTime": 1000,
+            "health": 97,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 6
+          },
+          "enemy": {
+            "id": "waterBug_Pond_2000",
+            "name": "Water Bug",
+            "health": 24,
+            "maxHealth": 24,
+            "attack": 3,
+            "defense": 1,
+            "speed": 6,
+            "type": "normal",
+            "colorTheme": "#6BCDFF",
+            "spriteRef": "assets/images/enemies/water_bug.png",
+            "area": "Pond",
+            "difficultyLevel": 1.01,
+            "dropTable": {
+              "possibleDrops": [
+                {
+                  "id": "common_slime",
+                  "name": "Common Slime",
+                  "dropRate": 0.8
+                },
+                {
+                  "id": "water_essence",
+                  "name": "Water Essence",
+                  "dropRate": 0.5
+                }
+              ],
+              "baseBufos": 6,
+              "baseExperience": 11
+            }
+          },
+          "victory": 1,
+          "rewards": {
+            "bufos": 6,
+            "experience": 11,
+            "drops": [
+              "common_slime"
+            ]
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_STATE_CHANGED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 11,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 2000,
+            "health": 97,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 6
+          },
+          "previousState": "fighting"
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 11,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 2000,
+            "health": 97,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 6
+          }
+        }
+      }
+    ]
+  },
+  "managerLevel": {
+    "state": {
+      "explorer": {
+        "name": "Explorer Frog",
+        "level": 3,
+        "experience": 8,
+        "experienceToNextLevel": 225,
+        "state": "resting",
+        "stateStartTime": 51000,
+        "health": 95,
+        "maxHealth": 150,
+        "attack": {
+          "value": 10,
+          "level": 1,
+          "growthRate": 2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "defense": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1.5,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "speed": {
+          "value": 8,
+          "level": 1,
+          "growthRate": 1.2,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "luck": {
+          "value": 5,
+          "level": 1,
+          "growthRate": 1,
+          "upgradeCost": 50,
+          "multiplier": 1
+        },
+        "equipment": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "explorationProgress": 0,
+        "currentArea": "Pond",
+        "explorationsCompleted": 1,
+        "lifetimeBufosFromExploring": 43
+      },
+      "resources": {
+        "bufos": 123,
+        "totalBufos": 123
+      }
+    },
+    "events": [
+      {
+        "name": "EXPLORER_STATE_CHANGED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "previousState": "idle"
+        }
+      },
+      {
+        "name": "EXPLORATION_STARTED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          },
+          "area": "Pond"
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 10,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 20,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 30,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 40,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 50,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 60,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 70,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 80,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 1,
+            "experience": 250,
+            "experienceToNextLevel": 100,
+            "state": "exploring",
+            "stateStartTime": 1000,
+            "health": 100,
+            "maxHealth": 100,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 90,
+            "currentArea": "Pond",
+            "explorationsCompleted": 0,
+            "lifetimeBufosFromExploring": 0
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_LEVEL_UP",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 2,
+            "experience": 158,
+            "experienceToNextLevel": 150,
+            "state": "resting",
+            "stateStartTime": 51000,
+            "health": 95,
+            "maxHealth": 125,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 1,
+            "lifetimeBufosFromExploring": 43
+          },
+          "newLevel": 2
+        }
+      },
+      {
+        "name": "EXPLORER_LEVEL_UP",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 3,
+            "experience": 8,
+            "experienceToNextLevel": 225,
+            "state": "resting",
+            "stateStartTime": 51000,
+            "health": 95,
+            "maxHealth": 150,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 1,
+            "lifetimeBufosFromExploring": 43
+          },
+          "newLevel": 3
+        }
+      },
+      {
+        "name": "EXPLORER_UPDATED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 3,
+            "experience": 8,
+            "experienceToNextLevel": 225,
+            "state": "resting",
+            "stateStartTime": 51000,
+            "health": 95,
+            "maxHealth": 150,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 1,
+            "lifetimeBufosFromExploring": 43
+          }
+        }
+      },
+      {
+        "name": "EXPLORER_STATE_CHANGED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 3,
+            "experience": 8,
+            "experienceToNextLevel": 225,
+            "state": "resting",
+            "stateStartTime": 51000,
+            "health": 95,
+            "maxHealth": 150,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 1,
+            "lifetimeBufosFromExploring": 43
+          },
+          "previousState": "exploring"
+        }
+      },
+      {
+        "name": "EXPLORATION_COMPLETED",
+        "payload": {
+          "explorer": {
+            "name": "Explorer Frog",
+            "level": 3,
+            "experience": 8,
+            "experienceToNextLevel": 225,
+            "state": "resting",
+            "stateStartTime": 51000,
+            "health": 95,
+            "maxHealth": 150,
+            "attack": {
+              "value": 10,
+              "level": 1,
+              "growthRate": 2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "defense": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1.5,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "speed": {
+              "value": 8,
+              "level": 1,
+              "growthRate": 1.2,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "luck": {
+              "value": 5,
+              "level": 1,
+              "growthRate": 1,
+              "upgradeCost": 50,
+              "multiplier": 1
+            },
+            "equipment": {
+              "weapon": null,
+              "armor": null,
+              "accessory": null
+            },
+            "explorationProgress": 0,
+            "currentArea": "Pond",
+            "explorationsCompleted": 1,
+            "lifetimeBufosFromExploring": 43
+          },
+          "result": {
+            "survived": 1,
+            "duration": 50,
+            "bufosGained": 43,
+            "experienceGained": 8,
+            "itemsFound": []
+          }
+        }
+      }
+    ]
+  },
+  "enemyMatrix": [
+    {
+      "template": "waterBug",
+      "type": "normal",
+      "area": "Pond",
+      "level": 1,
+      "distance": 0.4,
+      "rolls": [
+        0.1,
+        0.475,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "waterBug_Pond_1000",
+        "name": "Water Bug",
+        "health": 22,
+        "maxHealth": 22,
+        "attack": 3,
+        "defense": 1,
+        "speed": 6,
+        "type": "normal",
+        "colorTheme": "#6BCDFF",
+        "spriteRef": "assets/images/enemies/water_bug.png",
+        "area": "Pond",
+        "difficultyLevel": 1.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "common_slime",
+              "name": "Common Slime",
+              "dropRate": 0.8
+            },
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            }
+          ],
+          "baseBufos": 6,
+          "baseExperience": 11
+        }
+      }
+    },
+    {
+      "template": "waterBug",
+      "type": "elite",
+      "area": "Pond",
+      "level": 1,
+      "distance": 0.4,
+      "rolls": [
+        0.1,
+        0.975,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "waterBug_Pond_1000",
+        "name": "Elite Water Bug",
+        "health": 55,
+        "maxHealth": 55,
+        "attack": 6,
+        "defense": 2,
+        "speed": 7,
+        "type": "elite",
+        "colorTheme": "#6BCDFF",
+        "spriteRef": "assets/images/enemies/water_bug.png",
+        "area": "Pond",
+        "difficultyLevel": 1.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "common_slime",
+              "name": "Common Slime",
+              "dropRate": 0.8
+            },
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            }
+          ],
+          "baseBufos": 14,
+          "baseExperience": 28
+        }
+      }
+    },
+    {
+      "template": "mudCrawler",
+      "type": "normal",
+      "area": "Creek",
+      "level": 2,
+      "distance": 0.4,
+      "rolls": [
+        0.55,
+        0.45,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "mudCrawler_Creek_1000",
+        "name": "Mud Crawler",
+        "health": 44,
+        "maxHealth": 44,
+        "attack": 5,
+        "defense": 4,
+        "speed": 2,
+        "type": "normal",
+        "colorTheme": "#8B4513",
+        "spriteRef": "assets/images/enemies/mud_crawler.png",
+        "area": "Creek",
+        "difficultyLevel": 2.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "common_slime",
+              "name": "Common Slime",
+              "dropRate": 0.8
+            },
+            {
+              "id": "thorn_spike",
+              "name": "Thorn Spike",
+              "dropRate": 0.4
+            }
+          ],
+          "baseBufos": 12,
+          "baseExperience": 18
+        }
+      }
+    },
+    {
+      "template": "mudCrawler",
+      "type": "elite",
+      "area": "Creek",
+      "level": 2,
+      "distance": 0.4,
+      "rolls": [
+        0.55,
+        0.95,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "mudCrawler_Creek_1000",
+        "name": "Elite Mud Crawler",
+        "health": 110,
+        "maxHealth": 110,
+        "attack": 8,
+        "defense": 6,
+        "speed": 3,
+        "type": "elite",
+        "colorTheme": "#8B4513",
+        "spriteRef": "assets/images/enemies/mud_crawler.png",
+        "area": "Creek",
+        "difficultyLevel": 2.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "common_slime",
+              "name": "Common Slime",
+              "dropRate": 0.8
+            },
+            {
+              "id": "thorn_spike",
+              "name": "Thorn Spike",
+              "dropRate": 0.4
+            }
+          ],
+          "baseBufos": 31,
+          "baseExperience": 46
+        }
+      }
+    },
+    {
+      "template": "poisonDartFrog",
+      "type": "normal",
+      "area": "Swamp",
+      "level": 3,
+      "distance": 0.4,
+      "rolls": [
+        0.7000000000000001,
+        0.425,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "poisonDartFrog_Swamp_1000",
+        "name": "Poison Dart Frog",
+        "health": 31,
+        "maxHealth": 31,
+        "attack": 11,
+        "defense": 2,
+        "speed": 10,
+        "type": "normal",
+        "colorTheme": "#FF4D4D",
+        "spriteRef": "assets/images/enemies/poison_frog.png",
+        "area": "Swamp",
+        "difficultyLevel": 3.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "frog_scale",
+              "name": "Frog Scale",
+              "dropRate": 0.6
+            },
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            }
+          ],
+          "baseBufos": 34,
+          "baseExperience": 41
+        }
+      }
+    },
+    {
+      "template": "poisonDartFrog",
+      "type": "elite",
+      "area": "Swamp",
+      "level": 3,
+      "distance": 0.4,
+      "rolls": [
+        0.7000000000000001,
+        0.915,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "poisonDartFrog_Swamp_1000",
+        "name": "Elite Poison Dart Frog",
+        "health": 78,
+        "maxHealth": 78,
+        "attack": 20,
+        "defense": 4,
+        "speed": 12,
+        "type": "elite",
+        "colorTheme": "#FF4D4D",
+        "spriteRef": "assets/images/enemies/poison_frog.png",
+        "area": "Swamp",
+        "difficultyLevel": 3.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "frog_scale",
+              "name": "Frog Scale",
+              "dropRate": 0.6
+            },
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            }
+          ],
+          "baseBufos": 85,
+          "baseExperience": 102
+        }
+      }
+    },
+    {
+      "template": "poisonDartFrog",
+      "type": "boss",
+      "area": "Swamp",
+      "level": 3,
+      "distance": 0.4,
+      "rolls": [
+        0.7000000000000001,
+        0.99,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "poisonDartFrog_Swamp_1000",
+        "name": "Poison Dart Frog Boss",
+        "health": 156,
+        "maxHealth": 156,
+        "attack": 34,
+        "defense": 6,
+        "speed": 15,
+        "type": "boss",
+        "colorTheme": "#FF4D4D",
+        "spriteRef": "assets/images/enemies/poison_frog.png",
+        "area": "Swamp",
+        "difficultyLevel": 3.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "frog_scale",
+              "name": "Frog Scale",
+              "dropRate": 0.6
+            },
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            }
+          ],
+          "baseBufos": 170,
+          "baseExperience": 203
+        }
+      }
+    },
+    {
+      "template": "giantSnapper",
+      "type": "normal",
+      "area": "River",
+      "level": 4,
+      "distance": 0.4,
+      "rolls": [
+        0.7000000000000001,
+        0.4,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "giantSnapper_River_1000",
+        "name": "Giant Snapper",
+        "health": 123,
+        "maxHealth": 123,
+        "attack": 17,
+        "defense": 17,
+        "speed": 2,
+        "type": "normal",
+        "colorTheme": "#006400",
+        "spriteRef": "assets/images/enemies/giant_snapper.png",
+        "area": "River",
+        "difficultyLevel": 4.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            },
+            {
+              "id": "thorn_spike",
+              "name": "Thorn Spike",
+              "dropRate": 0.4
+            },
+            {
+              "id": "golden_egg",
+              "name": "Golden Egg",
+              "dropRate": 0.05
+            }
+          ],
+          "baseBufos": 60,
+          "baseExperience": 75
+        }
+      }
+    },
+    {
+      "template": "giantSnapper",
+      "type": "elite",
+      "area": "River",
+      "level": 4,
+      "distance": 0.4,
+      "rolls": [
+        0.7000000000000001,
+        0.875,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "giantSnapper_River_1000",
+        "name": "Elite Giant Snapper",
+        "health": 308,
+        "maxHealth": 308,
+        "attack": 30,
+        "defense": 26,
+        "speed": 3,
+        "type": "elite",
+        "colorTheme": "#006400",
+        "spriteRef": "assets/images/enemies/giant_snapper.png",
+        "area": "River",
+        "difficultyLevel": 4.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            },
+            {
+              "id": "thorn_spike",
+              "name": "Thorn Spike",
+              "dropRate": 0.4
+            },
+            {
+              "id": "golden_egg",
+              "name": "Golden Egg",
+              "dropRate": 0.05
+            }
+          ],
+          "baseBufos": 149,
+          "baseExperience": 187
+        }
+      }
+    },
+    {
+      "template": "giantSnapper",
+      "type": "boss",
+      "area": "River",
+      "level": 4,
+      "distance": 0.4,
+      "rolls": [
+        0.7000000000000001,
+        0.975,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "giantSnapper_River_1000",
+        "name": "Giant Snapper Boss",
+        "health": 616,
+        "maxHealth": 616,
+        "attack": 50,
+        "defense": 43,
+        "speed": 3,
+        "type": "boss",
+        "colorTheme": "#006400",
+        "spriteRef": "assets/images/enemies/giant_snapper.png",
+        "area": "River",
+        "difficultyLevel": 4.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "water_essence",
+              "name": "Water Essence",
+              "dropRate": 0.5
+            },
+            {
+              "id": "thorn_spike",
+              "name": "Thorn Spike",
+              "dropRate": 0.4
+            },
+            {
+              "id": "golden_egg",
+              "name": "Golden Egg",
+              "dropRate": 0.05
+            }
+          ],
+          "baseBufos": 298,
+          "baseExperience": 373
+        }
+      }
+    },
+    {
+      "template": "forestStalker",
+      "type": "normal",
+      "area": "Forest",
+      "level": 6,
+      "distance": 0.4,
+      "rolls": [
+        0.55,
+        0.375,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "forestStalker_Forest_1000",
+        "name": "Forest Stalker",
+        "health": 94,
+        "maxHealth": 94,
+        "attack": 27,
+        "defense": 8,
+        "speed": 18,
+        "type": "normal",
+        "colorTheme": "#3D7B3D",
+        "spriteRef": "assets/images/enemies/forest_stalker.png",
+        "area": "Forest",
+        "difficultyLevel": 6.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "thorn_spike",
+              "name": "Thorn Spike",
+              "dropRate": 0.4
+            },
+            {
+              "id": "golden_egg",
+              "name": "Golden Egg",
+              "dropRate": 0.05
+            }
+          ],
+          "baseBufos": 108,
+          "baseExperience": 144
+        }
+      }
+    },
+    {
+      "template": "forestStalker",
+      "type": "elite",
+      "area": "Forest",
+      "level": 6,
+      "distance": 0.4,
+      "rolls": [
+        0.55,
+        0.85,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "forestStalker_Forest_1000",
+        "name": "Elite Forest Stalker",
+        "health": 235,
+        "maxHealth": 235,
+        "attack": 49,
+        "defense": 13,
+        "speed": 22,
+        "type": "elite",
+        "colorTheme": "#3D7B3D",
+        "spriteRef": "assets/images/enemies/forest_stalker.png",
+        "area": "Forest",
+        "difficultyLevel": 6.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "thorn_spike",
+              "name": "Thorn Spike",
+              "dropRate": 0.4
+            },
+            {
+              "id": "golden_egg",
+              "name": "Golden Egg",
+              "dropRate": 0.05
+            }
+          ],
+          "baseBufos": 271,
+          "baseExperience": 361
+        }
+      }
+    },
+    {
+      "template": "forestStalker",
+      "type": "boss",
+      "area": "Forest",
+      "level": 6,
+      "distance": 0.4,
+      "rolls": [
+        0.55,
+        0.975,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "forestStalker_Forest_1000",
+        "name": "Forest Stalker Boss",
+        "health": 471,
+        "maxHealth": 471,
+        "attack": 82,
+        "defense": 21,
+        "speed": 27,
+        "type": "boss",
+        "colorTheme": "#3D7B3D",
+        "spriteRef": "assets/images/enemies/forest_stalker.png",
+        "area": "Forest",
+        "difficultyLevel": 6.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "thorn_spike",
+              "name": "Thorn Spike",
+              "dropRate": 0.4
+            },
+            {
+              "id": "golden_egg",
+              "name": "Golden Egg",
+              "dropRate": 0.05
+            }
+          ],
+          "baseBufos": 542,
+          "baseExperience": 722
+        }
+      }
+    },
+    {
+      "template": "darkDweller",
+      "type": "elite",
+      "area": "Mountains",
+      "level": 8,
+      "distance": 0.4,
+      "rolls": [
+        0.55,
+        0.4,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "darkDweller_Mountains_1000",
+        "name": "Elite Dark Dweller",
+        "health": 531,
+        "maxHealth": 531,
+        "attack": 81,
+        "defense": 48,
+        "speed": 9,
+        "type": "elite",
+        "colorTheme": "#4B0082",
+        "spriteRef": "assets/images/enemies/dark_dweller.png",
+        "area": "Mountains",
+        "difficultyLevel": 8.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "frog_scale",
+              "name": "Frog Scale",
+              "dropRate": 0.6
+            },
+            {
+              "id": "golden_egg",
+              "name": "Golden Egg",
+              "dropRate": 0.05
+            }
+          ],
+          "baseBufos": 546,
+          "baseExperience": 655
+        }
+      }
+    },
+    {
+      "template": "darkDweller",
+      "type": "boss",
+      "area": "Mountains",
+      "level": 8,
+      "distance": 0.4,
+      "rolls": [
+        0.55,
+        0.9,
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "expected": {
+        "id": "darkDweller_Mountains_1000",
+        "name": "Dark Dweller Boss",
+        "health": 1063,
+        "maxHealth": 1063,
+        "attack": 135,
+        "defense": 79,
+        "speed": 12,
+        "type": "boss",
+        "colorTheme": "#4B0082",
+        "spriteRef": "assets/images/enemies/dark_dweller.png",
+        "area": "Mountains",
+        "difficultyLevel": 8.2,
+        "dropTable": {
+          "possibleDrops": [
+            {
+              "id": "frog_scale",
+              "name": "Frog Scale",
+              "dropRate": 0.6
+            },
+            {
+              "id": "golden_egg",
+              "name": "Golden Egg",
+              "dropRate": 0.05
+            }
+          ],
+          "baseBufos": 1092,
+          "baseExperience": 1311
+        }
+      }
+    }
+  ]
+}

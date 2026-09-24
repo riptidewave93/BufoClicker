@@ -171,3 +171,23 @@ button:focus-visible, textarea:focus-visible { outline: 3px solid #b9ed84; outli
   html:has(.boss-banner) { scroll-padding-bottom: 190px; }
   .game-container:has(.boss-banner) { padding-bottom: 190px; }
 }
+
+/* Finite pointer feedback shares the original body-level effect layer. */
+.click-effect-layer .floating-number { position: absolute; pointer-events: none; color: #fff; font-size: 1.2em; font-weight: 700; text-shadow: 0 1px 2px #000; }
+.click-effect-layer .floating-number.combo { color: #ffd700; font-size: 1.4em; background: rgb(76 175 80 / 20%); padding: 4px 8px; border-radius: 10px; }
+.notification-close { color: #fff; min-width: 44px; min-height: 44px; background: transparent; border: 0; cursor: pointer; }
+.notification-content { display: flex; align-items: center; gap: 12px; }
+.achievement-notification, .achievement-notification.visible { max-width: min(440px, calc(100vw - 24px)); color: #fff; background: #183420; pointer-events: none; }
+.achievement-notification .achievement-item { background: transparent; }
+.achievement-notification-title { font-weight: 700; margin-bottom: 8px; }
+.generator-icon-fallback { align-items: center; justify-content: center; font-size: 2rem; }
+.generator-icon-fallback:not([hidden]) { display: flex; }
+@media (prefers-reduced-motion: reduce) { .click-effect-layer .click-emoji-pop { display: none; } }
+.notification { pointer-events: none; }
+.notification-close { pointer-events: auto; }
+.game-tooltip { background: #17281e; color: #fff; border-color: #56715d; }
+.game-tooltip .tooltip-title, .game-tooltip .tooltip-label, .game-tooltip .tooltip-value, .game-tooltip .tooltip-category, .game-tooltip .tooltip-description, .game-tooltip .tooltip-flavor { color: #fff; }
+.golden-bufo-toast { background: #594b1c; color: #fff; }
+.golden-bufo-toast--click_frenzy { background: #1d4661; color: #fff; }
+.golden-bufo-toast--lucky { background: #284330; color: #fff; }
+.achievement-notification-name, .achievement-notification-description { color: #fff; }

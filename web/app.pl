@@ -7,12 +7,34 @@ use JSON::PP qw/decode_json/;
 use Bufo::Catalog;
 use Bufo::Game;
 use Bufo::Save;
+use Bufo::API;
+use Bufo::Loop;
+use Bufo::Core::EventBus;
+use Bufo::Core::StateManager;
+use Bufo::Core::Logger;
+use Bufo::Util::State;
+use Bufo::Browser::UI;
+use Bufo::Browser::Debug;
+use Bufo::Browser::StyleLoader;
+use Bufo::Browser::Initialization;
+use Bufo::Util::Index;
+use Bufo::Util::SaveManager;
+use Bufo::Util::Time;
+use Bufo::Util::Storage;
+use Bufo::Util::DataLoader;
+use Bufo::Loader;
 
 my $document = js('document');
 my $window   = js('window');
 my $date     = js('Date');
 my $root     = $document->getElementById('game-container');
-our ( $game, $catalog, $save );
+our (
+    $game,   $catalog, $save, $api,   $events, $state,
+    $logger, $loop,    $ui,   $utils, $loader, $save_manager
+);
+my $scheduled_frame;
+our $in_simulation_step;
+my $state_pending = 0;
 my ( %catalog_data, @requests, %nodes, %displayed, %upgrades, %achievements, %bosses );
 my ( $started, $failed, $blocked, $blocked_raw, $storage_error )              = ( 0, 0, 0, '', 0 );
 my ( $quantity, $last_tick, $last_render, $last_save, $hidden_at )            = ( 1, 0, 0, 0, 0 );
@@ -23,6 +45,11 @@ my ( @expiring, @feedback );
 my $frenzy_signature = '';
 
 sub now { return $date->now; }
+
+sub interaction_allowed {
+    if ($blocked) { show_recovery(); return 0; }
+    return 1;
+}
 
 sub escape_html {
     my ($value) = @_;
@@ -91,6 +118,9 @@ sub button_html {
 sub clamp { my ( $n, $min, $max ) = @_; return $n < $min ? $min : $n > $max ? $max : $n; }
 
 sub shell {
+    $root              = $_[0] if defined $_[0];
+    %nodes             = ();
+    %displayed         = ();
     $root->{innerHTML} = <<'HTML';
 <main class="game-content" aria-label="BufoClicker">
  <div class="three-column-layout">
@@ -177,6 +207,7 @@ sub render_resources {
 }
 
 sub render_tree {
+    if ($ui) { $state->notifyStateChange; $ui->refreshTranscendButton; return; }
     my $state     = $game->state;
     my @ids       = ordered_generators();
     my @available = @{ $state->{upgrades}{available} };
@@ -313,6 +344,13 @@ sub render { render_resources(); render_tree(); render_boss(); render_frenzies()
 
 sub notification {
     my ( $message, $type, $duration ) = @_;
+    return $ui->showNotification(
+        {
+            message  => $message,
+            type     => $type || 'info',
+            duration => defined($duration) ? $duration : 3000
+        }
+    ) if $ui;
     my $element = $document->createElement('div');
     $element->{className}   = 'notification visible notification-' . ( $type || 'info' );
     $element->{textContent} = $message;
@@ -364,6 +402,7 @@ sub clean_effects {
 
 sub show_modal {
     my ( $id, $title, $body, $footer, $backdrop, $lock ) = @_;
+    close_modal() if $modal_id;
     $previous_focus = $document->{activeElement} unless $modal_id;
     $modal_id       = $id;
     $modal_backdrop = defined $backdrop ? $backdrop : 1;
@@ -383,15 +422,31 @@ sub show_modal {
     my $content = $document->querySelector('.modal-content');
     $content->focus;
     hide_tooltip();
-    return;
+    $events->emit( 'UI_MODAL_OPENED', { modalId => $id } ) if $events;
+    return node($id);
 }
 
 sub close_modal {
     return if now() < $modal_unlock;
-    put_html( 'modal-container', '' );
+    my $old_id = $modal_id;
+    my $old    = node($old_id) if $old_id;
     $modal_id = '';
+    if ( defined $old ) {
+        Bufo::Browser::Templates::release($old);
+        $old->{classList}->remove('visible');
+        Bufo::Browser::DOM::later(
+            300,
+            sub {
+                $old->remove;
+                $events->emit( 'UI_MODAL_CLOSED', { modalId => $old_id } ) if $events;
+                return;
+            }
+        );
+    }
     if ( defined $previous_focus && $previous_focus->{isConnected} ) { $previous_focus->focus; }
     $previous_focus = undef;
+    %nodes          = ();
+    %displayed      = ();
     return;
 }
 
@@ -440,7 +495,13 @@ sub show_stats {
         duration( ( now() - $s->{gameSettings}{firstStartTime} ) / 1000 ) )
       . stat_html( 'Total Clicks', number( $r->{clickCount}, 0 ) )
       . '</div><div class="stats-row">'
-      . stat_html( 'Achievements',       "$earned/$total (" . int( $earned * 100 / $total ) . '%)' )
+      . '<div class="stat-item"><div class="stat-label">Achievements</div><div class="stat-value">'
+      . $earned . '/'
+      . $total . ' ('
+      . int( $earned * 100 / $total + .5 )
+      . '%)</div><div class="achievement-progress-indicator"><div class="achievement-progress-bar" style="width:'
+      . ( $earned * 100 / $total )
+      . '%"></div></div></div>'
       . stat_html( 'Upgrades Purchased', scalar @{ $s->{upgrades}{purchased} } )
       . '</div><div class="stats-row">'
       . stat_html( 'Generators Unlocked', $unlocked . '/' . scalar( keys %{ $s->{generators} } ) )
@@ -483,7 +544,7 @@ sub show_achievements {
     my @ids     = @{ $game->state->{achievements}{unlocked} };
     my %icons   = ( generators => '🏭', production => '💰', clicks => '👆', special => '🎮' );
     my $total   = scalar @{ $catalog->achievements };
-    my $percent = int( @ids * 100 / $total );
+    my $percent = int( @ids * 100 / $total + .5 );
     my $body =
       '<div class="achievements-container"><div class="achievement-progress-bar"><div class="achievement-progress-text">'
       . scalar(@ids) . ' of '
@@ -520,7 +581,8 @@ sub show_achievements {
                 ? '<div class="achievement-reward">'
                   . escape_html( reward_text( $a->{reward} ) )
                   . '</div>'
-                : '' )
+                : ''
+              )
               . '</div></div>'
         } @ids
       )
@@ -712,6 +774,7 @@ sub boss_result {
 
 sub process_events {
     my $events = $game->drain_events;
+    return if $ui;
     for my $event (@$events) {
         if ( $event->{type} eq 'achievement' ) {
             my $a = $achievements{ $event->{id} };
@@ -728,6 +791,7 @@ sub process_events {
 }
 
 sub spawn_golden {
+    if ($api) { $api->getGoldenBufoManager->forceSpawn; return; }
     return if $golden_until || $hidden_at || !$started;
     $golden_outcome = $game->golden_outcome( rand() );
     $golden_until   = now() + 13000;
@@ -756,6 +820,7 @@ sub clear_golden {
 }
 
 sub render_frenzies {
+    return if $ui;
     my $f         = $game->active_frenzies( now() );
     my @active    = grep { defined $f->{$_} } qw/production click/;
     my $signature = join( ',', @active );
@@ -824,7 +889,12 @@ sub persist {
     $last_save     = $time;
     $storage_error = 0;
     node('save-status')->{hidden} = 1;
-    notification( 'Game saved successfully.', 'success' ) if $manual;
+    if ($manual) {
+        $ui
+          ? $ui->showSaveNotification(
+            'Game saved at ' . js_new( 'Date', now() )->toLocaleTimeString )
+          : notification( 'Game saved successfully.', 'success' );
+    }
     return 1;
 }
 sub export_codec { my ($raw) = @_; return $window->btoa( $window->encodeURIComponent($raw) ); }
@@ -868,8 +938,10 @@ sub accept_game {
     my $time = now();
     storage()->setItem( Bufo::Save->key, $save->serialize( $candidate->state, now => $time ) );
     $candidate->mark_saved($time);
-    $game              = $candidate;
-    $blocked           = 0;
+    $game->getGoldenBufoManager->stop if $api;
+    $game    = $candidate;
+    $blocked = 0;
+    attach_game() if $events;
     $blocked_raw       = '';
     $storage_error     = 0;
     $last_save         = $time;
@@ -883,6 +955,7 @@ sub accept_game {
     $document->{body}->{classList}->remove('boss-fight-active');
     clear_golden();
     node('save-status')->{hidden} = 1;
+    $events->emit( 'GAME_LOADED', { state => $game->state } ) if $events;
     render();
     return;
 }
@@ -998,6 +1071,7 @@ sub on_click {
     my ($event) = @_;
     my $target = $event->{target};
     return unless defined $target;
+    return if Bufo::Browser::Templates::activate($event);
     my $control = $target->closest('[data-action]');
     if ( !defined $control ) {
         if ( $modal_id && $modal_backdrop && defined $target->getAttribute('data-backdrop') ) {
@@ -1040,6 +1114,7 @@ sub on_click {
         }
     } elsif ( $action eq 'quantity' ) {
         $quantity = 0 + $control->getAttribute('data-amount');
+        $ui->getComponent('shop')->setPurchaseAmount($quantity) if $ui;
         my $buttons = $document->querySelectorAll('.purchase-amount-button');
         for my $i ( 0 .. $buttons->{length} - 1 ) {
             my $b      = $buttons->item($i);
@@ -1064,24 +1139,7 @@ sub on_click {
     } elsif ( $action eq 'generator-detail' ) {
         generator_detail($id);
     } elsif ( $action eq 'confirm-prestige' ) {
-        my $candidate = Bufo::Game->new(
-            catalog => $catalog,
-            now     => now(),
-            state   => $save->parse( $save->serialize( $game->state, now => now() ), now => now() )
-        );
-        my $result = $candidate->prestige;
-        if ( $result->{ok} ) {
-            my $ok = eval { accept_game($candidate); 1 };
-            if ($ok) {
-                close_modal();
-                process_events();
-                notification( 'Transcended! +' . $result->{gained} . ' Bufoplier points.',
-                    'success', 6000 );
-            } else {
-                notification( 'Could not save transcendence. Your current run is unchanged.',
-                    'error' );
-            }
-        }
+        transcend_game();
     } elsif ( $action eq 'fight' ) {
         my $r = $game->start_boss( now() );
         render_boss();
@@ -1093,9 +1151,7 @@ sub on_click {
         $game->retreat_boss;
         render_boss();
     } elsif ( $action eq 'boss-hit' ) {
-        my $r = $game->hit_boss( now() );
-        click_effect( $event, '-' . number( $r->{damage} ), 1 ) if $r->{ok};
-        process_events();
+        $ui->getComponent('bossFight')->handleHit($event);
         render_boss();
     } elsif ( $action eq 'golden' ) {
         if ( $golden_until > now() ) {
@@ -1157,14 +1213,14 @@ sub on_visibility {
     if ( $document->{hidden} ) {
         return if $hidden_at;
         $hidden_at = $time;
-        $game->pause($time);
+        stop_runtime();
         clear_golden();
         persist(0);
     } elsif ($hidden_at) {
         my $seconds =
           $save->elapsed_seconds( last_tick => $hidden_at, now => $time, minimum_ms => 0 );
         $game->credit_elapsed( $seconds, $time );
-        $game->resume($time);
+        start_runtime();
         $hidden_at = 0;
         $last_tick = $time;
         $golden_at = $time + 45000 + rand(45000);
@@ -1177,7 +1233,7 @@ sub on_visibility {
 
 sub on_pagehide {
     return unless $started;
-    if ( !$hidden_at ) { $hidden_at = now(); $game->pause($hidden_at); }
+    if ( !$hidden_at ) { $hidden_at = now(); stop_runtime(); }
     persist(0);
     return;
 }
@@ -1187,7 +1243,7 @@ sub on_resize { hide_tooltip(); $next_move = 0; render_boss() if $started; retur
 sub on_tick {
     return unless $started && !$hidden_at;
     my $time = now();
-    if ( !$blocked ) { $game->tick( ( $time - $last_tick ) / 1000, $time ); }
+
     $last_tick = $time;
     clean_effects();
     process_events();
@@ -1196,10 +1252,6 @@ sub on_tick {
         $modal->{classList}->remove('modal--input-locked') if defined $modal;
     }
     if ( $time - $last_render >= 250 ) { render(); $last_render = $time; }
-    if ( !$blocked && !$modal_id ) {
-        if    ( $golden_until && $time >= $golden_until ) { clear_golden(); }
-        elsif ( !$golden_until && $time >= $golden_at )   { spawn_golden(); }
-    }
     if ( !$blocked && $game->state->{gameSettings}{autoSave} && $time - $last_save >= 60000 ) {
         persist(0);
         $last_save = $time;
@@ -1207,9 +1259,169 @@ sub on_tick {
     return;
 }
 
+sub render_menu_state {
+    return unless defined $game;
+    my $pending = $game->pending_prestige;
+    my $button  = node('transcend-button');
+    return unless defined $button;
+    $button->{hidden} = ( $pending < 1 && $game->state->{prestige}{lifetimePoints} < 1 ) ? 1 : 0;
+    $button->{textContent} = $pending > 0 ? 'Transcend (+' . $pending . ')' : 'Transcend';
+    $button->{classList}->toggle( 'is-ready', $pending > 0 );
+    $document->{body}
+      ->setAttribute( 'data-boss-stage', scalar @{ $game->state->{bosses}{defeated} } );
+    return;
+}
+sub move_boss { $next_move = 0; render_boss(); return; }
+sub stop_boss_movement { $next_move = 9e15; return; }
+
+sub transcend_game {
+    my $candidate = Bufo::Game->new(
+        catalog => $catalog,
+        now     => now(),
+        state   => $save->parse( $save->serialize( $game->state, now => now() ), now => now() )
+    );
+    my $result = $candidate->prestige;
+    return 0 unless $result->{ok};
+    my $ok = eval { accept_game($candidate); 1 };
+    if ( !$ok ) {
+        notification( 'Could not save transcendence. Your current run is unchanged.', 'error' );
+        return 0;
+    }
+    close_modal();
+    notification( 'Transcended! +' . $result->{gained} . ' Bufoplier points.', 'success', 6000 );
+    return $result->{gained};
+}
+
+sub attach_game {
+    $game->set_event_bus($events);
+    $game->set_state_observer(
+        sub {
+            if ($in_simulation_step) { $state_pending = 1; }
+            else                     { $state->notifyStateChange; }
+            return;
+        }
+    ) if $state;
+    $game->getPrestigeManager->{transcend} = \&transcend_game;
+    $game->getGoldenBufoManager->start if $started && !$hidden_at && !$blocked;
+    $state->notifyStateChange          if $state;
+    return;
+}
+
+sub run_scheduled_frame {
+    my $callback = $scheduled_frame;
+    $scheduled_frame = undef;
+    $callback->( now() ) if $callback;
+    return;
+}
+
+sub start_runtime {
+    return unless $loop;
+    return if $loop->isRunning;
+    $game->resume( now() );
+    $game->getGoldenBufoManager->start unless $blocked;
+    $loop->start;
+    $events->emit( 'GAME_STARTED', undef );
+    return;
+}
+
+sub stop_runtime {
+    my $running = $loop && $loop->isRunning;
+    $loop->stop                       if $loop;
+    $game->getGoldenBufoManager->stop if $api;
+    $game->pause( now() );
+    $events->emit( 'GAME_PAUSED', undef ) if $events && $running;
+    return;
+}
+
+sub import_text {
+    my ($text) = @_;
+    my $ok = eval {
+        my $parsed    = $save->parse( import_codec($text), now => now() );
+        my $candidate = Bufo::Game->new( catalog => $catalog, now => now(), state => $parsed );
+        accept_game($candidate);
+        1;
+    };
+    return $ok ? 1 : 0;
+}
+
+sub initialize_services {
+    $logger = Bufo::Core::Logger->new(
+        now  => \&now,
+        sink => sub { my ( $method, @args ) = @_; js('console')->$method(@args); return; }
+    );
+    $logger->setContext('BufoIdle');
+    $events = Bufo::Core::EventBus->new( logger => $logger );
+    Bufo::Core::EventBus->setInstance($events);
+    $state = Bufo::Core::StateManager->new(
+        get      => sub { return $game->state },
+        set      => sub { $game->replace_state( $_[0] ); return; },
+        defaults => sub { return Bufo::Game->new( catalog => $catalog, now => now() )->state },
+        derive   => sub { return $_[0] },
+        validate => \&Bufo::Util::State::validateState,
+        on_error => sub { $logger->error(@_); return; }
+    );
+    Bufo::Core::StateManager->setInstance($state);
+    $api = Bufo::API->new(
+        game          => sub { return $game },
+        clock         => \&now,
+        events        => $events,
+        state_manager => $state,
+        hooks         => {
+            init  => sub { $api->checkUnlocks; start_runtime(); return 1 },
+            start => \&start_runtime,
+            stop  => \&stop_runtime,
+            reset => sub {
+                return 0
+                  unless $window->confirm(
+                    'Are you sure you want to reset your game? All progress will be lost.');
+                reset_game();
+                return 1;
+            },
+            resetState => \&reset_game,
+            save       => sub { return persist(1) },
+            load       => sub { load_game(); attach_game(); render(); return !$blocked },
+            exportSave =>
+              sub { return export_codec( $save->serialize( $game->state, now => now() ) ) },
+            importSave     => \&import_text,
+            getGameLoop    => sub { return $loop },
+            getUIManager   => sub { return $ui },
+            toggleAutoSave => sub { $ui->updateAutoSaveStatus( $_[0] ) if $ui; persist(0); return; }
+        }
+    );
+    $loop = Bufo::Loop->new(
+        now      => \&now,
+        schedule => sub {
+            $scheduled_frame = $_[0];
+            return $window->requestAnimationFrame( \&run_scheduled_frame );
+        },
+        cancel => sub { $window->cancelAnimationFrame( $_[0] ); $scheduled_frame = undef; return; },
+        tick   => sub {
+            local $in_simulation_step = 1;
+            $api->processTick( $_[0] ) unless $blocked || $hidden_at;
+            return;
+        },
+        emit => sub {
+            if ($state_pending) {
+                $state_pending = 0;
+                $state->notifyStateChange;
+            }
+            $events->emit(@_);
+            on_tick();
+            return;
+        },
+        on_error => sub { $logger->error( $_[0] ); return; }
+    );
+    $events->on( 'GENERATOR_PURCHASED', sub { persist(0);         return; } );
+    $events->on( 'UPGRADE_PURCHASED',   sub { persist(0);         return; } );
+    $events->on( 'GAME_LOADED',         sub { $api->checkUnlocks; return; } );
+    attach_game();
+    return;
+}
+
 sub fatal {
     my ($message) = @_;
     $failed = 1;
+    $root->removeAttribute('data-ready');
     $root->{innerHTML} =
         '<div class="startup-status" role="alert"><h1>The pond could not open</h1><p>'
       . escape_html($message)
@@ -1221,27 +1433,44 @@ sub fatal {
 }
 
 sub start {
-    return if $started || $failed;
+    my ( $root_id, $report ) = @_;
+    $root_id ||= 'game-container';
+    $report  ||= sub { return; };
+    return 0 if $failed;
+    if ($started) { $report->( 'Initialization complete', 100 ); start_runtime(); return 1; }
     my $ok = eval {
         $catalog      = Bufo::Catalog->new(%catalog_data);
         %upgrades     = map { $_->{id} => $_ } @{ $catalog->upgrades };
         %achievements = map { $_->{id} => $_ } @{ $catalog->achievements };
         %bosses       = map { $_->{id} => $_ } @{ $catalog->bosses };
         $save         = Bufo::Save->new( catalog => $catalog );
-        shell();
+        $report->( 'Initializing managers', 40 );
+        $game = Bufo::Game->new( catalog => $catalog, now => now() );
+        initialize_services();
+        $report->( 'Initializing UI', 60 );
+        $ui = Bufo::Browser::UIManager->getInstance;
+        $ui->init($root_id);
+        $report->( 'Initializing game core', 70 );
+        $api->checkUnlocks;
+        $report->( 'Initializing game loop', 80 );
+        $report->( 'Loading saved game',     90 );
         load_game();
+        attach_game();
         $started   = 1;
         $last_tick = now();
         $last_save = $last_tick;
-        $golden_at = $last_tick + 45000 + rand(45000);
         render();
+        show_recovery() if $blocked;
+        $report->( 'Starting game systems', 95 );
+        start_runtime();
+        Bufo::Browser::Debug->expose if $Bufo::Build::DEVELOPMENT;
         $root->setAttribute( 'aria-busy',  'false' );
         $root->setAttribute( 'data-ready', 'true' );
-        $window->setInterval( \&on_tick, 100 );
+        $report->( 'Initialization complete', 100 );
         1;
     };
     fatal( clean_error($@) ) unless $ok;
-    return;
+    return $ok ? 1 : 0;
 }
 
 sub on_catalog_load {
@@ -1264,25 +1493,125 @@ sub on_catalog_error {
     return;
 }
 
-$document->addEventListener( 'click',            \&on_click );
-$document->addEventListener( 'pointerover',      \&on_pointer_over );
-$document->addEventListener( 'pointerout',       \&on_pointer_out );
-$document->addEventListener( 'keydown',          \&on_keydown );
-$document->addEventListener( 'dragstart',        \&on_dragstart );
-$document->addEventListener( 'visibilitychange', \&on_visibility );
-$window->addEventListener( 'pagehide', \&on_pagehide );
-$window->addEventListener( 'pageshow', \&on_pageshow );
-$window->addEventListener( 'resize',   \&on_resize );
+Bufo::Browser::DOM::listen( $document, 'click',            \&on_click );
+Bufo::Browser::DOM::listen( $document, 'pointerover',      \&on_pointer_over );
+Bufo::Browser::DOM::listen( $document, 'pointerout',       \&on_pointer_out );
+Bufo::Browser::DOM::listen( $document, 'keydown',          \&on_keydown );
+Bufo::Browser::DOM::listen( $document, 'dragstart',        \&on_dragstart );
+Bufo::Browser::DOM::listen( $document, 'visibilitychange', \&on_visibility );
+Bufo::Browser::DOM::listen( $window,   'pagehide',         \&on_pagehide );
+Bufo::Browser::DOM::listen( $window,   'pageshow',         \&on_pageshow );
+Bufo::Browser::DOM::listen( $window,   'resize',           \&on_resize );
 
-for my $name (qw/generators upgrades achievements/) {
+sub fetch_data {
+    my ( $path, $success, $failure, $timeout ) = @_;
     my $request = js_new('XMLHttpRequest');
-    $request->{bufoCatalog} = $name;
-    $request->open( 'GET', './assets/data/' . $name . '.json', 1 );
-    $request->{timeout} = 20000;
-    $request->addEventListener( 'load',    \&on_catalog_load );
-    $request->addEventListener( 'error',   \&on_catalog_error );
-    $request->addEventListener( 'timeout', \&on_catalog_error );
+    my ( $onload, $onerror );
+    my $cleanup = sub {
+        Bufo::Browser::DOM::unlisten( $request, 'load',    $onload );
+        Bufo::Browser::DOM::unlisten( $request, 'error',   $onerror );
+        Bufo::Browser::DOM::unlisten( $request, 'timeout', $onerror );
+        return;
+    };
+    $onload = sub {
+        $success->( { status => $request->{status}, text => $request->{responseText} } );
+        $cleanup->();
+        return;
+    };
+    $onerror = sub { $failure->('Network request failed or timed out'); $cleanup->(); return; };
+    $request->open( 'GET', $path, 1 );
+    $request->{timeout} = $timeout;
+    Bufo::Browser::DOM::listen( $request, 'load',    $onload );
+    Bufo::Browser::DOM::listen( $request, 'error',   $onerror );
+    Bufo::Browser::DOM::listen( $request, 'timeout', $onerror );
     push @requests, $request;
     $request->send;
+    return;
 }
+
+sub initialize_utility_adapters {
+    my $time = Bufo::Util::Time->new(
+        now         => \&now,
+        schedule    => sub { my ( $cb, $ms ) = @_; return Bufo::Browser::DOM::later( $ms, $cb ) },
+        cancel      => \&Bufo::Browser::DOM::cancel,
+        format_date => sub {
+            my ( $ms, $include ) = @_;
+            my $d       = js_new( 'Date', $ms );
+            my $options = { year => 'numeric', month => 'short', day => 'numeric' };
+            @$options{qw/hour minute second/} = ('2-digit') x 3 if $include;
+            return $d->toLocaleString( [], $options );
+        }
+    );
+    my $storage = Bufo::Util::Storage->new(
+        get    => sub { return storage()->getItem( $_[0] ) },
+        set    => sub { storage()->setItem( $_[0], $_[1] ); return; },
+        remove => sub { storage()->removeItem( $_[0] );     return; },
+        clear  => sub { storage()->clear;                   return; },
+        keys   => sub {
+            my $s = storage();
+            return [ map { $s->key($_) } 0 .. $s->{length} - 1 ];
+        },
+        encode => \&export_codec,
+        decode => \&import_codec
+    );
+    $utils = Bufo::Util::Index->new(
+        time          => $time,
+        storage       => $storage,
+        logger        => $logger,
+        is_valid_date => sub {
+            my ($v) = @_;
+            return 0 unless ref $v;
+            my $valid = eval {
+                return 0 unless js('Object.prototype.toString')->call($v) eq '[object Date]';
+                my $n = $v->getTime;
+                js('Number')->isFinite($n);
+            };
+            return $valid ? 1 : 0;
+        },
+        is_valid_url => sub {
+            my $ok = eval { js_new( 'URL', $_[0] ); 1 };
+            return $ok ? 1 : 0;
+        }
+    );
+    $save_manager = Bufo::Util::SaveManager->new(
+        key       => Bufo::Save->key,
+        storage   => $storage,
+        logger    => $logger,
+        serialize => sub {
+            die 'Save recovery is required' if $blocked;
+            return $save->serialize( $_[0], now => now() );
+        },
+        parse => sub { return $save->parse( $_[0], now => now() ) }
+    );
+    Bufo::Util::SaveManager->setInstance($save_manager);
+    my $data =
+      Bufo::Util::DataLoader->new( fetch => \&fetch_data, storage => $storage, logger => $logger );
+    $loader = Bufo::Loader->new(
+        loader     => $data,
+        logger     => $logger,
+        initialize => {
+            map {
+                my $name = $_;
+                $name => sub { $catalog_data{$name} = $_[0]; return; }
+            } qw/generators upgrades achievements/
+        },
+        counts => sub {
+            return {
+                generatorsLoaded => $catalog ? scalar( keys %{ $catalog->generators } ) : 0,
+                upgradesLoaded   => $catalog ? scalar( @{ $catalog->upgrades } )        : 0
+            };
+        }
+    );
+    return;
+}
+$logger = Bufo::Core::Logger->new(
+    now  => \&now,
+    sink => sub { my ( $method, @args ) = @_; js('console')->$method(@args); return; }
+);
+initialize_utility_adapters();
+my $loading = Bufo::Browser::Initialization::createLoadingUI('game-container');
+Bufo::Browser::Initialization::initializeGame(
+    'game-container',
+    sub { $loading->{update}->( $_[0] ); $loading->{remove}->() if $_[0]{progress} == 100; return; }
+);
 1;

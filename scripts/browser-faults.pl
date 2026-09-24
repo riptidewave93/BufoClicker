@@ -22,7 +22,7 @@ sub browser_fault_checks {
         my $before   = state();
         my $stored   = _fault_keys( $key, $legacy_key );
         my $imported = evaluate(
-'const save = JSON.parse(arguments[0]); save.state.resources.clickCount = 123; save.state.achievements.clickCount = 123; return JSON.stringify(save);',
+            'const save = JSON.parse(arguments[0]); save.state.resources.clickCount = 123; save.state.achievements.clickCount = 123; return JSON.stringify(save);',
             $stored->[0]
         );
         evaluate(
@@ -34,14 +34,14 @@ sub browser_fault_checks {
             };
         }
         );
+
         if ( $action eq 'reset' ) {
             click('#reset-button');
             click('[data-action=confirm-reset]');
             wait_for(
                 sub { evaluate('return document.body.innerText.includes("Reset failed because");') }
             );
-        }
-        elsif ( $action eq 'import' ) {
+        } elsif ( $action eq 'import' ) {
             click('#stats-button');
             click('[data-action=saves]');
             evaluate( 'document.getElementById("save-transfer").value = arguments[0];', $imported );
@@ -49,12 +49,11 @@ sub browser_fault_checks {
             wait_for(
                 sub {
                     evaluate(
-'return document.getElementById("save-transfer-status").innerText.includes("Import failed");'
+                        'return document.getElementById("save-transfer-status").innerText.includes("Import failed");'
                     );
                 }
             );
-        }
-        else {
+        } else {
             click('#transcend-button');
             click('[data-action=confirm-prestige]');
             wait_for(
@@ -75,7 +74,7 @@ sub browser_fault_checks {
     command( 'POST', '/url', { url => "$base/" } );
     ready();
     evaluate(
-'localStorage.setItem(arguments[0], "{corrupt"); localStorage.setItem(arguments[1], arguments[2]);',
+        'localStorage.setItem(arguments[0], "{corrupt"); localStorage.setItem(arguments[1], arguments[2]);',
         $key, $legacy_key, $legacy );
     my $script = command(
         'POST',
@@ -155,10 +154,10 @@ sub browser_fault_checks {
     }
     );
     seed(
-'$s->{resources}{bufos}=20000; $s->{resources}{totalBufos}=20000; $s->{generators}{tadpole}{count}=10;'
+        '$s->{resources}{bufos}=20000; $s->{resources}{totalBufos}=20000; $s->{generators}{tadpole}{count}=10; $s->{explorer}{state}="exploring"; $s->{explorer}{stateStartTime}=Bufo::Browser::now(); $s->{explorer}{explorationProgress}=25;'
     );
     perl_eval(
-'$Bufo::Browser::game->tick(0, Bufo::Browser::now()); Bufo::Browser::process_events(); Bufo::Browser::render(); 1;'
+        '$Bufo::Browser::game->tick(0, Bufo::Browser::now()); Bufo::Browser::process_events(); Bufo::Browser::render(); 1;'
     );
     click('.boss-banner__fight');
     my $rate  = 0 + perl_eval('$Bufo::Browser::game->production');
@@ -182,8 +181,27 @@ sub browser_fault_checks {
         $fight->{remainingMs}, 'simulated background gap preserves fight time' );
     is( $resumed_fight->{health},
         $fight->{health}, 'simulated background gap preserves fight health' );
+    is_deeply(
+        $resumed->{explorer},
+        $hidden_before->{explorer},
+        'simulated background gap preserves Explorer progress and health'
+    );
+
+    evaluate(
+        'window.__faultHidden=true; document.dispatchEvent(new Event("visibilitychange")); window.__faultTime -= 60000; window.__faultHidden=false; document.dispatchEvent(new Event("visibilitychange"));'
+    );
+    ok( perl_eval('$Bufo::Browser::game->tick(1, Bufo::Browser::now())->{ok}'),
+        'backward wall-clock adjustment resumes production' );
+    click('#boss-sprite');
+    cmp_ok(
+        0 + perl_eval('$Bufo::Browser::game->active_boss->{health}'),
+        '<',
+        $resumed_fight->{health},
+        'backward wall-clock adjustment keeps boss controls usable'
+    );
 
     # Block the real catalog request before navigation; never alter deployed files.
+    perl_eval('Bufo::Browser::persist(0);1;');
     my $stored_before_catalog = _fault_keys( $key, $legacy_key );
     command( 'POST', '/goog/cdp/execute', { cmd => 'Network.enable', params => {} } );
     command(

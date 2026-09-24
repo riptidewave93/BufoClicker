@@ -1,0 +1,14 @@
+[
+  {
+    "browser": "chromium",
+    "playwrightClickMs": 52,
+    "bufos": 1,
+    "clickCount": 1
+  },
+  {
+    "browser": "firefox",
+    "playwrightClickMs": 195,
+    "bufos": 1,
+    "clickCount": 1
+  }
+]

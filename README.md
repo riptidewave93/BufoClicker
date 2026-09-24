@@ -18,7 +18,9 @@ docker compose up dev
 ```
 
 Open [localhost:9000](http://localhost:9000). Rebuild after editing Perl or assets,
-then refresh the page. The same preview supports
+then refresh the page. This development build exposes `window.debugTools`, including
+Explorer/combat, resource controls, events, logging, and time scaling. The production
+image omits that binding. The same preview supports
 [the GitHub Pages path](http://localhost:9000/BufoClicker/).
 
 For a production image with its assets included:
@@ -42,6 +44,8 @@ Run real browser flows against the production image:
 
 ```sh
 docker compose --profile browser run --build --rm browser-test
+docker compose run --rm build
+docker compose --profile browser run --rm browser-ui
 docker compose --profile browser down
 ```
 
@@ -89,7 +93,8 @@ with a `file://` URL does not provide the HTTP environment WebPerl needs.
 
 Read the [architecture decision](docs/adr/0001-port-client-to-perl-and-webassembly.md),
 [migration description](docs/perl-wasm-migration.md), and
-[parity matrix](docs/parity.md) for implementation details.
+[parity matrix](docs/parity.md), [complete source map](docs/source-map.md), and
+[development interfaces](docs/development.md) for implementation details.
 
 WebPerl includes supplied JavaScript bridge/loader files. Application logic is
 Perl; HTML, CSS and JSON remain their native formats. The runtime is a pinned

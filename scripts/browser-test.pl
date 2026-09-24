@@ -14,7 +14,7 @@ my $http   = HTTP::Tiny->new(
     timeout  => 60,
     max_redirect => 0,
     proxy    => undef,
-    no_proxy => 'localhost,127.0.0.1,webdriver,site,host.docker.internal'
+    no_proxy => 'localhost,127.0.0.1,webdriver,site,dev,host.docker.internal'
 );
 my $json = JSON::PP->new->canonical;
 my $session;
@@ -64,6 +64,7 @@ for my $path ( '/', '/BufoClicker/' ) {
     evaluate('localStorage.clear();');
     command( 'POST', '/url', { url => "$base$path" } );
     ready();
+    is(evaluate('return typeof window.debugTools;'), 'undefined', "$path production omits developer binding");
     push @measurements,
       {
         path => $path,
@@ -255,7 +256,7 @@ sub click {
     wait_for(
         sub {
             evaluate(
-'const e=document.querySelector(arguments[0]); if(!e)return false; const r=e.getBoundingClientRect(),s=getComputedStyle(e); return r.width>2 && r.height>2 && Number(s.opacity)>.99 && s.pointerEvents!=="none";',
+'const e=document.querySelector(arguments[0]); if(!e)return false; const r=e.getBoundingClientRect(),s=getComputedStyle(e); return r.width>2 && r.height>2 && Number(s.opacity)>0 && s.visibility!=="hidden" && s.pointerEvents!=="none";',
                 $selector
             );
         }

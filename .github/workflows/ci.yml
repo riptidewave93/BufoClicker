@@ -13,6 +13,10 @@ jobs:
         run: docker build --target build -t bufo-build .
       - name: Exercise browser flows
         run: BUFO_UID=$(id -u) BUFO_GID=$(id -g) docker compose --profile browser run --build --rm browser-test
+      - name: Exercise development APIs and browser components
+        run: |
+          BUFO_UID=$(id -u) BUFO_GID=$(id -g) docker compose run --rm build
+          BUFO_UID=$(id -u) BUFO_GID=$(id -g) docker compose --profile browser run --rm browser-ui
       - name: Keep browser evidence
         if: always()
         uses: actions/upload-artifact@v4

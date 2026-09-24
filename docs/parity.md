@@ -1,8 +1,8 @@
 # Gameplay and save compatibility
 
-The Perl port preserves the clicker game, its content, and static hosting. It
-follows the scope of [Rust proposal PR #2](https://github.com/riptidewave93/BufoClicker/pull/2),
-including removal of the retired Explorer simulation. This matrix compares the
+The Perl conversion preserves the complete original application, its content,
+and static hosting. This includes Explorer/combat, development tools, reusable
+helpers, and browser component APIs. This matrix compares the
 original TypeScript client with the Perl implementation. The
 [verification record](verification.md) records completed executions, browser
 coverage, measurements, and screenshots.
@@ -37,22 +37,32 @@ coverage, measurements, and screenshots.
 | A corrupt save does not disappear | Invalid current data blocks gameplay and automatic writes until explicit recovery. It does not trigger a legacy fallback. | [`scripts/browser-faults.pl`](../scripts/browser-faults.pl) records reads and writes during recovery. |
 | Import and reset preserve progress if storage fails | The browser validates a candidate game and writes its save before replacing the active game. Prestige uses the same replacement rule. | Browser fault checks inject storage quota failures and compare active state and both stored keys. |
 | Export strings remain compatible | Export uses Base64 of URI-encoded JSON. Import also accepts raw JSON. Save tools now expose these operations in the UI. | Browser tests export, decode, import, and reject malformed input. |
-| Durable state restores once | Currency, ownership, purchases, achievements, custom events, prestige, boss history, and settings persist. Derived prices and multipliers are rebuilt. | Native save round trips compare permanent production and click power. |
+| Durable state restores once | Currency, ownership, enabled flags, boosts, purchases, achievements, custom events, Explorer, equipment, prestige, boss history, and settings persist. Derived prices and multipliers are rebuilt. | Native save round trips compare permanent production and click power. |
 | Temporary state does not persist | Saves exclude active fights, click combos, Golden Bufo spawns, frenzy deadlines, and notification queues. | Save tests verify transient exclusion. Engine tests verify a fresh transient state after reconstruction. |
 | Purchases and lifecycle transitions save progress | Manual Save, purchases, autosave, page hide, and tab hide use the Perl storage adapter. | Browser tests refresh after interaction and exercise lifecycle writes. |
 
 ## Deliberate changes
 
-The retired Explorer subsystem had no player UI and was superseded by clicker
-bosses. Its combat simulation, models, and public methods are removed, as in
-PR #2. Legacy `explorer` fields are accepted and ignored. The port does not add
-an Explorer interface or convert that saved progression into clicker rewards.
+Explorer remains callable through the game facade and developer tools. Its
+original engine integration does not credit exploration rewards to the main
+currency bank: completion updates Explorer totals and experience. The unused
+callback definitions in the original GameCore do not change that observed
+behavior. The conversion preserves it, including separate pure-model algorithms,
+transient encounter context, and wall-clock completion duration.
+
+The [source operation map](source-map.md) accounts for all 64 original modules.
+Type-only declarations map to data, option, and callback contracts. Durable save
+and catalog data are validated at runtime. Barrel exports map to Perl package access. Singleton getters map to application-owned service instances.
+Every executable operation has a concrete implementation.
 
 The port corrects three existing economy defects. Reloads no longer replay
 one-time achievement currency rewards. Prestige retains the effects of the
 achievements it retains. Max purchases verify the rounded actual price, so a
 logarithmic estimate cannot authorize an unaffordable purchase. Catalog prices,
-production, rewards, and unlock thresholds remain unchanged.
+production, rewards, and unlock thresholds remain unchanged. The Perl game
+facade also rejects an upgrade purchase before its unlock conditions are met.
+The original UI filtered these upgrades, but its direct public purchase API did
+not enforce that guard.
 
 Export, import, and save recovery gain visible controls. The interface retains
 the existing artwork and layout, with a dark palette and white primary text.

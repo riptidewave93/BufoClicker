@@ -1,0 +1,13 @@
+{
+  "source_repository": "https://github.com/riptidewave93/BufoClicker",
+  "source_commit": "fc7f61ad270476d471adb1bd8cbaf6b4a0258e9c",
+  "source_sha256": {
+    "src/models/generators.ts": "d6be846e42e9f46cc5af9a98a30bcc665d8f03b342f32bfaafafa2976b9693c1",
+    "src/models/upgrades.ts": "320ec6c6b311e1301474176c55714f6f321506f5a44c855456c52b3115be82fb",
+    "src/models/achievements.ts": "fa2cf5014d7dfb42280fea38181d16ee3362dea14b6a364f786d90aff0e99081",
+    "src/models/prestige.ts": "c9a35941940dd11ada3524fcc4a44a7f8dd3b15d93f3ae9017665ef5eac0918a",
+    "src/models/boss.ts": "eb89c7aaa25241fc802c5d179afe2373a39e9b1e09476a9f7dd24066f5180f0d"
+  },
+  "generation": "Executed original TypeScript functions with transpileModule in an isolated container. Inputs are repeated in t/models.t; expected outputs are captured in models-oracle.json. Boolean flags are normalized to Perl 0/1 during comparison.",
+  "fixture": "models-oracle.json"
+}

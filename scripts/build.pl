@@ -9,6 +9,8 @@ use File::Temp qw(tempdir);
 use Digest::SHA;
 
 chdir "$FindBin::Bin/.." or die "Cannot enter project: $!";
+my $development = @ARGV == 1 && $ARGV[0] eq '--development' ? 1 : 0;
+die "Usage: perl scripts/build.pl [--development]\n" if @ARGV && !$development;
 my $release = 'v0.09-beta';
 my $sha     = '5f441249217e90ab378c666f473d4206ab4f44907f6bb0aa8d70834bc38c40dc';
 my $archive = ".cache/webperl-$release.zip";
@@ -53,7 +55,7 @@ open my $bridge_in, '<:raw', $bridge_path or die "Cannot read browser bridge: $!
 my $bridge = do { local $/; <$bridge_in> };
 close $bridge_in;
 my $removed = $bridge =~
-s{\t\t\twindow\.addEventListener\("beforeunload", function \(\) \{\n\t\t\t\t// not really needed because we're unloading anyway, but for good measure, end Perl\.\.\.\n\t\t\t\tconsole\.debug\("Perl: beforeunload, ending\.\.\."\);\n\t\t\t\tPerl\.end\(\);\n\t\t\t\}\);\n}{};
+  s{\t\t\twindow\.addEventListener\("beforeunload", function \(\) \{\n\t\t\t\t// not really needed because we're unloading anyway, but for good measure, end Perl\.\.\.\n\t\t\t\tconsole\.debug\("Perl: beforeunload, ending\.\.\."\);\n\t\t\t\tPerl\.end\(\);\n\t\t\t\}\);\n}{};
 die "Pinned WebPerl shutdown hook changed\n" unless $removed == 1;
 open my $bridge_out, '>:raw', $bridge_path or die "Cannot write browser bridge: $!";
 print {$bridge_out} $bridge;
@@ -76,12 +78,24 @@ for my $tree (qw(assets styles)) {
 copy( 'web/index.html',         "$stage/index.html" )  or die "Cannot copy entry: $!";
 copy( 'assets/images/bufo.ico', "$stage/favicon.ico" ) or die "Cannot copy favicon: $!";
 open my $bundle, '>:raw', "$stage/app.pl" or die "Cannot create Perl bundle: $!";
-for my $module (qw(Catalog Number Game Save)) {
-    my $path = "lib/Bufo/$module.pm";
-    next if $module eq 'Number' && !-f $path;
+print {$bundle} "package Bufo::Build; our \$DEVELOPMENT = $development;\n";
+my @modules = qw(
+  Catalog Number ExplorerModel Enemies Combat Explorer
+  Util/Validation Util/Deferred Util/General Util/Number Util/Math Util/Time Util/Storage
+  Util/SaveManager Util/DataLoader Util/State Util/Index Core/Logger Core/Events Core/EventBus Core/StateManager
+  Model/Generators Model/Upgrades Model/Achievements Model/Prestige Model/Boss Model/State
+  Managers/Generators Managers/Upgrades Managers/Achievements Managers/Prestige Managers/Boss Managers/Golden
+  Game Save API Loop Loader Managers
+  Browser/DOM Browser/Component Browser/Container Browser/Animation Browser/Tooltip
+  Browser/Styles Browser/Constants Browser/Templates Browser/Components Browser/Lists
+  Browser/Special Browser/UIManager Browser/UI Browser/Debug Browser/StyleLoader Browser/Initialization
+);
+
+for my $module (@modules) {
+    die "Missing application module $module\n" unless -f "lib/Bufo/$module.pm";
     print {$bundle} "BEGIN { \$INC{'Bufo/$module.pm'} = __FILE__ }\n";
-    append_file( $bundle, $path );
 }
+append_file( $bundle, "lib/Bufo/$_.pm" ) for @modules;
 append_file( $bundle, 'web/app.pl' );
 close $bundle or die "Cannot finish Perl bundle: $!";
 
