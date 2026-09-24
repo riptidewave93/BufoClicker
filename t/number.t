@@ -1,0 +1,17 @@
+use strict;
+use warnings;
+use Test::More;
+use lib 'lib';
+use Bufo::Number;
+is( Bufo::Number::format(0),                 '0',        'zero' );
+is( Bufo::Number::format( 1.25, 2 ),         '1.25',     'requested precision' );
+is( Bufo::Number::format(1000),              '1,000',    'thousands stay comma grouped' );
+is( Bufo::Number::format(2500000),           '2.5M',     'millions' );
+is( Bufo::Number::format(999999),            '999,999',  'whole numbers stay grouped below one million' );
+is( Bufo::Number::format(-1000),             '-1,000',   'negative sign' );
+is( Bufo::Number::format( 1.123456789, 10 ), '1.123457', 'precision bounded' );
+unlike( Bufo::Number::format(1e100), qr/e\+?\d/i, 'large values avoid scientific notation' );
+is(Bufo::Number::format(1000000), '1.0M', 'suffix preserves requested decimal places');
+is(Bufo::Number::format(1e100), '999,999.0Dc+', 'extreme values use bounded display');
+is(Bufo::Number::format(1.25, 1), '1.3', 'positive midpoint rounding matches original');
+done_testing;

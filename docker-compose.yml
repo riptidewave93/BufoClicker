@@ -1,45 +1,39 @@
-# BufoClicker – Docker workflows
-#
-#   docker compose up dev       # hot-reloading dev server on http://localhost:9000
-#   docker compose run --rm build   # write a production build into ./dist
-#   docker compose up site      # serve the production build on http://localhost:8080
-#
-# Everything Node-related runs inside these containers; nothing is installed on
-# the host.
-
 services:
-  # Hot-reloading development server (webpack-dev-server).
-  dev:
-    build:
-      context: .
-      target: dev
-    ports:
-      - "9000:9000"
-    volumes:
-      # Live-mount the source for hot reload; keep the image's node_modules
-      # (in a named volume, so the container's deps never touch the host).
-      - .:/app
-      - bufo_node_modules:/app/node_modules
-    command: npm run dev
-
-  # One-shot production build. Output lands in ./dist on the host (owned by
-  # uid 1000, which matches a typical single-user host account).
   build:
     build:
       context: .
-      target: dev
+      target: tools
+    user: "${BUFO_UID:-1000}:${BUFO_GID:-1000}"
     volumes:
       - .:/app
-      - bufo_node_modules:/app/node_modules
-    command: npm run build
-
-  # Serve the already-built ./dist with nginx.
+    command: perl scripts/build.pl
+  test:
+    extends: build
+    command: prove -lr t
+  dev:
+    image: nginx:1.28.0-alpine
+    ports:
+      - "127.0.0.1:9000:80"
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
   site:
     build:
       context: .
       target: runtime
     ports:
-      - "8080:80"
-
-volumes:
-  bufo_node_modules:
+      - "127.0.0.1:8080:80"
+  webdriver:
+    image: selenium/standalone-chromium:4.34.0
+    profiles: [browser]
+    shm_size: 2gb
+    environment:
+      SE_NODE_MAX_SESSIONS: 1
+  browser-test:
+    extends: build
+    profiles: [browser]
+    depends_on: [site, webdriver]
+    environment:
+      WEBDRIVER_URL: http://webdriver:4444
+      BUFO_URL: http://site
+    command: perl scripts/browser-test.pl

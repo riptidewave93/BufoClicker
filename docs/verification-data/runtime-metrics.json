@@ -1,0 +1,62 @@
+[
+   {
+      "path" : "/",
+      "readyUpperBoundMs" : 543.100000023842,
+      "runtime" : [
+         {
+            "decodedBytes" : 13606,
+            "durationMs" : 9,
+            "encodedBytes" : 5659,
+            "name" : "webperl.js"
+         },
+         {
+            "decodedBytes" : 303013,
+            "durationMs" : 3.40000009536743,
+            "encodedBytes" : 72711,
+            "name" : "emperl.js"
+         },
+         {
+            "decodedBytes" : 12021691,
+            "durationMs" : 73.2999999523163,
+            "encodedBytes" : 3176373,
+            "name" : "emperl.data"
+         },
+         {
+            "decodedBytes" : 3735145,
+            "durationMs" : 31.1000000238419,
+            "encodedBytes" : 1338537,
+            "name" : "emperl.wasm"
+         }
+      ]
+   },
+   {
+      "path" : "/BufoClicker/",
+      "readyUpperBoundMs" : 283.300000071526,
+      "runtime" : [
+         {
+            "decodedBytes" : 13606,
+            "durationMs" : 11.2000000476837,
+            "encodedBytes" : 5659,
+            "name" : "webperl.js"
+         },
+         {
+            "decodedBytes" : 303013,
+            "durationMs" : 3.20000004768372,
+            "encodedBytes" : 72711,
+            "name" : "emperl.js"
+         },
+         {
+            "decodedBytes" : 12021691,
+            "durationMs" : 74.3000000715256,
+            "encodedBytes" : 3176373,
+            "name" : "emperl.data"
+         },
+         {
+            "decodedBytes" : 3735145,
+            "durationMs" : 36.7000000476837,
+            "encodedBytes" : 1338537,
+            "name" : "emperl.wasm"
+         }
+      ]
+   }
+]

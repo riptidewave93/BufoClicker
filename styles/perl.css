@@ -1,0 +1,173 @@
+:root {
+  color-scheme: dark;
+  --color-text: #fff;
+  --color-text-light: #c4cec6;
+  --color-text-inverse: #fff;
+  --color-background: #101813;
+  --color-surface: #1a261e;
+  --color-border: #39543f;
+  --color-primary: #559d53;
+  --color-primary-dark: #2c692f;
+  --z-index-modal: 4000;
+}
+body { color: #fff; background: #101813; }
+body::before { opacity: .35; }
+[hidden] { display: none !important; }
+button, textarea { font: inherit; }
+button { color: #fff; }
+button:focus-visible, textarea:focus-visible { outline: 3px solid #b9ed84; outline-offset: 3px; }
+.game-container { background: rgba(8, 16, 11, .35); box-shadow: none; }
+.column { background: rgba(16, 26, 19, .88); border: 0; border-radius: 3px; box-shadow: none; min-width: 0; }
+.panel, .panel-content, .resource-display, .frog-display, .owned-generator,
+.building-item, .shop-item, .modal-content, .contributions, .stats-container,
+.achievement-item, .achievement-progress-bar, .prestige-modal__stats,
+.stats-row .stat-item, .contributions-container {
+  color: #fff;
+  background: #1a261e;
+  box-shadow: none;
+  border-color: transparent;
+  border-radius: 3px;
+}
+.panel-header { background: #244e2b; border: 0; border-radius: 3px 3px 0 0; }
+.panel-header h2, .generator-name, .achievement-name, .stats-section-title,
+.contributions h3, .modal-header h2 { color: #fff; }
+.panel-header { padding: 14px 18px; }
+.panel-content { padding: 16px; }
+.resource-count .number-value { color: #fff; font-variant-numeric: tabular-nums; }
+.resource-count .number-label, .production-rate, .stat-label, .achievement-description,
+.empty-upgrades, .empty-generators, .empty-contributions, .contribution-name,
+.boss-result__hint, .boss-result__area, .prestige-modal__blurb { color: #c4cec6; }
+.production-rate { background: transparent; border-radius: 0; }
+.generator-production, .contribution-value, .stat-value { color: #b9ed84; }
+.game-menu { background: transparent; border: 0; padding: 0; flex-wrap: wrap; }
+.menu-button, .buy-button, .modal-button, .purchase-amount-button,
+.boss-banner__fight, .boss-banner__later { border-radius: 3px; min-height: 44px; }
+.menu-button { padding: 8px 10px; transition: background-color 120ms; }
+.menu-button:hover { transform: none; box-shadow: none; }
+.menu-button--prestige { background: #76549b; }
+.menu-button--prestige.is-ready { animation: none; box-shadow: none; }
+.frog-display { width: 100%; display: block; transition: none; }
+.frog-display:hover { transform: none; box-shadow: none; }
+.frog-display:active .bufo-image { transform: scale(.96); }
+.bufo-image { width: auto; object-fit: contain; transition: transform 90ms; }
+.owned-generator { width: 100%; text-align: left; margin-bottom: 8px; min-height: 64px; }
+.generator-icon { flex-shrink: 0; }
+.generator-icon-img { width: 54px; height: 54px; object-fit: contain; }
+.generator-count { color: #cfedc8; background: transparent; border-radius: 0; }
+.generator-left, .generator-info { min-width: 0; }
+.generator-name { overflow-wrap: anywhere; }
+.generator-name-section { display: flex; flex-wrap: wrap; gap: 6px; }
+.purchase-controls { background: transparent; }
+.purchase-amount-button { background: #26382b; color: #fff; border: 1px solid #47644e; min-width: 44px; }
+.purchase-amount-button.active { background: #34723b; border-color: #7db572; }
+.buy-button.unaffordable { background: #364239; color: #d5ddd7; cursor: pointer; }
+.building-item, .shop-item { position: relative; overflow: hidden; }
+.upgrades-grid { gap: 10px; }
+.upgrade-item { border-radius: 3px; background: transparent; min-width: 54px; min-height: 54px; }
+.upgrade-icon { width: 56px; height: 56px; padding: 5px; background: #2b402f; border: 1px solid #47644e; border-radius: 3px; }
+.upgrade-icon-img { width: 100%; height: 100%; object-fit: contain; }
+.upgrade-item.can-afford .upgrade-icon { border-color: #91d278; }
+.upgrade-item.cannot-afford .upgrade-icon { opacity: .65; }
+.upgrade-item:hover { transform: none; }
+.contributions h3, .stats-section-title { border: 0; }
+.contribution-item { border: 0; gap: 12px; align-items: baseline; }
+.contribution-name { min-width: 0; overflow-wrap: anywhere; }
+.contribution-value { flex-shrink: 0; }
+.stats-section-title { padding-top: 14px; }
+.stats-row { gap: 14px; }
+.stats-row .stat-item { padding: 8px 0; }
+.achievement-progress-outer { background: #2c3d30; }
+.achievement-progress-inner { background: #6da65d; }
+.achievement-reward { background: #263b2b; color: #b9ed84; }
+.achievement-item { border: 0; }
+.modal-container { z-index: 4000; }
+.modal-content { max-height: calc(100dvh - 32px); min-width: 0; width: min(620px, calc(100vw - 24px)); max-width: calc(100vw - 24px); border: 1px solid #4e6755; }
+.modal-header, .modal-footer { background: #162219; border: 0; }
+.modal-header { gap: 10px; }
+.modal-header h2 { font-size: 1.3rem; }
+.modal-close { color: #fff; width: 44px; height: 44px; min-width: 44px; flex-shrink: 0; }
+.modal-body { color: #fff; }
+.modal-body p { margin-bottom: 12px; }
+.modal-footer { display: flex; flex-wrap: wrap; gap: 8px; }
+.modal-button { background: #34493a; color: #fff; }
+.modal-button.confirm-button { background: #35773b; }
+.modal-button.cancel-button { background: #3b4140; }
+.modal--input-locked button { pointer-events: none; opacity: .6; }
+.prestige-modal__stats > div { border: 0; padding: 9px 0; }
+.prestige-modal__stats .is-gain strong { color: #b9ed84; }
+.boss-result__reward { background: #29352d; color: #fff; }
+.boss-fight-hud__timer--urgent { animation: none; }
+.boss-fight-hud__retreat { min-height: 44px; color: #fff; }
+.boss-banner { border-radius: 4px; box-shadow: 0 8px 24px #0008; }
+.boss-fight-overlay { background: #08040388; }
+.golden-bufo { animation: golden-bufo-in 260ms ease-out; }
+.frenzy-badge { background: #594b1c; color: #fff; border-radius: 3px; box-shadow: none; }
+.frenzy-badge--click { background: #1d4661; color: #fff; }
+.frenzy-badge__bar-fill { transition: none; }
+.notification-container { position: fixed; right: 16px; bottom: 16px; width: min(380px, calc(100vw - 32px)); z-index: 5000; pointer-events: none; }
+.notification { display: block; position: relative; margin-top: 8px; padding: 12px 16px; background: #284330; color: #fff; border: 0; border-radius: 3px; opacity: 1; transform: none; box-shadow: 0 4px 14px #0006; }
+.notification-error { background: #6a2c28; }
+.notification-warning { background: #654c21; }
+.save-status { position: fixed; left: 12px; bottom: 12px; z-index: 3000; background: #6a2c28; padding: 10px 14px; max-width: calc(100vw - 24px); }
+.click-effect-layer { position: fixed; inset: 0; overflow: visible; pointer-events: none; z-index: 2500; }
+.perl-click-number { position: fixed; color: #fff; font-size: 1.2rem; font-weight: 800; text-shadow: 0 2px 4px #000; transform: translate(-50%, -100%); animation: perl-click-float 700ms ease-out forwards; }
+@keyframes perl-click-float { from { opacity: 1; translate: 0 0; } to { opacity: 0; translate: 0 -42px; } }
+.bufo-tooltip { position: fixed; display: block; z-index: 3500; pointer-events: none; background: #17281e; color: #fff; border: 1px solid #5a7862; border-radius: 3px; padding: 12px; box-shadow: 0 5px 16px #0008; opacity: 1; visibility: visible; }
+.bufo-tooltip p { margin-top: 8px; }
+.tooltip-cost { color: #b9ed84; }
+#save-transfer { display: block; width: 100%; margin: 8px 0 12px; padding: 10px; resize: vertical; color: #fff; background: #101b14; border: 1px solid #56715d; border-radius: 3px; font: 13px ui-monospace, monospace; }
+#save-transfer-status { overflow-wrap: anywhere; }
+.startup-status { margin: auto; max-width: 470px; padding: 40px 20px; text-align: center; }
+.startup-status img { width: 130px; }
+.startup-status h1 { margin: 16px 0; }
+.startup-status p { margin: 14px 0; }
+.startup-hint { color: #c4cec6; font-size: .9rem; }
+@media (max-width: 1024px) {
+  .column { padding: 10px; }
+  .panel-content { padding: 10px; }
+  .panel-header { padding: 12px; }
+  .left-column, .center-column, .right-column { min-width: 0; }
+  .menu-button { flex: 1 1 calc(33.333% - 8px); }
+  .bufo-image { min-height: 0; height: 34vw; max-height: 190px; }
+  .generator-icon-img { width: 44px; height: 44px; }
+  .owned-generator { padding: 10px; }
+  .contribution-value { font-size: .8rem; }
+  .notification-container { bottom: 8px; right: 8px; width: calc(100vw - 16px); }
+  .boss-fight-active .frenzy-indicator-layer { top: auto; bottom: 10px; }
+  .stats-row { flex-wrap: wrap; }
+  .stats-row .stat-item { flex: 1 1 42%; min-width: 0; }
+}
+@media (max-width: 420px) { .menu-button { flex: 1 1 calc(50% - 8px); } }
+@media (max-height: 520px) and (orientation: landscape) { .bufo-image { height: 26vh; max-height: 130px; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+/* Specific legacy selectors carry their dark theme through each surface. */
+.production-stats .contributions, .production-stats .stats-container,
+.stats-modal-content .stats-container, .stats-modal-content .contributions-container,
+.stats-modal-content .stat-item, .owned-generator.category-basic,
+.owned-generator.category-premium, .owned-generator.category-special {
+  background: #1a261e;
+  color: #fff;
+  border: 0;
+  box-shadow: none;
+}
+.production-stats .contributions h3, .stats-modal-content .stats-section-title,
+.stats-modal-content .contribution-name { color: #fff; border: 0; }
+.production-stats .contribution-item, .stats-modal-content .contribution-item { border: 0; }
+.production-stats .contribution-value, .stats-modal-content .contribution-value,
+.stats-modal-content .stat-value { color: #b9ed84; }
+.production-stats .empty-contributions, .stats-modal-content .stat-label { color: #c4cec6; }
+.stats-modal-content .contribution-item:hover { background: #26382b; }
+.menu-button--prestige.is-ready { color: #fff; background: #76549b; }
+.prestige-modal__locked { background: #453b22; color: #fff; }
+.owned-generator .generator-production { color: #b9ed84; }
+.owned-generator .generator-count { color: #cfedc8; background: transparent; }
+.achievement-progress-text { color: #fff; }
+.achievement-icon { background: #29422f; color: #b9ed84; border-radius: 3px; }
+.achievement-item:hover { transform: none; box-shadow: none; }
+@media (max-width: 1024px) {
+  /* Keep scrolled and focused controls above the fixed boss invitation. */
+  html:has(.boss-banner) { scroll-padding-bottom: 190px; }
+  .game-container:has(.boss-banner) { padding-bottom: 190px; }
+}
