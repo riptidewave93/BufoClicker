@@ -1,0 +1,742 @@
+{
+  "source": "Original /app/src/utils in bufo-ui-reference, TypeScript 5.9.3 transpileModule",
+  "random": 0.25,
+  "cases": [
+    {
+      "module": "numberUtils",
+      "method": "roundTo",
+      "args": [
+        1.235,
+        2
+      ],
+      "expected": 1.24
+    },
+    {
+      "module": "numberUtils",
+      "method": "roundTo",
+      "args": [
+        -1.25,
+        1
+      ],
+      "expected": -1.2
+    },
+    {
+      "module": "numberUtils",
+      "method": "clamp",
+      "args": [
+        20,
+        0,
+        10
+      ],
+      "expected": 10
+    },
+    {
+      "module": "numberUtils",
+      "method": "calculateExponentialCost",
+      "args": [
+        10,
+        1.15,
+        -2
+      ],
+      "expected": 10
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumber",
+      "args": [
+        999.95,
+        1
+      ],
+      "expected": "1,000"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumber",
+      "args": [
+        1234567,
+        1
+      ],
+      "expected": "1.2M"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumber",
+      "args": [
+        -1250000,
+        1
+      ],
+      "expected": "-1.3M"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumber",
+      "args": [
+        1e+45,
+        3
+      ],
+      "expected": "999,999.000Dc+"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumber",
+      "args": [
+        -1e+45,
+        3
+      ],
+      "expected": "-1,000,000,000,000.000Dc"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumberWithPrecision",
+      "args": [
+        1234567
+      ],
+      "expected": "1,234,567"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumberWithPrecision",
+      "args": [
+        1000000000000
+      ],
+      "expected": "1.000T"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumberWithPrecision",
+      "args": [
+        -1234567000000
+      ],
+      "expected": "-1.235T"
+    },
+    {
+      "module": "numberUtils",
+      "method": "getNumberFullName",
+      "args": [
+        1234567
+      ],
+      "expected": "Million"
+    },
+    {
+      "module": "numberUtils",
+      "method": "getNumberFullName",
+      "args": [
+        999
+      ],
+      "expected": ""
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatDuration",
+      "args": [
+        3600
+      ],
+      "expected": "1h 0m 0s"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatDuration",
+      "args": [
+        86400
+      ],
+      "expected": "24h 0m 0s"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatDuration",
+      "args": [
+        60
+      ],
+      "expected": "1m 0s"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatDuration",
+      "args": [
+        -1
+      ],
+      "expected": "0s"
+    },
+    {
+      "module": "numberUtils",
+      "method": "calculatePercentage",
+      "args": [
+        1,
+        3,
+        2
+      ],
+      "expected": 33.33
+    },
+    {
+      "module": "numberUtils",
+      "method": "calculatePercentage",
+      "args": [
+        2,
+        0,
+        1
+      ],
+      "expected": 0
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatPercentage",
+      "args": [
+        12.55,
+        1
+      ],
+      "expected": "12.6%"
+    },
+    {
+      "module": "numberUtils",
+      "method": "sum",
+      "args": [
+        [
+          2,
+          3,
+          -1
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "module": "numberUtils",
+      "method": "average",
+      "args": [
+        [
+          2,
+          3,
+          -1
+        ]
+      ],
+      "expected": 1.3333333333333333
+    },
+    {
+      "module": "mathUtils",
+      "method": "randomInt",
+      "args": [
+        2,
+        9
+      ],
+      "expected": 4
+    },
+    {
+      "module": "mathUtils",
+      "method": "randomInt",
+      "args": [
+        -1.2,
+        3.9
+      ],
+      "expected": 0
+    },
+    {
+      "module": "mathUtils",
+      "method": "randomFloat",
+      "args": [
+        1,
+        2,
+        2
+      ],
+      "expected": 1.25
+    },
+    {
+      "module": "mathUtils",
+      "method": "mapRange",
+      "args": [
+        2,
+        0,
+        1,
+        10,
+        0
+      ],
+      "expected": 0
+    },
+    {
+      "module": "mathUtils",
+      "method": "mapRange",
+      "args": [
+        2,
+        0,
+        1,
+        10,
+        0,
+        false
+      ],
+      "expected": -10
+    },
+    {
+      "module": "mathUtils",
+      "method": "inRange",
+      "args": [
+        5,
+        10,
+        0
+      ],
+      "expected": true
+    },
+    {
+      "module": "mathUtils",
+      "method": "lerp",
+      "args": [
+        1,
+        5,
+        2
+      ],
+      "expected": 5
+    },
+    {
+      "module": "mathUtils",
+      "method": "inverseLerp",
+      "args": [
+        1,
+        5,
+        3
+      ],
+      "expected": 0.5
+    },
+    {
+      "module": "mathUtils",
+      "method": "inverseLerp",
+      "args": [
+        1,
+        1,
+        3
+      ],
+      "expected": 0
+    },
+    {
+      "module": "mathUtils",
+      "method": "distance",
+      "args": [
+        0,
+        0,
+        3,
+        4
+      ],
+      "expected": 5
+    },
+    {
+      "module": "mathUtils",
+      "method": "angle",
+      "args": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "expected": 1.5707963267948966
+    },
+    {
+      "module": "mathUtils",
+      "method": "toDegrees",
+      "args": [
+        3.141592653589793
+      ],
+      "expected": 180
+    },
+    {
+      "module": "mathUtils",
+      "method": "toRadians",
+      "args": [
+        180
+      ],
+      "expected": 3.141592653589793
+    },
+    {
+      "module": "mathUtils",
+      "method": "pointFromAngle",
+      "args": [
+        2,
+        3,
+        0,
+        4
+      ],
+      "expected": [
+        6,
+        3
+      ]
+    },
+    {
+      "module": "mathUtils",
+      "method": "smoothLerp",
+      "args": [
+        0,
+        10,
+        0.25
+      ],
+      "expected": 0.6561279296875
+    },
+    {
+      "module": "mathUtils",
+      "method": "weightedRandom",
+      "args": [
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "module": "mathUtils",
+      "method": "weightedRandom",
+      "args": [
+        [
+          -1,
+          0
+        ]
+      ],
+      "expected": -1
+    },
+    {
+      "module": "mathUtils",
+      "method": "factorial",
+      "args": [
+        5
+      ],
+      "expected": 120
+    },
+    {
+      "module": "mathUtils",
+      "method": "factorial",
+      "args": [
+        -2
+      ],
+      "expected": 1
+    },
+    {
+      "module": "mathUtils",
+      "method": "chance",
+      "args": [
+        25
+      ],
+      "expected": false
+    },
+    {
+      "module": "mathUtils",
+      "method": "chance",
+      "args": [
+        26
+      ],
+      "expected": true
+    },
+    {
+      "module": "mathUtils",
+      "method": "randomNormal",
+      "args": [
+        0,
+        1
+      ],
+      "expected": 1.0195853396696437e-16
+    },
+    {
+      "module": "timeUtils",
+      "method": "calculateElapsedTime",
+      "args": [
+        100,
+        50
+      ],
+      "expected": 0
+    },
+    {
+      "module": "timeUtils",
+      "method": "calculateElapsedTime",
+      "args": [
+        0,
+        1234
+      ],
+      "expected": 1234
+    },
+    {
+      "module": "timeUtils",
+      "method": "formatTimeAgo",
+      "args": [
+        0,
+        1000
+      ],
+      "expected": "1 second ago"
+    },
+    {
+      "module": "timeUtils",
+      "method": "formatTimeAgo",
+      "args": [
+        0,
+        60000
+      ],
+      "expected": "1 minute ago"
+    },
+    {
+      "module": "timeUtils",
+      "method": "formatTimeAgo",
+      "args": [
+        0,
+        31104000000
+      ],
+      "expected": "1 year ago"
+    },
+    {
+      "module": "timeUtils",
+      "method": "calculateFPS",
+      "args": [
+        16
+      ],
+      "expected": 63
+    },
+    {
+      "module": "timeUtils",
+      "method": "calculateFPS",
+      "args": [
+        0
+      ],
+      "expected": 0
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidNumber",
+      "args": [
+        12
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidNumber",
+      "args": [
+        "12"
+      ],
+      "expected": false
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidInteger",
+      "args": [
+        1.2
+      ],
+      "expected": false
+    },
+    {
+      "module": "validationUtils",
+      "method": "isPositiveNumber",
+      "args": [
+        0
+      ],
+      "expected": false
+    },
+    {
+      "module": "validationUtils",
+      "method": "isNonNegativeNumber",
+      "args": [
+        0
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "isInRange",
+      "args": [
+        5,
+        0,
+        5
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "isNonEmptyString",
+      "args": [
+        "  "
+      ],
+      "expected": false
+    },
+    {
+      "module": "validationUtils",
+      "method": "isNonEmptyString",
+      "args": [
+        "x"
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidArray",
+      "args": [
+        []
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "isNonEmptyArray",
+      "args": [
+        []
+      ],
+      "expected": false
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidObject",
+      "args": [
+        null
+      ],
+      "expected": false
+    },
+    {
+      "module": "validationUtils",
+      "method": "hasRequiredProperties",
+      "args": [
+        {
+          "x": null
+        },
+        [
+          "x"
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidEmail",
+      "args": [
+        "a@b.test"
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidEmail",
+      "args": [
+        "bad"
+      ],
+      "expected": false
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidUrl",
+      "args": [
+        "https://example.test/path"
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidUrl",
+      "args": [
+        "mailto:a@example.test"
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "isValidUrl",
+      "args": [
+        "relative/path"
+      ],
+      "expected": false
+    },
+    {
+      "module": "validationUtils",
+      "method": "createValidationResult",
+      "args": [
+        true,
+        [
+          "ignored"
+        ]
+      ],
+      "expected": {
+        "isValid": true,
+        "errors": []
+      }
+    },
+    {
+      "module": "validationUtils",
+      "method": "isOneOf",
+      "args": [
+        1,
+        [
+          "1",
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "module": "validationUtils",
+      "method": "validateSaveData",
+      "args": [
+        {
+          "state": {
+            "resources": {}
+          },
+          "version": "1.0.0"
+        }
+      ],
+      "expected": {
+        "isValid": true,
+        "errors": []
+      }
+    },
+    {
+      "module": "validationUtils",
+      "method": "validateSaveData",
+      "args": [
+        {
+          "state": 2,
+          "version": 3
+        }
+      ],
+      "expected": {
+        "isValid": false,
+        "errors": [
+          "Invalid state property",
+          "Invalid version property"
+        ]
+      }
+    },
+    {
+      "module": "numberUtils",
+      "method": "clamp",
+      "args": [
+        -1,
+        10,
+        0
+      ],
+      "expected": 0
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumber",
+      "args": [
+        1.12345,
+        5
+      ],
+      "expected": "1.123"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumber",
+      "args": [
+        123,
+        -1
+      ],
+      "expected": "120"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumber",
+      "args": [
+        1500000,
+        1.5
+      ],
+      "expected": "1.5M"
+    },
+    {
+      "module": "numberUtils",
+      "method": "formatNumber",
+      "args": [
+        -1250000,
+        1
+      ],
+      "expected": "-1.3M"
+    }
+  ]
+}

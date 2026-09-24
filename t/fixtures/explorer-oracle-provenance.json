@@ -1,0 +1,14 @@
+{
+  "source_repository": "https://github.com/riptidewave93/BufoClicker",
+  "source_commit": "fc7f61a",
+  "source_sha256": {
+    "src/models/explorer.ts": "97a57de718e8ba71fd8000bafde397d5041c604a71b09caad45840251a383065",
+    "src/models/enemies.ts": "a5cfd5cf1d6789a909000a5b6d2450d8981229d8271a7090a98d51161c8f2a00",
+    "src/models/combat.ts": "01796d382fdb2479c015d47b2d09eb588a2264df1127fa7efc517c02e5b56e50",
+    "src/managers/explorerManager.ts": "80687c14a64f91c56efd5423de4acb2df7e41118b7e4398b9d364d7572c928fe"
+  },
+  "generation": "Executed the original TypeScript modules in Docker bufo-ui-baseline:latest with TypeScript transpileModule, deterministic Date.now and sequence-backed Math.random. Manager imports used an in-memory StateManager and EventBus recorder. Boolean values were normalized to numeric 0/1 in the JSON fixture.",
+  "clock_ms": 1000,
+  "fixture": "explorer-oracle.json",
+  "oracle_driver_sha256": "b5c1bfdfc4f2e7be549f997711526774caf0cecaf3daf5eeff7a17967b4c529f"
+}

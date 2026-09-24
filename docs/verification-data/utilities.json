@@ -1,0 +1,46 @@
+[
+  {
+    "name": "configured-service-singletons",
+    "status": "PASS",
+    "proof": "1"
+  },
+  {
+    "name": "platform-codec-unicode",
+    "status": "PASS",
+    "proof": {
+      "frog": "🐸",
+      "name": "étang"
+    }
+  },
+  {
+    "name": "platform-date-url",
+    "status": "PASS",
+    "proof": {
+      "date": "Feb 13, 2009, 11:31:30 PM",
+      "valid": "1",
+      "invalid": "0",
+      "url": "1",
+      "bad": "0"
+    }
+  },
+  {
+    "name": "timer-adapters-debounce-throttle-cancellation",
+    "status": "PASS",
+    "proof": [
+      "t:first",
+      "delay",
+      "t:last",
+      "d:last"
+    ]
+  },
+  {
+    "name": "async-data-loader-and-deferred",
+    "status": "PASS",
+    "proof": "chain:14:0"
+  },
+  {
+    "name": "uncaught-runtime-errors",
+    "status": "PASS",
+    "proof": []
+  }
+]

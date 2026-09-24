@@ -1,0 +1,78 @@
+{
+  "browser": "Firefox",
+  "version": "146.0.1",
+  "results": [
+    {
+      "route": "/",
+      "version": "146.0.1",
+      "checks": {
+        "ready": true,
+        "firstClick": true,
+        "purchase": true,
+        "reload": true,
+        "stats": true
+      },
+      "errors": [],
+      "title": "BufoClicker",
+      "bounds": [
+        {
+          "width": 375,
+          "overflow": [],
+          "undersized": []
+        },
+        {
+          "width": 390,
+          "overflow": [],
+          "undersized": []
+        },
+        {
+          "width": 412,
+          "overflow": [],
+          "undersized": []
+        },
+        {
+          "width": 768,
+          "overflow": [],
+          "undersized": []
+        }
+      ],
+      "passed": true
+    },
+    {
+      "route": "/BufoClicker/",
+      "version": "146.0.1",
+      "checks": {
+        "ready": true,
+        "firstClick": true,
+        "purchase": true,
+        "reload": true,
+        "stats": true
+      },
+      "errors": [],
+      "title": "BufoClicker",
+      "bounds": [
+        {
+          "width": 375,
+          "overflow": [],
+          "undersized": []
+        },
+        {
+          "width": 390,
+          "overflow": [],
+          "undersized": []
+        },
+        {
+          "width": 412,
+          "overflow": [],
+          "undersized": []
+        },
+        {
+          "width": 768,
+          "overflow": [],
+          "undersized": []
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

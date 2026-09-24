@@ -1,135 +1,102 @@
 # BufoClicker
 
-An updated fork of [pjscheetz/BufoClicker](https://github.com/pjscheetz/BufoClicker)
+Click cartoon frogs. Buy generators, unlock upgrades, fight bosses and transcend
+for permanent bonuses. The game runs entirely in your browser, with game rules
+and UI behavior written in Perl.
 
-An incremental / idle "clicker" game about breeding cartoon bufos (toads).
-Vanilla TypeScript, bundled with webpack, deploys as a static site to GitHub
-Pages.
+This fork of [pjscheetz/BufoClicker](https://github.com/pjscheetz/BufoClicker)
+uses [WebPerl](https://webperl.zero-g.net/) to run Perl through WebAssembly.
+It remains a static site. No application server, account or database is required.
 
-Click the bufo to earn **bufos**, spend them on generators that produce bufos
-automatically, then on upgrades that multiply that production.
+## Run locally
 
----
+Install Docker with Compose. Build the static site, then start its preview:
 
-## Requirements
-
-You only need **Docker** (with the Compose plugin). Every Node/npm command runs
-inside a container — nothing is installed on your machine.
-
-- Docker Engine 24+ / Docker Desktop, including `docker compose`
-- Ports `9000` (dev server) and `8080` (production preview) free
-
-> Prefer a native Node toolchain? See [Running without Docker](#running-without-docker).
-
----
-
-## Run it locally (development)
-
-Hot-reloading dev server with source maps and in-browser debug tools:
-
-```bash
+```sh
+docker compose run --build --rm build
 docker compose up dev
 ```
 
-Open <http://localhost:9000>. Edits under `src/` and `styles/` rebuild and
-reload automatically. Stop with `Ctrl-C`.
+Open [localhost:9000](http://localhost:9000). Rebuild after editing Perl or assets,
+then refresh the page. This development build exposes `window.debugTools`, including
+Explorer/combat, resource controls, events, logging, and time scaling. The production
+image omits that binding. The same preview supports
+[the GitHub Pages path](http://localhost:9000/BufoClicker/).
 
-The dev build exposes `window.debugTools` in the browser console
-(`debugTools.help()` lists everything) — handy for granting resources, unlocking
-generators, inspecting state, etc.
+For a production image with its assets included:
 
----
+```sh
+docker compose up --build site
+```
 
-## Build the production bundle
+Open [localhost:8080](http://localhost:8080). Stop the containers with
+`docker compose down`.
 
-Writes the optimised static site into `./dist/` on your host:
+## Check a change
 
-```bash
+Run the browser-independent tests:
+
+```sh
+docker compose run --build --rm test
+```
+
+Run real browser flows against the production image:
+
+```sh
+docker compose --profile browser run --build --rm browser-test
 docker compose run --rm build
+docker compose --profile browser run --rm browser-ui
+docker compose --profile browser down
 ```
 
-`./dist/` is what gets published. It is git-ignored — treat it as a build
-artifact, regenerate it whenever you need it.
+The browser command starts isolated Selenium Chromium and nginx containers.
+It writes screenshots to ignored `artifacts/`. It does not use your normal
+browser profile. See the [verification record](docs/verification.md) for the
+measured results and remaining browser coverage.
 
----
+On Linux, prefix the commands that write mounted files with
+`BUFO_UID=$(id -u) BUFO_GID=$(id -g)` if your user is not UID/GID 1000.
 
-## Preview the production build
+## Saves
 
-Serve the contents of `./dist/` with nginx exactly as it would be hosted:
+Progress lives in your browser's local storage. The Perl client writes
+`bufo_idle_save_perl_v1`. On first use, it can migrate the original
+`bufo_idle_save` without changing that original value. A valid Perl save takes
+precedence afterward. Invalid saves show recovery choices instead of silently
+starting over.
 
-```bash
-docker compose run --rm build      # make sure ./dist is fresh
-docker compose up site
-```
+Open **Stats** for save export and import. Export before moving to another
+origin or clearing browser data. Old export strings remain compatible. Neither
+GitHub nor this repository stores your progress.
 
-Open <http://localhost:8080>.
+## Build and deploy
 
----
+`scripts/build.pl` produces `dist/`, including the pinned WebPerl runtime,
+Perl application, CSS, JSON and artwork. The build verifies the runtime archive's
+SHA256. It caches the download in `.cache/`. Both directories are generated.
 
-## Deploy to GitHub Pages
+The Pages workflow builds and tests with Docker, then publishes `dist/` when
+`main` changes. Configure the repository's Pages source as **GitHub Actions**.
+The artifact supports both `/` and `/BufoClicker/`. Opening `index.html` directly
+with a `file://` URL does not provide the HTTP environment WebPerl needs.
 
-Deployment is automatic via GitHub Actions (`.github/workflows/deploy.yml`):
-every push to `main` builds the site (`npm ci && npm run build`) and publishes
-`./dist` straight to GitHub Pages. There is nothing to run locally - just
-merge to `main`.
+## Code and design
 
-Notes:
-
-- In the repo settings, **Pages → Build and deployment → Source** must be set
-  to **GitHub Actions** (not "Deploy from a branch"). Set this once per repo;
-  the workflow handles every deploy after that.
-- Check progress under the repo's **Actions** tab, or `gh run list` / `gh run watch`.
-- The live URL is `https://<owner>.github.io/BufoClicker/`.
-
----
-
-## Common tasks
-
-| Task | Command |
+| Path | Responsibility |
 | --- | --- |
-| Dev server | `docker compose up dev` |
-| Production build → `./dist` | `docker compose run --rm build` |
-| Preview `./dist` | `docker compose up site` |
-| Type-check only | `docker compose run --rm build npx tsc --noEmit` |
-| Dependency audit | `docker compose run --rm build npm audit` |
-| Update `package-lock.json` after editing `package.json` | `docker compose run --rm build npm install` |
-| Shell in the toolchain container | `docker compose run --rm build bash` |
-| Rebuild the image after dependency changes | `docker compose build` |
+| `lib/Bufo/` | Content validation, game rules, number formatting and save migration |
+| `web/` | Perl browser UI and static loading shell |
+| `assets/data/` | Generator, upgrade and achievement catalogs |
+| `assets/images/`, `styles/` | Existing artwork and responsive styles |
+| `scripts/` | Perl build and browser verification |
+| `t/` | Native Perl tests and legacy save fixtures |
 
----
+Read the [architecture decision](docs/adr/0001-port-client-to-perl-and-webassembly.md),
+[migration description](docs/perl-wasm-migration.md), and
+[parity matrix](docs/parity.md), [complete source map](docs/source-map.md), and
+[development interfaces](docs/development.md) for implementation details.
 
-## Project layout
-
-```
-src/
-  core/         state manager, event bus, shared types
-  game/         GameCore, game loop, save/load, top-level Game API
-  managers/     generator / upgrade / achievement / explorer managers
-  models/       data shapes + pure helpers (generators, upgrades, ...)
-  ui/           component framework + concrete components (shop, upgrades, ...)
-  utils/        number/format/storage/animation helpers, debug tools
-styles/         plain CSS, copied verbatim into the build
-assets/         images + JSON data (generators.json, upgrades.json, achievements.json)
-webpack.config.js
-```
-
-Game content (generators, upgrades, achievements) is data-driven: it is
-`fetch()`-ed at runtime from `assets/data/*.json`, so tuning numbers or adding
-entries does **not** require a rebuild — just refresh.
-
-Saves live in `localStorage` under the key `bufo_idle_save`.
-
----
-
-## Running without Docker
-
-Requires **Node.js 20+** and npm.
-
-```bash
-npm ci                 # install exact locked dependencies
-npm run start          # dev server on http://localhost:9000 (opens a browser)
-npm run build          # production build into ./dist
-npm run serve:dist     # preview ./dist on http://localhost:8080
-```
-
-Deployment always runs in GitHub Actions (see above), not locally.
+WebPerl includes supplied JavaScript bridge/loader files. Application logic is
+Perl; HTML, CSS and JSON remain their native formats. The runtime is a pinned
+beta and adds about 16 MB before compression. This port claims no download-size
+or performance improvement over the TypeScript client.
