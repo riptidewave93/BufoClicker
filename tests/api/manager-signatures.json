@@ -1,0 +1,528 @@
+[
+  {
+    "path": "generator.recalculateGenerator",
+    "operation": "generator.recalculateGenerator",
+    "arguments": [
+      "generatorType"
+    ]
+  },
+  {
+    "path": "generator.recalculateAllGenerators",
+    "operation": "generator.recalculateAllGenerators",
+    "arguments": []
+  },
+  {
+    "path": "generator.checkUnlocks",
+    "operation": "generator.checkUnlocks",
+    "arguments": [
+      "totalBufos"
+    ]
+  },
+  {
+    "path": "generator.purchaseGenerator",
+    "operation": "generator.purchaseGenerator",
+    "arguments": [
+      "generatorType",
+      "quantity",
+      "availableBufos"
+    ]
+  },
+  {
+    "path": "generator.getMaxAffordable",
+    "operation": "generator.getMaxAffordable",
+    "arguments": [
+      "generatorType",
+      "availableBufos"
+    ]
+  },
+  {
+    "path": "generator.calculateTotalProduction",
+    "operation": "generator.calculateTotalProduction",
+    "arguments": []
+  },
+  {
+    "path": "generator.calculateProductionForTime",
+    "operation": "generator.calculateProductionForTime",
+    "arguments": [
+      "seconds",
+      "multiplier"
+    ]
+  },
+  {
+    "path": "generator.getProductionStats",
+    "operation": "generator.getProductionStats",
+    "arguments": []
+  },
+  {
+    "path": "generator.applyBoostToGenerator",
+    "operation": "generator.applyBoostToGenerator",
+    "arguments": [
+      "generatorType",
+      "boostId",
+      "multiplier",
+      "source",
+      "active"
+    ]
+  },
+  {
+    "path": "generator.toggleGeneratorBoost",
+    "operation": "generator.toggleGeneratorBoost",
+    "arguments": [
+      "generatorType",
+      "boostId",
+      "active"
+    ]
+  },
+  {
+    "path": "generator.getAllGenerators",
+    "operation": "generator.getAllGenerators",
+    "arguments": []
+  },
+  {
+    "path": "generator.getUnlockedGenerators",
+    "operation": "generator.getUnlockedGenerators",
+    "arguments": []
+  },
+  {
+    "path": "generator.reset",
+    "operation": "generator.reset",
+    "arguments": []
+  },
+  {
+    "path": "upgrade.initialize",
+    "operation": "upgrade.initialize",
+    "arguments": []
+  },
+  {
+    "path": "upgrade.checkAvailableUpgrades",
+    "operation": "upgrade.checkAvailableUpgrades",
+    "arguments": [
+      "state",
+      "generatorCounts"
+    ]
+  },
+  {
+    "path": "upgrade.purchaseUpgrade",
+    "operation": "upgrade.purchaseUpgrade",
+    "arguments": [
+      "upgradeId",
+      "currentBufos"
+    ]
+  },
+  {
+    "path": "upgrade.applyUpgradeEffects",
+    "operation": "upgrade.applyUpgradeEffects",
+    "arguments": [
+      "upgrade"
+    ]
+  },
+  {
+    "path": "upgrade.calculateTotalMultiplierForGenerator",
+    "operation": "upgrade.calculateTotalMultiplierForGenerator",
+    "arguments": [
+      "generatorType"
+    ]
+  },
+  {
+    "path": "upgrade.calculateTotalClickMultiplier",
+    "operation": "upgrade.calculateTotalClickMultiplier",
+    "arguments": []
+  },
+  {
+    "path": "upgrade.reapplyAllUpgrades",
+    "operation": "upgrade.reapplyAllUpgrades",
+    "arguments": []
+  },
+  {
+    "path": "upgrade.getUpgradeEffects",
+    "operation": "upgrade.getUpgradeEffects",
+    "arguments": [
+      "upgradeId"
+    ]
+  },
+  {
+    "path": "upgrade.findUpgradeById",
+    "operation": "upgrade.findUpgradeById",
+    "arguments": [
+      "upgradeId"
+    ]
+  },
+  {
+    "path": "upgrade.getAvailableUpgrades",
+    "operation": "upgrade.getAvailableUpgrades",
+    "arguments": []
+  },
+  {
+    "path": "upgrade.getPurchasedUpgrades",
+    "operation": "upgrade.getPurchasedUpgrades",
+    "arguments": []
+  },
+  {
+    "path": "upgrade.isUpgradePurchased",
+    "operation": "upgrade.isUpgradePurchased",
+    "arguments": [
+      "upgradeId"
+    ]
+  },
+  {
+    "path": "upgrade.setUpgrades",
+    "operation": "upgrade.setUpgrades",
+    "arguments": [
+      "upgrades"
+    ]
+  },
+  {
+    "path": "upgrade.getAllUpgrades",
+    "operation": "upgrade.getAllUpgrades",
+    "arguments": []
+  },
+  {
+    "path": "upgrade.reset",
+    "operation": "upgrade.reset",
+    "arguments": []
+  },
+  {
+    "path": "achievement.initialize",
+    "operation": "achievement.initialize",
+    "arguments": [
+      "silentLoad"
+    ]
+  },
+  {
+    "path": "achievement.saveToState",
+    "operation": "achievement.saveToState",
+    "arguments": []
+  },
+  {
+    "path": "achievement.checkAllAchievements",
+    "operation": "achievement.checkAllAchievements",
+    "arguments": []
+  },
+  {
+    "path": "achievement.checkAchievementCategory",
+    "operation": "achievement.checkAchievementCategory",
+    "arguments": [
+      "category"
+    ]
+  },
+  {
+    "path": "achievement.unlockAchievement",
+    "operation": "achievement.unlockAchievement",
+    "arguments": [
+      "achievementId"
+    ]
+  },
+  {
+    "path": "achievement.silentUnlockAchievement",
+    "operation": "achievement.silentUnlockAchievement",
+    "arguments": [
+      "achievementId"
+    ]
+  },
+  {
+    "path": "achievement.reapplyAllAchievementRewards",
+    "operation": "achievement.reapplyAllAchievementRewards",
+    "arguments": []
+  },
+  {
+    "path": "achievement.restoreUnlockedAchievements",
+    "operation": "achievement.restoreUnlockedAchievements",
+    "arguments": [
+      "achievementIds"
+    ]
+  },
+  {
+    "path": "achievement.getAllAchievements",
+    "operation": "achievement.getAllAchievements",
+    "arguments": []
+  },
+  {
+    "path": "achievement.getUnlockedAchievements",
+    "operation": "achievement.getUnlockedAchievements",
+    "arguments": []
+  },
+  {
+    "path": "achievement.getVisibleLockedAchievements",
+    "operation": "achievement.getVisibleLockedAchievements",
+    "arguments": []
+  },
+  {
+    "path": "achievement.getAchievementProgress",
+    "operation": "achievement.getAchievementProgress",
+    "arguments": [
+      "achievementId"
+    ]
+  },
+  {
+    "path": "achievement.isAchievementUnlocked",
+    "operation": "achievement.isAchievementUnlocked",
+    "arguments": [
+      "achievementId"
+    ]
+  },
+  {
+    "path": "achievement.getTotalAchievementCount",
+    "operation": "achievement.getTotalAchievementCount",
+    "arguments": []
+  },
+  {
+    "path": "achievement.getUnlockedCount",
+    "operation": "achievement.getUnlockedCount",
+    "arguments": []
+  },
+  {
+    "path": "achievement.getClickCount",
+    "operation": "achievement.getClickCount",
+    "arguments": []
+  },
+  {
+    "path": "achievement.setClickCount",
+    "operation": "achievement.setClickCount",
+    "arguments": [
+      "count"
+    ]
+  },
+  {
+    "path": "achievement.setCustomEvents",
+    "operation": "achievement.setCustomEvents",
+    "arguments": [
+      "events"
+    ]
+  },
+  {
+    "path": "achievement.triggerCustomEvent",
+    "operation": "achievement.triggerCustomEvent",
+    "arguments": [
+      "eventName"
+    ]
+  },
+  {
+    "path": "achievement.getCustomEvents",
+    "operation": "achievement.getCustomEvents",
+    "arguments": []
+  },
+  {
+    "path": "achievement.getAllCustomEvents",
+    "operation": "achievement.getAllCustomEvents",
+    "arguments": []
+  },
+  {
+    "path": "achievement.hasCustomEventOccurred",
+    "operation": "achievement.hasCustomEventOccurred",
+    "arguments": [
+      "eventName"
+    ]
+  },
+  {
+    "path": "achievement.getAchievementDetails",
+    "operation": "achievement.getAchievementDetails",
+    "arguments": [
+      "achievementId"
+    ]
+  },
+  {
+    "path": "achievement.reset",
+    "operation": "achievement.reset",
+    "arguments": []
+  },
+  {
+    "path": "prestige.getPendingPoints",
+    "operation": "prestige.getPendingPoints",
+    "arguments": []
+  },
+  {
+    "path": "prestige.getMultiplier",
+    "operation": "prestige.getMultiplier",
+    "arguments": []
+  },
+  {
+    "path": "prestige.getState",
+    "operation": "prestige.getState",
+    "arguments": []
+  },
+  {
+    "path": "prestige.getBonusPerPoint",
+    "operation": "prestige.getBonusPerPoint",
+    "arguments": []
+  },
+  {
+    "path": "prestige.getMinTotalBufos",
+    "operation": "prestige.getMinTotalBufos",
+    "arguments": []
+  },
+  {
+    "path": "prestige.canTranscend",
+    "operation": "prestige.canTranscend",
+    "arguments": []
+  },
+  {
+    "path": "prestige.transcend",
+    "operation": "save.prestige",
+    "arguments": []
+  },
+  {
+    "path": "prestige.reset",
+    "operation": "prestige.reset",
+    "arguments": []
+  },
+  {
+    "path": "goldenManager.start",
+    "operation": "golden.start",
+    "arguments": []
+  },
+  {
+    "path": "goldenManager.stop",
+    "operation": "golden.stop",
+    "arguments": []
+  },
+  {
+    "path": "goldenManager.isActive",
+    "operation": "golden.isActive",
+    "arguments": []
+  },
+  {
+    "path": "goldenManager.getActiveFrenzies",
+    "operation": "golden.getActiveFrenzies",
+    "arguments": []
+  },
+  {
+    "path": "goldenManager.collect",
+    "operation": "golden.collect",
+    "arguments": [
+      "id"
+    ]
+  },
+  {
+    "path": "goldenManager.reset",
+    "operation": "golden.reset",
+    "arguments": []
+  },
+  {
+    "path": "goldenManager.forceSpawn",
+    "operation": "golden.forceSpawn",
+    "arguments": []
+  },
+  {
+    "path": "bossManager.getAvailableBoss",
+    "operation": "boss.getAvailableBoss",
+    "arguments": []
+  },
+  {
+    "path": "bossManager.getActiveFight",
+    "operation": "boss.getActiveFight",
+    "arguments": []
+  },
+  {
+    "path": "bossManager.getScaledHealth",
+    "operation": "boss.getScaledHealth",
+    "arguments": [
+      "boss"
+    ]
+  },
+  {
+    "path": "bossManager.getMultiplier",
+    "operation": "boss.getMultiplier",
+    "arguments": []
+  },
+  {
+    "path": "bossManager.getDefeatedCount",
+    "operation": "boss.getDefeatedCount",
+    "arguments": []
+  },
+  {
+    "path": "bossManager.startFight",
+    "operation": "boss.startFight",
+    "arguments": []
+  },
+  {
+    "path": "bossManager.hit",
+    "operation": "boss.hit",
+    "arguments": [
+      "amount"
+    ]
+  },
+  {
+    "path": "bossManager.retreat",
+    "operation": "boss.retreat",
+    "arguments": []
+  },
+  {
+    "path": "bossManager.pause",
+    "operation": "boss.pause",
+    "arguments": []
+  },
+  {
+    "path": "bossManager.resume",
+    "operation": "boss.resume",
+    "arguments": []
+  },
+  {
+    "path": "bossManager.reset",
+    "operation": "boss.reset",
+    "arguments": []
+  },
+  {
+    "path": "explorer.getExplorer",
+    "operation": "explorer.getExplorer",
+    "arguments": []
+  },
+  {
+    "path": "explorer.getCurrentEnemy",
+    "operation": "explorer.getCurrentEnemy",
+    "arguments": []
+  },
+  {
+    "path": "explorer.getCurrentCombat",
+    "operation": "explorer.getCurrentCombat",
+    "arguments": []
+  },
+  {
+    "path": "explorer.update",
+    "operation": "explorer.update",
+    "arguments": [
+      "delta"
+    ]
+  },
+  {
+    "path": "explorer.startExploration",
+    "operation": "explorer.startExploration",
+    "arguments": [
+      "area"
+    ]
+  },
+  {
+    "path": "explorer.performCombatAction",
+    "operation": "explorer.performCombatAction",
+    "arguments": [
+      "action"
+    ]
+  },
+  {
+    "path": "explorer.autoResolveCombat",
+    "operation": "explorer.autoResolveCombat",
+    "arguments": []
+  },
+  {
+    "path": "explorer.upgradeExplorerStat",
+    "operation": "explorer.upgradeExplorerStat",
+    "arguments": [
+      "statName",
+      "availableBufos"
+    ]
+  },
+  {
+    "path": "explorer.getExplorerStats",
+    "operation": "explorer.getExplorerStats",
+    "arguments": []
+  },
+  {
+    "path": "explorer.getAvailableAreas",
+    "operation": "explorer.getAvailableAreas",
+    "arguments": []
+  },
+  {
+    "path": "explorer.reset",
+    "operation": "explorer.reset",
+    "arguments": []
+  }
+]

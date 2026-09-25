@@ -1,0 +1,17 @@
+<!doctype html><meta charset="utf-8"><title>COBOL UI library test</title>
+<style>.game-tooltip{position:fixed;max-width:150px;transition:opacity .3s;opacity:0}.game-tooltip.visible{opacity:1}</style>
+<div id="fixture"></div>
+<script type="module">
+import create from './bufo.js';import {installDomBridge} from './dom-bridge.js';
+const module=await create();const callbacks=new Map();
+const responses=[];
+const dispatch=request=>{const response=JSON.parse(module.ccall('bufo_dispatch','string',['string'],[JSON.stringify({now:performance.now(),...request})]));responses.push(response);
+for(const command of response.commands||[])if(command.kind==='domCallback'){
+ if(command.guard && !dispatch(command.guard).result)continue;
+ let callbackResult;try{callbackResult={ok:true,value:callbacks.get(command.callback?.$callback)?.(command.value)};}catch(error){callbackResult={ok:false,error:error.message};}
+ if(command.continuation)dispatch({...command.continuation,callbackResult});
+}
+return response;};
+const bridge=installDomBridge(dispatch,(id,value)=>callbacks.get(id)?.(value));
+Object.assign(window,{ui:{dispatch,bridge,callbacks,responses}});
+</script>

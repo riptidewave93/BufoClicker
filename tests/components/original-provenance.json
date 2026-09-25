@@ -1,0 +1,17 @@
+{
+  "baseline": "fe02bde429b650d32591f22a824f7dad8a0d4dd9",
+  "sourceHashes": {
+    "src/ui/templates.ts": "f01806fb4fe5daa85652768484a182ca341b1c9792b7b84bf7f54eb430a00d1d",
+    "src/ui/styles.ts": "6600f0318adcbe8bb2dc7c67085b6c792cf5d49b59b8508d1ae2d85fb64e5f05",
+    "src/utils/animationUtils.ts": "5a891a771064deb72bf041419791323eb15e9f9dd4e7534381acbb5282c48b9f",
+    "src/ui/components/generatorItem.ts": "7f2dee495900c683e7e8231bccd6761c24bd95741d5fb3a1379b9fc868ba6b01",
+    "src/models/generators.ts": "d6be846e42e9f46cc5af9a98a30bcc665d8f03b342f32bfaafafa2976b9693c1",
+    "src/utils/numberUtils.ts": "6cdaef26f75b3211a4e412ecf3ff64b095136e87e42b628eb3db946ba2e611ad",
+    "src/utils/tooltipUtils.ts": "0b2b59cd25ae570f91eeb91d338107f0d70374c03cd449d9c228730e9db4cb60",
+    "src/ui/components/shopItem.ts": "116d1463d9216b9fee93de52a5ab4b2f84e361e533cb5bc7597e953ee04300db",
+    "src/ui/components/upgradeItem.ts": "fc2bd0f93b2e2becba4cea8cb36b9e019ba85ba97c97a9c414c07b86b7f87910",
+    "src/models/upgrades.ts": "320ec6c6b311e1301474176c55714f6f321506f5a44c855456c52b3115be82fb",
+    "src/ui/constants.ts": "56cb7f09c45ab82f99c0ba16efae772663eabc4ed604c8171e089d1f04b58232"
+  },
+  "count": 75
+}

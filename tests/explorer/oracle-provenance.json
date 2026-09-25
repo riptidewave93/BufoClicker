@@ -1,0 +1,37 @@
+{
+  "revision": "fe02bde429b650d32591f22a824f7dad8a0d4dd9",
+  "sourceFiles": [
+    {
+      "file": "src/models/explorer.ts",
+      "sha256": "97a57de718e8ba71fd8000bafde397d5041c604a71b09caad45840251a383065"
+    },
+    {
+      "file": "src/models/enemies.ts",
+      "sha256": "a5cfd5cf1d6789a909000a5b6d2450d8981229d8271a7090a98d51161c8f2a00"
+    },
+    {
+      "file": "src/models/combat.ts",
+      "sha256": "01796d382fdb2479c015d47b2d09eb588a2264df1127fa7efc517c02e5b56e50"
+    },
+    {
+      "file": "src/managers/explorerManager.ts",
+      "sha256": "80687c14a64f91c56efd5423de4acb2df7e41118b7e4398b9d364d7572c928fe"
+    },
+    {
+      "file": "src/core/eventTypes.ts",
+      "sha256": "a1931c2034b34b657b13d12b1c95d6a026a6cf0382dcc0abb234a4198361d060"
+    },
+    {
+      "file": "src/core/types.ts",
+      "sha256": "9630aed833c96e58f3cbfe620db7332e22975e284cf1e33bc2cc146cfc8bef06"
+    }
+  ],
+  "oracleSha256": "3f4dd67e26c69d38dedd2573497ea43f4f90c2d19293b72052c9268d4e464f5f",
+  "vectorsSha256": "5f620a5326af884c49f3ff28917904d2ac78935d44af96eafc6d87267ff8d216",
+  "substitutions": [
+    "StateManager cloned-read in-memory store",
+    "EventBus payload recorder without listener delivery",
+    "Date.now and Math.random deterministic sources"
+  ],
+  "vectors": 177
+}

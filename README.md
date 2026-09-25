@@ -1,135 +1,77 @@
 # BufoClicker
 
-An updated fork of [pjscheetz/BufoClicker](https://github.com/pjscheetz/BufoClicker)
+A browser idle game about building a bufo empire, now written in COBOL.
 
-An incremental / idle "clicker" game about breeding cartoon bufos (toads).
-Vanilla TypeScript, bundled with webpack, deploys as a static site to GitHub
-Pages.
+Click Bufo, buy frogs that produce bufos, unlock upgrades and achievements, fight bosses, and transcend for permanent bonuses. The game runs locally in your browser through WebAssembly. GitHub Pages serves the static files.
 
-Click the bufo to earn **bufos**, spend them on generators that produce bufos
-automatically, then on upgrades that multiply that production.
+This is an updated fork of [pjscheetz/BufoClicker](https://github.com/pjscheetz/BufoClicker).
 
----
+![COBOL game running in Chromium](docs/screenshots/desktop.png)
 
-## Requirements
+[Mobile layout](docs/screenshots/mobile.png) · [Boss fight](docs/screenshots/boss.png)
 
-You only need **Docker** (with the Compose plugin). Every Node/npm command runs
-inside a container — nothing is installed on your machine.
+## Run the game
 
-- Docker Engine 24+ / Docker Desktop, including `docker compose`
-- Ports `9000` (dev server) and `8080` (production preview) free
-
-> Prefer a native Node toolchain? See [Running without Docker](#running-without-docker).
-
----
-
-## Run it locally (development)
-
-Hot-reloading dev server with source maps and in-browser debug tools:
+Install Docker with Compose, then run:
 
 ```bash
 docker compose up dev
 ```
 
-Open <http://localhost:9000>. Edits under `src/` and `styles/` rebuild and
-reload automatically. Stop with `Ctrl-C`.
+Open [localhost:9000](http://localhost:9000). The first build compiles the COBOL runtime dependencies. After changing source files, restart the service to rebuild:
 
-The dev build exposes `window.debugTools` in the browser console
-(`debugTools.help()` lists everything) — handy for granting resources, unlocking
-generators, inspecting state, etc.
+```bash
+docker compose restart dev
+```
 
----
+Development builds expose `debugTools` and `cobol` in the browser console. `debugTools.help()` lists the game helpers. No Node installation is required on your host.
 
-## Build the production bundle
+## Build and preview
 
-Writes the optimised static site into `./dist/` on your host:
+Build the static site into `dist/`:
 
 ```bash
 docker compose run --rm build
 ```
 
-`./dist/` is what gets published. It is git-ignored — treat it as a build
-artifact, regenerate it whenever you need it.
-
----
-
-## Preview the production build
-
-Serve the contents of `./dist/` with nginx exactly as it would be hosted:
+Preview a production build:
 
 ```bash
-docker compose run --rm build      # make sure ./dist is fresh
-docker compose up site
+docker compose up --build site
 ```
 
-Open <http://localhost:8080>.
+Open [localhost:8080](http://localhost:8080). Production builds do not expose the developer facade. Both a site root and a path such as `/BufoClicker/` are supported.
 
----
+## Save your progress
 
-## Deploy to GitHub Pages
+The game saves in this browser. Open **Settings** to export a backup or import a save from another browser. Existing TypeScript saves migrate when the COBOL save key is absent. The legacy save remains available for recovery.
 
-Deployment is automatic via GitHub Actions (`.github/workflows/deploy.yml`):
-every push to `main` builds the site (`npm ci && npm run build`) and publishes
-`./dist` straight to GitHub Pages. There is nothing to run locally - just
-merge to `main`.
+If a save is corrupt or storage fails, the game shows recovery controls. An unsuccessful import or reset does not replace your progress. Offline production is capped at 12 hours.
 
-Notes:
+## Verify a change
 
-- In the repo settings, **Pages → Build and deployment → Source** must be set
-  to **GitHub Actions** (not "Deploy from a branch"). Set this once per repo;
-  the workflow handles every deploy after that.
-- Check progress under the repo's **Actions** tab, or `gh run list` / `gh run watch`.
-- The live URL is `https://<owner>.github.io/BufoClicker/`.
-
----
-
-## Common tasks
-
-| Task | Command |
-| --- | --- |
-| Dev server | `docker compose up dev` |
-| Production build → `./dist` | `docker compose run --rm build` |
-| Preview `./dist` | `docker compose up site` |
-| Type-check only | `docker compose run --rm build npx tsc --noEmit` |
-| Dependency audit | `docker compose run --rm build npm audit` |
-| Update `package-lock.json` after editing `package.json` | `docker compose run --rm build npm install` |
-| Shell in the toolchain container | `docker compose run --rm build bash` |
-| Rebuild the image after dependency changes | `docker compose build` |
-
----
-
-## Project layout
-
-```
-src/
-  core/         state manager, event bus, shared types
-  game/         GameCore, game loop, save/load, top-level Game API
-  managers/     generator / upgrade / achievement / explorer managers
-  models/       data shapes + pure helpers (generators, upgrades, ...)
-  ui/           component framework + concrete components (shop, upgrades, ...)
-  utils/        number/format/storage/animation helpers, debug tools
-styles/         plain CSS, copied verbatim into the build
-assets/         images + JSON data (generators.json, upgrades.json, achievements.json)
-webpack.config.js
-```
-
-Game content (generators, upgrades, achievements) is data-driven: it is
-`fetch()`-ed at runtime from `assets/data/*.json`, so tuning numbers or adding
-entries does **not** require a rebuild — just refresh.
-
-Saves live in `localStorage` under the key `bufo_idle_save`.
-
----
-
-## Running without Docker
-
-Requires **Node.js 20+** and npm.
+Build the toolchain and run native and WebAssembly checks:
 
 ```bash
-npm ci                 # install exact locked dependencies
-npm run start          # dev server on http://localhost:9000 (opens a browser)
-npm run build          # production build into ./dist
-npm run serve:dist     # preview ./dist on http://localhost:8080
+docker build --target tools -t bufoclicker-cobol-tools .
+docker run --rm -v "$PWD:/app" -w /app bufoclicker-cobol-tools ./scripts/test.sh
 ```
 
-Deployment always runs in GitHub Actions (see above), not locally.
+Build the development site and run browser checks:
+
+```bash
+docker run --rm -v "$PWD:/app" -w /app -e BUILD_MODE=development bufoclicker-cobol-tools ./scripts/build.sh
+docker build -t bufoclicker-browser-tests tests/browser
+docker run --rm -v "$PWD:/app" -w /app bufoclicker-browser-tests
+```
+
+Browser checks cover Chromium, Firefox, and WebKit at root and subpath URLs. Reports and screenshots go to `build/browser-evidence/`. All Node commands for the test harness run inside containers.
+
+## Read the implementation notes
+
+- [Architecture decision](docs/adr/0001-port-client-to-cobol-and-webassembly.md)
+- [Parity, adaptations, and evidence](docs/cobol-parity.md)
+- [COBOL and browser ABI](vendor/ABI.md)
+- [Runtime dependencies and relinking](vendor/RUNTIME.md)
+
+COBOL contains application behavior and markup. C and JavaScript provide generic runtime and browser bindings. Assets, stylesheets, and catalog JSON remain static files. GitHub Actions builds `dist/` and publishes it when a change reaches `main`.

@@ -1,0 +1,114 @@
+{
+  "generator": {
+    "id": "tadpole",
+    "name": "Tadpole",
+    "description": "Test",
+    "category": "basic",
+    "count": 0,
+    "baseProduction": 0.1,
+    "currentProduction": 0.1,
+    "totalProduction": 0,
+    "baseCost": 15,
+    "currentCost": 15,
+    "costMultiplier": 1.15,
+    "unlockRequirements": [
+      {
+        "type": "bufos",
+        "value": 0
+      }
+    ],
+    "unlocked": true,
+    "enabled": true,
+    "boosts": []
+  },
+  "boosted": {
+    "id": "tadpole",
+    "name": "Tadpole",
+    "description": "Test",
+    "category": "basic",
+    "count": 10,
+    "baseProduction": 0.1,
+    "currentProduction": 0.6000000000000001,
+    "totalProduction": 6.000000000000001,
+    "baseCost": 15,
+    "currentCost": 61,
+    "costMultiplier": 1.15,
+    "unlockRequirements": [
+      {
+        "type": "bufos",
+        "value": 0
+      }
+    ],
+    "unlocked": true,
+    "enabled": true,
+    "boosts": [
+      {
+        "id": "custom",
+        "multiplier": 3,
+        "source": "Test",
+        "active": true
+      }
+    ]
+  },
+  "inactive": {
+    "id": "tadpole",
+    "name": "Tadpole",
+    "description": "Test",
+    "category": "basic",
+    "count": 10,
+    "baseProduction": 0.1,
+    "currentProduction": 0.2,
+    "totalProduction": 2,
+    "baseCost": 15,
+    "currentCost": 61,
+    "costMultiplier": 1.15,
+    "unlockRequirements": [
+      {
+        "type": "bufos",
+        "value": 0
+      }
+    ],
+    "unlocked": true,
+    "enabled": true,
+    "boosts": [
+      {
+        "id": "custom",
+        "multiplier": 3,
+        "source": "Test",
+        "active": false
+      }
+    ]
+  },
+  "bulk": [
+    15,
+    305,
+    117431246
+  ],
+  "max": [
+    0,
+    1,
+    4,
+    17
+  ],
+  "upgrades": {
+    "generator": 15,
+    "click": 2,
+    "global": 3,
+    "locked": false,
+    "unlocked": true
+  },
+  "prestige": [
+    0,
+    1,
+    10,
+    100
+  ],
+  "boss": {
+    "health": 3900,
+    "multiplier": 2
+  },
+  "achievement": {
+    "exploration": true,
+    "icon": "🎮"
+  }
+}
