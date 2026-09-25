@@ -300,13 +300,14 @@ export function loadGame(): boolean {
     // too - the manager read state before the save was loaded.
     achievementManager.setCustomEvents(achievementState.customEvents);
     
-    // Now silently restore previously unlocked achievements
+    // Restore previously unlocked achievements and put their rewards back on
+    // the multipliers reset to 1 above - exactly once, right here. loadGame()
+    // runs twice on every page load (GameCore.init() and initialization.ts step
+    // 7), and the old per-unlock + delayed-reapply combination applied rewards
+    // once on the first call and twice (both timers) after the second - every
+    // reward squared on reload.
+    achievementManager.restoreUnlockedAchievements(previouslyUnlockedAchievements);
     if (previouslyUnlockedAchievements.length > 0) {
-      // Silently unlock each previously unlocked achievement
-      for (const achievementId of previouslyUnlockedAchievements) {
-        achievementManager.silentUnlockAchievement(achievementId);
-      }
-      
       // Make sure to save the state with restored achievements
       achievementManager.saveToState();
     }
@@ -314,8 +315,6 @@ export function loadGame(): boolean {
     // Reset the flag after restoring achievements
     setTimeout(() => {
       (achievementManager as any).isRestoringAchievements = false;
-      // Reapply all achievement rewards
-      achievementManager.reapplyAllAchievementRewards();
     }, 500);
     
     // Force check unlocks for generators

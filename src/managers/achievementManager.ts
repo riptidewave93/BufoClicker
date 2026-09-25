@@ -2,7 +2,7 @@
 import { getStateManager } from '../core/stateManager';
 import { getEventBus } from '../core/eventBus';
 import { getGameCore } from '../game/gameCore';
-import { BOSS_DEFEATED, GOLDEN_BUFO_COLLECTED } from '../core/eventTypes';
+import { BOSS_DEFEATED, GOLDEN_BUFO_COLLECTED, PRESTIGE_TRANSCENDED } from '../core/eventTypes';
 import * as Logger from '../utils/logger';
 import { 
   Achievement, 
@@ -143,6 +143,15 @@ public initialize(silentLoad: boolean = false): void {
 
     eventBus.on(GOLDEN_BUFO_COLLECTED, () => {
       this.triggerCustomEvent('golden_bufo_caught');
+    });
+
+    // Transcending resets clickMultiplier/productionMultiplier to 1 and swaps in
+    // fresh generators (dropping achievement generator boosts), but achievements
+    // stay unlocked - so their rewards have to go back on, same as loadGame()
+    // does via restoreUnlockedAchievements(). Without this they were missing
+    // until a reload.
+    eventBus.on(PRESTIGE_TRANSCENDED, () => {
+      this.reapplyAllAchievementRewards();
     });
     
     // Track game ticks for periodic checking
@@ -390,6 +399,22 @@ public reapplyAllAchievementRewards(): void {
     }
   }
 }
+/**
+ * Restore achievements unlocked in a save and re-apply every unlocked
+ * achievement's reward exactly once. Callers must have reset the multipliers
+ * the rewards stack onto (loadGame() sets them to 1 first) - that is what makes
+ * this safe to run on every load, however many times loadGame() is called.
+ * @param achievementIds Achievement IDs unlocked in the save
+ */
+public restoreUnlockedAchievements(achievementIds: string[]): void {
+  for (const achievementId of achievementIds) {
+    if (this.achievements.some(a => a.id === achievementId)) {
+      this.unlockedAchievements.add(achievementId);
+    }
+  }
+  this.reapplyAllAchievementRewards();
+}
+
 /**
  * Silently unlock an achievement by ID (no notification or event emission)
  * Used for loading previously unlocked achievements without re-notifying

@@ -121,6 +121,24 @@ to the repo to avoid creating the problem in the first place.
   now a fading `::after` overlay (background tint + inset ring); colour and
   box-shadow don't contribute to scrollable overflow, so they can't reflow
   anything. Any future in-list feedback wants the same shape.
+- **Achievement rewards are multiplied into state, so every reset has to
+  re-apply them exactly once.** `ClickBoost`/`ProductionBoost` rewards multiply
+  `resources.clickMultiplier`/`productionMultiplier` and `GeneratorBoost`
+  rewards live on `generators[*].boosts` - there's no "recompute from
+  achievements" path. Two resets got this wrong: `PrestigeManager.transcend()`
+  sets both multipliers to 1 and swaps in fresh generators but never put the
+  rewards back (every achievement bonus gone until a reload), and `loadGame()`
+  runs **twice** per page load (`GameCore.init()` and `initialization.ts`
+  step 7) - the first call's silent unlocks applied rewards, the second call
+  reset to 1 and re-unlocked nothing, and *both* calls' 500ms
+  `reapplyAllAchievementRewards()` timers then fired, squaring every reward on
+  reload (a real save sat at x4,529 click instead of x67.3). Now `loadGame()`
+  calls `restoreUnlockedAchievements()`, which re-applies synchronously right
+  after its own reset (idempotent however many times load runs), and
+  `AchievementManager` re-applies on `PRESTIGE_TRANSCENDED`. Invariant worth
+  testing after touching any of this: clickMultiplier with no reload ==
+  after one reload == after two reloads == (click upgrades x clickBoost
+  rewards).
 - **A full-screen fight overlay needs `pointer-events: auto` on itself, not
   just its children.** `.boss-fight-overlay` used to be `pointer-events: none`
   with only the sprite/HUD set to `auto` - visually it covered the screen but
