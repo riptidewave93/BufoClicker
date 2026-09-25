@@ -1,0 +1,58 @@
+[
+  {
+    "id": "furious_froglet",
+    "name": "Furious Froglet",
+    "flavorText": "It's smaller than you, but it is FURIOUS about it.",
+    "iconPath": "./assets/images/bosses/bufo-very-angry.png",
+    "threshold": 10000,
+    "baseHealth": 975
+  },
+  {
+    "id": "the_enraged_bufo",
+    "name": "The Enraged Bufo",
+    "flavorText": "Every click you’ve ever made has led to this moment of pure rage.",
+    "iconPath": "./assets/images/bosses/bufo-enraged.png",
+    "threshold": 100000000,
+    "baseHealth": 53800
+  },
+  {
+    "id": "bufo_dragon",
+    "name": "Bufo Dragon",
+    "flavorText": "Legends spoke of a bufo that ascended beyond amphibian. This is it.",
+    "iconPath": "./assets/images/bosses/bufo-dragon.png",
+    "threshold": 5000000000,
+    "baseHealth": 38700000
+  },
+  {
+    "id": "bufo_devil",
+    "name": "Bufo Devil",
+    "flavorText": "It offers you a deal. You should probably just click it instead.",
+    "iconPath": "./assets/images/bosses/bufo-devil.png",
+    "threshold": 100000000000,
+    "baseHealth": 65600000
+  },
+  {
+    "id": "mega_bufo",
+    "name": "MEGA BUFO",
+    "flavorText": "The one all other bufos speak of in hushed croaks. Surely nothing tops this... right?",
+    "iconPath": "./assets/images/bosses/mega-bufo.png",
+    "threshold": 10000000000000,
+    "baseHealth": 7070000000
+  },
+  {
+    "id": "interdimensional_bufo",
+    "name": "Interdimensional Bufo",
+    "flavorText": "It rests atop the terrarium of existence, watching your entire pond like it were a fish tank.",
+    "iconPath": "./assets/images/bosses/terrarium.png",
+    "threshold": 50000000000000,
+    "baseHealth": 78200000000
+  },
+  {
+    "id": "omniscient_bufo",
+    "name": "The Omniscient Bufo",
+    "flavorText": "It already knows how this fight ends. Prove it wrong.",
+    "iconPath": "./assets/images/bosses/omniscient.png",
+    "threshold": 2000000000000000,
+    "baseHealth": 1670000000000
+  }
+]

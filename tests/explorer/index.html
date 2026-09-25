@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><meta charset="UTF-8"><title>Explorer COBOL verification</title>
+<style>body{background:#111;color:white;font:16px system-ui;padding:24px}pre{white-space:pre-wrap}</style>
+<h1>Explorer COBOL verification</h1><pre id="status">Loading WebAssembly...</pre>
+<script type="module">
+import createBufoModule from './bufo.js';
+const module = await createBufoModule();
+window.explorerRun = request => JSON.parse(module.ccall('bufo_dispatch','string',['string'],[JSON.stringify(request)]));
+document.querySelector('#status').textContent = 'WebAssembly ready';
+</script></html>

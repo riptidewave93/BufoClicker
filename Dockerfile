@@ -1,47 +1,28 @@
 # syntax=docker/dockerfile:1
-
-##
-## BufoClicker – container image
-##
-## Targets:
-##   dev     -> hot-reloading webpack-dev-server (used by `docker compose up dev`)
-##   build   -> produces the static site in /app/dist
-##   runtime -> tiny nginx image serving the built site (default target)
-##
-
-# ---------------------------------------------------------------------------
-# Shared base with dependencies installed
-# ---------------------------------------------------------------------------
-FROM node:22-bookworm-slim AS deps
+FROM debian:bookworm-slim@sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171 AS tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gnucobol3=3.1.2-5+b1 emscripten=3.1.6~dfsg-5 \
+    build-essential ca-certificates curl xz-utils autoconf libtool libgmp-dev qemu-user-static \
+    && dpkg --add-architecture i386 && apt-get update \
+    && mkdir -p /opt/cobc32 /tmp/cobc32 && cd /tmp/cobc32 \
+    && apt-get download gnucobol3:i386=3.1.2-5+b1 libcob4:i386=3.1.2-5+b1 \
+    libc6:i386 libgmp10:i386 libncursesw6:i386 libtinfo6:i386 libdb5.3:i386 \
+    libxml2:i386 libicu72:i386 libstdc++6:i386 libgcc-s1:i386 liblzma5:i386 zlib1g:i386 \
+    && for package in *.deb; do dpkg-deb -x "$package" /opt/cobc32; done \
+    && rm -rf /tmp/cobc32 /var/lib/apt/lists/*
+RUN printf '#!/bin/sh\nexec qemu-i386-static -L /opt/cobc32 /opt/cobc32/lib/ld-linux.so.2 --library-path /opt/cobc32/lib/i386-linux-gnu:/opt/cobc32/usr/lib/i386-linux-gnu /opt/cobc32/usr/bin/cobc "$@"\n' > /usr/local/bin/cobc32 && chmod +x /usr/local/bin/cobc32
+COPY scripts/build-runtime.sh /tmp/build-runtime.sh
+RUN /tmp/build-runtime.sh
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
 
-# ---------------------------------------------------------------------------
-# Toolchain image (dev server + one-off build/lint/audit commands).
-# Runs as the unprivileged `node` user (uid 1000) so files written back to a
-# bind-mounted host directory (e.g. ./dist) stay owned by a normal user.
-# ---------------------------------------------------------------------------
-FROM deps AS dev
-WORKDIR /app
+FROM tools AS dev
 COPY . .
-RUN chown -R node:node /app
-USER node
-EXPOSE 9000
-CMD ["npm", "run", "dev"]
+CMD ["./scripts/dev.sh"]
 
-# ---------------------------------------------------------------------------
-# Production build -> /app/dist
-# ---------------------------------------------------------------------------
-FROM deps AS build
-WORKDIR /app
+FROM tools AS build
 COPY . .
-RUN npm run build
+RUN ./scripts/build.sh
 
-# ---------------------------------------------------------------------------
-# Runtime: serve the static bundle with nginx
-# ---------------------------------------------------------------------------
-FROM nginx:1.27-alpine AS runtime
+FROM nginx:1.28.0-alpine AS runtime
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
-# nginx's default config already serves /usr/share/nginx/html with index.html

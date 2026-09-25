@@ -8,23 +8,42 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - name: Build COBOL toolchain
+        run: docker build --target tools -t bufoclicker-cobol-tools .
+      - name: Native and WebAssembly parity
+        run: docker run --rm -v "$PWD:/app" -w /app bufoclicker-cobol-tools ./scripts/test.sh
+      - name: Build browser checks
+        run: docker build -t bufoclicker-browser-tests tests/browser
+      - name: Build development site
+        run: docker run --rm -v "$PWD:/app" -w /app -e BUILD_MODE=development bufoclicker-cobol-tools ./scripts/build.sh
+      - name: Browser interactions at root and subpath
+        run: docker run --rm -v "$PWD:/app" -w /app -e BUFO_EVIDENCE_DIR=build/browser-evidence/development bufoclicker-browser-tests
+      - name: Public API in Chromium
+        run: docker run --rm -v "$PWD:/app" -w /app bufoclicker-browser-tests node tests/api/browser.cjs
+      - name: Callback ownership in Chromium
+        run: docker run --rm -v "$PWD:/app" -w /app bufoclicker-browser-tests node tests/api/callbacks.cjs
+      - name: Firefox navigation and final saves
+        run: docker run --rm -v "$PWD:/app" -w /app bufoclicker-browser-tests node tests/browser/lifecycle.cjs
+      - name: Explorer in Chromium
+        run: docker run --rm -v "$PWD:/app" -w /app bufoclicker-browser-tests node tests/explorer/browser.cjs
+      - name: Reusable components in Chromium
+        run: docker run --rm -v "$PWD:/app" -w /app bufoclicker-browser-tests node tests/components/browser.cjs
+      - name: Callback reentry and click effects
+        run: |
+          docker run --rm -v "$PWD:/app" -w /app bufoclicker-browser-tests node tests/components/callback-reentry.cjs
+          docker run --rm -v "$PWD:/app" -w /app bufoclicker-browser-tests node tests/components/click-effects.cjs
+      - name: Build production site
+        run: docker run --rm -v "$PWD:/app" -w /app bufoclicker-cobol-tools ./scripts/build.sh
+      - name: Production browser checks
+        run: docker run --rm -v "$PWD:/app" -w /app -e BUFO_EVIDENCE_DIR=build/browser-evidence/production bufoclicker-browser-tests
+      - name: Browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Type-check
-        run: npx tsc --noEmit
-
-      - name: Build
-        run: npm run build
+          name: browser-evidence
+          path: build/browser-evidence

@@ -21,17 +21,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+      - name: Build COBOL toolchain
+        run: docker build --target tools -t bufoclicker-cobol-tools .
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
+      - name: Build static site
+        run: docker run --rm -v "$PWD:/app" -w /app bufoclicker-cobol-tools ./scripts/build.sh
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

@@ -1,0 +1,1355 @@
+{
+  "baseline": "fe02bde429b650d32591f22a824f7dad8a0d4dd9",
+  "hashes": {
+    "src/utils/numberUtils.ts": "6cdaef26f75b3211a4e412ecf3ff64b095136e87e42b628eb3db946ba2e611ad",
+    "src/utils/mathUtils.ts": "655c4544ba1416797219cd0cea0b1751a26c9b38386c3ffaa3e4b14d2c89404f",
+    "src/utils/validationUtils.ts": "aca0b0350765dad3d39feefb87e159e045e561812c82ab0846b9b439432ee58c"
+  },
+  "cases": [
+    {
+      "operation": "number.clamp",
+      "args": [
+        0.9999999999999998,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        0.9999999999999998,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        0.9999999999999998,
+        1.0000000000000009,
+        1
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        0.9999999999999998,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        1,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1,
+        1.0000000000000009,
+        1
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        1,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        1.0000000000000004,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1.0000000000000004
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1.0000000000000004,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1.0000000000000004,
+        1.0000000000000009,
+        1
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        1.0000000000000004,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        1.0000000000000009,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1.0000000000000009
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1.0000000000000009,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1.0000000000000009,
+        1.0000000000000009,
+        1
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        1.0000000000000009,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        1.000000000000001,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1.0000000000000009
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1.000000000000001,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1.000000000000001,
+        1.0000000000000009,
+        1
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        1.000000000000001,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        1.0000000000000004,
+        1,
+        1.0000000000000009,
+        10,
+        20
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 15
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        2,
+        0,
+        1,
+        1,
+        1.0000000000000009
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1.0000000000000009
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        -1,
+        0,
+        1,
+        1.0000000000000009,
+        1
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1.0000000000000009
+    },
+    {
+      "operation": "math.inverseLerp",
+      "args": [
+        1,
+        1.0000000000000009,
+        1.0000000000000004
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 0.5
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        999999999999.9999,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1000000000000
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        999999999999.9999,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        999999999999.9999,
+        1000000000000.0005,
+        1000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        999999999999.9999,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        1000000000000,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1000000000000
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1000000000000,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1000000000000,
+        1000000000000.0005,
+        1000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        1000000000000,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        1000000000000.0002,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1000000000000.0002
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1000000000000.0002,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1000000000000.0002,
+        1000000000000.0005,
+        1000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        1000000000000.0002,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        1000000000000.0005,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1000000000000.0005
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1000000000000.0005,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1000000000000.0005,
+        1000000000000.0005,
+        1000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        1000000000000.0005,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        1000000000000.0006,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1000000000000.0005
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1000000000000.0006,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        1000000000000.0006,
+        1000000000000.0005,
+        1000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        1000000000000.0006,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        1000000000000.0002,
+        1000000000000,
+        1000000000000.0005,
+        10,
+        20
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 15
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        2,
+        0,
+        1,
+        1000000000000,
+        1000000000000.0005
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1000000000000.0005
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        -1,
+        0,
+        1,
+        1000000000000.0005,
+        1000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1000000000000.0005
+    },
+    {
+      "operation": "math.inverseLerp",
+      "args": [
+        1000000000000,
+        1000000000000.0005,
+        1000000000000.0002
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 0.5
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        9999999999999998,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000000
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        9999999999999998,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        9999999999999998,
+        10000000000000008,
+        10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        9999999999999998,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        10000000000000000,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000000
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        10000000000000000,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        10000000000000000,
+        10000000000000008,
+        10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        10000000000000000,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        10000000000000004,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000004
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        10000000000000004,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        10000000000000004,
+        10000000000000008,
+        10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        10000000000000004,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        10000000000000008,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000008
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        10000000000000008,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        10000000000000008,
+        10000000000000008,
+        10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        10000000000000008,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        10000000000000010,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000008
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        10000000000000010,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        10000000000000010,
+        10000000000000008,
+        10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        10000000000000010,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        10000000000000004,
+        10000000000000000,
+        10000000000000008,
+        10,
+        20
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 15
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        2,
+        0,
+        1,
+        10000000000000000,
+        10000000000000008
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000008
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        -1,
+        0,
+        1,
+        10000000000000008,
+        10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000008
+    },
+    {
+      "operation": "math.inverseLerp",
+      "args": [
+        10000000000000000,
+        10000000000000008,
+        10000000000000004
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 0.5
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        -10000000000000002,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": -10000000000000000
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -10000000000000002,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -10000000000000002,
+        -9999999999999992,
+        -10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        -10000000000000002,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        -10000000000000000,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": -10000000000000000
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -10000000000000000,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -10000000000000000,
+        -9999999999999992,
+        -10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        -10000000000000000,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        -9999999999999996,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": -9999999999999996
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -9999999999999996,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -9999999999999996,
+        -9999999999999992,
+        -10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        -9999999999999996,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        -9999999999999992,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": -9999999999999992
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -9999999999999992,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -9999999999999992,
+        -9999999999999992,
+        -10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        -9999999999999992,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": true
+    },
+    {
+      "operation": "number.clamp",
+      "args": [
+        -9999999999999990,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": -9999999999999992
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -9999999999999990,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.inRange",
+      "args": [
+        -9999999999999990,
+        -9999999999999992,
+        -10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "validation.isInRange",
+      "args": [
+        -9999999999999990,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        -9999999999999996,
+        -10000000000000000,
+        -9999999999999992,
+        10,
+        20
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 15
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        2,
+        0,
+        1,
+        -10000000000000000,
+        -9999999999999992
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": -9999999999999992
+    },
+    {
+      "operation": "math.mapRange",
+      "args": [
+        -1,
+        0,
+        1,
+        -9999999999999992,
+        -10000000000000000
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": -9999999999999992
+    },
+    {
+      "operation": "math.inverseLerp",
+      "args": [
+        -10000000000000000,
+        -9999999999999992,
+        -9999999999999996
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 0.5
+    },
+    {
+      "operation": "math.lerp",
+      "args": [
+        0,
+        10000000000000000,
+        0.9999999999999998
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 9999999999999998
+    },
+    {
+      "operation": "math.smoothLerp",
+      "args": [
+        0,
+        10000000000000000,
+        0.9999999999999998,
+        2
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000000
+    },
+    {
+      "operation": "math.lerp",
+      "args": [
+        0,
+        10000000000000000,
+        1
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000000
+    },
+    {
+      "operation": "math.smoothLerp",
+      "args": [
+        0,
+        10000000000000000,
+        1,
+        2
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000000
+    },
+    {
+      "operation": "math.lerp",
+      "args": [
+        0,
+        10000000000000000,
+        1.0000000000000002
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000000
+    },
+    {
+      "operation": "math.smoothLerp",
+      "args": [
+        0,
+        10000000000000000,
+        1.0000000000000002,
+        2
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 10000000000000000
+    },
+    {
+      "operation": "math.lerp",
+      "args": [
+        0,
+        10000000000000000,
+        -5e-324
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 0
+    },
+    {
+      "operation": "math.smoothLerp",
+      "args": [
+        0,
+        10000000000000000,
+        -5e-324,
+        2
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 0
+    },
+    {
+      "operation": "math.chance",
+      "args": [
+        50
+      ],
+      "random": [
+        0.4999999999999998
+      ],
+      "expected": true
+    },
+    {
+      "operation": "math.weightedRandom",
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "random": [
+        0.4999999999999998
+      ],
+      "expected": 0
+    },
+    {
+      "operation": "math.chance",
+      "args": [
+        50
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.weightedRandom",
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "random": [
+        0.5
+      ],
+      "expected": 1
+    },
+    {
+      "operation": "math.chance",
+      "args": [
+        50
+      ],
+      "random": [
+        0.5000000000000002
+      ],
+      "expected": false
+    },
+    {
+      "operation": "math.weightedRandom",
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "random": [
+        0.5000000000000002
+      ],
+      "expected": 1
+    }
+  ]
+}

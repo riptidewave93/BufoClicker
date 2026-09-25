@@ -1,0 +1,66 @@
+#include <assert.h>
+#include <string.h>
+#include "cJSON.h"
+extern void *j_parse(const char *,int);
+extern int j_print(void *,char *,int);
+extern int j_string(void *,const char *,char *,int);
+extern int j_merge(void *,void *);
+extern int j_set(void *,const char *,void *);
+extern int j_set_boolean(void *,const char *,int);
+extern int j_set_string(void *,const char *,const char *,int);
+extern int j_append(void *,void *);
+extern int h_json_equal(cJSON *,cJSON *);
+int main(void) {
+    assert(!j_parse("{\"n\":1e999}",11));
+    assert(!j_parse("{} garbage",10));
+    assert(!j_parse("{}\0{}",5));
+    cJSON *node=j_parse("{\"s\":\"hello\"}",13);
+    assert(node);
+    char buffer[3];
+    assert(j_string(node,"s",buffer,3)==-1);
+    assert(!memcmp(buffer,"   ",3));
+    assert(j_print(node,buffer,3)==-1);
+    assert(!memcmp(buffer,"   ",3));
+    cJSON *source=j_parse("{\"s\":\"new\",\"n\":2}",17);
+    assert(source);
+    assert(j_merge(node,source)==0);
+    cJSON_Delete(source);
+    assert(!strcmp(cJSON_GetObjectItem(node,"s")->valuestring,"new"));
+    assert(cJSON_GetObjectItem(node,"n")->valuedouble==2);
+    assert(j_set(node,"s.child",cJSON_CreateNumber(1))==-1);
+    assert(j_set(node,"bad..path",cJSON_CreateNumber(1))==-1);
+    assert(j_set_boolean(NULL,"flag",1)==-1);
+    assert(j_set_string(node,"s.child","x",1)==-1);
+    assert(j_set_string(node,"s","x",-1)==-1);
+    assert(j_append(node,cJSON_CreateString("owned"))==-1);
+    memcpy(buffer,"old",3);
+    assert(j_print(NULL,buffer,3)==-1);
+    assert(!memcmp(buffer,"   ",3));
+    assert(!j_parse("{\"n\":1,\"n\":2}",13));
+    assert(!j_parse("{\"a\":{\"n\":1,\"n\":2}}",19));
+    cJSON *array=cJSON_CreateArray();
+    assert(j_set(array,"0",cJSON_CreateNumber(1))==-1);
+    assert(j_append(array,cJSON_CreateNumber(1))==0);
+    assert(cJSON_GetArraySize(array)==1);
+    cJSON_Delete(array);
+    assert(j_set(node,"new.child",cJSON_CreateNumber(3))==0);
+    assert(cJSON_GetObjectItem(cJSON_GetObjectItem(node,"new"),"child")->valuedouble==3);
+    cJSON_Delete(node);
+    cJSON *large_number = cJSON_CreateNumber(3781512058463620608.0);
+    char *number_text = cJSON_PrintUnformatted(large_number);
+    cJSON *roundtrip = cJSON_Parse(number_text);
+    assert(roundtrip && roundtrip->valuedouble == large_number->valuedouble);
+    cJSON_Delete(roundtrip);
+    cJSON_free(number_text);
+    cJSON_Delete(large_number);
+    cJSON *selected_before = cJSON_Parse("{\"selected\":[10000000000000000]}");
+    cJSON *selected_after = cJSON_Parse("{\"selected\":[10000000000000002]}");
+    cJSON *selected_copy = cJSON_Duplicate(selected_before, 1);
+    assert(selected_before && selected_after && selected_copy);
+    assert(!h_json_equal(selected_before, selected_after));
+    assert(h_json_equal(selected_before, selected_copy));
+    cJSON_Delete(selected_before);
+    cJSON_Delete(selected_after);
+    cJSON_Delete(selected_copy);
+    return 0;
+}
